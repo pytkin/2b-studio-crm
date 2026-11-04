@@ -1,3 +1,5 @@
+engineStrict: true
+saveExact: true
 overrides:
   # typed-rest-client pins an affected qs patch. Scope the fix to Stryker's HTTP client.
   'typed-rest-client@2.3.1>qs': 6.17.1

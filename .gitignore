@@ -11,6 +11,7 @@ playwright-report/
 test-results/
 .cache/
 .local/
+.vercel/
 supabase/.temp/
 supabase/.branches/
 local/test/supabase/.temp/

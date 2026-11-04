@@ -1,0 +1,17 @@
+# Only the SPA build inputs are uploaded. In particular, .local, .env*, the
+# private Agent Platform checkout, database files and browser reports stay out.
+/*
+!/src
+!/public
+!/scripts
+/scripts/*
+!/scripts/build-output.mts
+!/scripts/private-local-directory.mts
+!/index.html
+!/vite.config.ts
+!/tsconfig.json
+!/package.json
+!/pnpm-lock.yaml
+!/pnpm-workspace.yaml
+!/.npmrc
+!/vercel.json
