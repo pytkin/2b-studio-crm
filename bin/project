@@ -1,0 +1,81 @@
+#!/bin/sh
+set -eu
+
+PROJECT_ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+cd "$PROJECT_ROOT"
+
+fail() {
+  printf '%s\n' "$1" >&2
+  exit 1
+}
+
+check_kit() {
+  [ -f .agent-platform/.git ] || fail 'Kit submodule недоступен. Выполните: rtk proxy ./bin/project setup'
+  [ -r .agent-platform/shared/AGENTS.md ] || fail 'Kit baseline недоступен.'
+  staged_pin=$(git rev-parse :.agent-platform)
+  checkout_pin=$(git -C .agent-platform rev-parse HEAD)
+  [ "$staged_pin" = "$checkout_pin" ] || fail 'HEAD Kit не совпадает с gitlink в индексе. Проверьте намеренное изменение pin.'
+  [ -z "$(git -C .agent-platform status --porcelain)" ] || fail 'Kit содержит локальные изменения; проверка требует чистого submodule.'
+  [ -L .agents/skills/review-change ] || fail 'review-change должен быть канонической символической ссылкой.'
+  [ "$(readlink .agents/skills/review-change)" = '../../.agent-platform/catalog/skills/review-change' ] || fail 'Неверная цель ссылки review-change.'
+  [ -r .agents/skills/review-change/SKILL.md ] || fail 'review-change/SKILL.md недоступен.'
+  [ -d .agents/skills/review-change/references ] || fail 'review-change/references недоступен.'
+}
+
+lint_docs() {
+  check_kit
+  python3 .agent-platform/tools/document-links/check-document-links.py \
+    --project-root "$PROJECT_ROOT" \
+    --source AGENTS.md --source README.md --source docs --source .agents/rules \
+    --allow-target-root .
+}
+
+check_source() {
+  python3 - <<'PY'
+import hashlib
+from pathlib import Path
+
+manifest = Path('docs/source/SHA256SUMS')
+for line in manifest.read_text(encoding='utf-8').splitlines():
+    expected, name = line.split('  ', 1)
+    actual = hashlib.sha256(Path(name).read_bytes()).hexdigest()
+    if actual != expected:
+        raise SystemExit('Source checksum: failed (' + name + ')')
+    print('Source checksum: passed (' + name + ')')
+PY
+}
+
+[ "$#" -le 1 ] || fail 'Ожидается одна операция. Справка: rtk proxy ./bin/project help'
+case "${1:-help}" in
+  setup)
+    git submodule update --init -- .agent-platform
+    check_kit
+    printf '%s\n' 'Kit setup: passed'
+    ;;
+  lint)
+    lint_docs
+    ;;
+  verify)
+    lint_docs
+    python3 .agent-platform/catalog/validators/validate-kit-binding.py agent-platform.json
+    check_source
+    git diff --check
+    git diff --cached --check
+    printf '%s\n' 'Project verify: passed (Kit and documentation only)'
+    ;;
+  dev|test|build)
+    printf '%s\n' "Операция $1 неприменима на этапе Kit и документов; см. agent-platform.json." >&2
+    exit 2
+    ;;
+  help|-h|--help)
+    printf '%s\n' 'Usage: rtk proxy ./bin/project {setup|lint|verify}' \
+      'setup: initialize the pinned Kit submodule' \
+      'lint: check local Markdown links' \
+      'verify: check Kit, binding, documents, source checksum and Git whitespace' \
+      'dev, test, build: not applicable until application implementation'
+    ;;
+  *)
+    printf '%s\n' "Неизвестная операция: $1" >&2
+    exit 2
+    ;;
+esac

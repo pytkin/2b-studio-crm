@@ -1,0 +1,17 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+!.env.*.example
+node_modules/
+dist/
+coverage/
+playwright-report/
+test-results/
+.cache/
+.local/
+supabase/.temp/
+supabase/.branches/
+*.log
+__pycache__/
+*.py[cod]

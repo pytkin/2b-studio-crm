@@ -1,0 +1,3 @@
+[submodule ".agent-platform"]
+	path = .agent-platform
+	url = git@gitlab.com:pytkin/agent-platform.git
