@@ -61,6 +61,7 @@ pnpm demo:stop
 - [Техническая спецификация](docs/technical-specification.md) и [решения](docs/decisions.md)
 - [Повторное ревью и проверка всех сценариев](docs/evidence/review.md) · [эвристический UI/UX-анализ](docs/evidence/ux-audit/README.md)
 - [Негативные проверки: что уже защищено и какие ошибки обнаруживают мутационные тесты](docs/evidence/negative-mutation.md)
+- [Аудит безопасности и критерии приёмки исправлений](docs/evidence/security-audit.md)
 - [Результаты локальной приёмки и снимки desktop/mobile](docs/evidence/README.md)
 - [Матрица приёмки](docs/acceptance-plan.md) и [карточки с результатами](docs/implementation-plan.md)
 - [Исходное задание](docs/source/README.md)

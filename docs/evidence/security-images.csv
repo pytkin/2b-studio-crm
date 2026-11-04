@@ -1,0 +1,587 @@
+image,advisory,scanner_severity,package,installed,fix_state,fix_versions,match_type,advisory_url,raw_match_count
+kong,CVE-2022-23521,Critical,git,2.36.3-r0,fixed,2.36.4-r0,exact-direct-match | exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2022-23521,1
+kong,CVE-2022-23521,Critical,git-perl,2.36.3-r0,fixed,2.36.4-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2022-23521,1
+kong,CVE-2022-23521,Critical,perl-git,2.36.3-r0,fixed,2.36.4-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2022-23521,1
+kong,CVE-2022-32221,Critical,libcurl,7.83.1-r3,fixed,7.83.1-r4,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2022-32221,1
+kong,CVE-2022-41903,Critical,git,2.36.3-r0,fixed,2.36.4-r0,exact-direct-match | exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2022-41903,1
+kong,CVE-2022-41903,Critical,git-perl,2.36.3-r0,fixed,2.36.4-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2022-41903,1
+kong,CVE-2022-41903,Critical,perl-git,2.36.3-r0,fixed,2.36.4-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2022-41903,1
+kong,CVE-2022-48174,Critical,busybox,1.35.0-r17,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2022-48174,1
+kong,CVE-2022-48174,Critical,ssl_client,1.35.0-r17,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2022-48174,1
+kong,CVE-2022-48522,Critical,perl,5.34.1-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2022-48522,1
+kong,CVE-2023-23914,Critical,libcurl,7.83.1-r3,fixed,7.83.1-r6,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-23914,1
+kong,CVE-2023-38545,Critical,libcurl,7.83.1-r3,fixed,8.4.0-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-38545,1
+kong,CVE-2024-32002,Critical,git,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-32002,1
+kong,CVE-2024-32002,Critical,git-perl,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-32002,1
+kong,CVE-2024-32002,Critical,perl-git,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-32002,1
+kong,CVE-2024-5535,Critical,libcrypto1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-5535,1
+kong,CVE-2024-5535,Critical,libssl1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-5535,1
+kong,CVE-2024-5535,Critical,openssl,1.1.1n,fixed,1.0.2zk | 1.1.1za | 3.0.15 | 3.1.7 | 3.2.3 | 3.3.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-5535,1
+kong,CVE-2024-5535,Critical,openssl,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-5535,1
+kong,CVE-2026-111497,Critical,brotli-libs,1.0.9-r6,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-111497,1
+kong,CVE-2026-13221,Critical,perl,5.34.1-r0,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-13221,1
+kong,CVE-2026-15176,Critical,nginx,1.19.9,fixed,1.30.6 | 1.31.7,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-15176,1
+kong,CVE-2026-4176,Critical,perl,5.34.1-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-4176,1
+kong,CVE-2026-42533,Critical,nginx,1.19.9,fixed,1.30.4 | 1.31.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-42533,1
+kong,CVE-2026-8376,Critical,perl,5.34.1-r0,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-8376,1
+kong,CVE-2021-23017,High,nginx,1.19.9,fixed,1.20.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2021-23017,1
+kong,CVE-2021-3618,High,nginx,1.19.9,fixed,1.21.0,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2021-3618,1
+kong,CVE-2022-1292,High,openssl,1.1.1n,fixed,1.0.2ze | 1.1.1o | 3.0.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2022-1292,1
+kong,CVE-2022-2068,High,openssl,1.1.1n,fixed,1.0.2zf | 1.1.1p | 3.0.4,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2022-2068,1
+kong,CVE-2022-41409,High,pcre2,10.40-r0,fixed,10.42-r0,exact-direct-match | exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2022-41409,1
+kong,CVE-2022-41741,High,nginx,1.19.9,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2022-41741,1
+kong,CVE-2022-41742,High,nginx,1.19.9,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2022-41742,1
+kong,CVE-2022-42915,High,libcurl,7.83.1-r3,fixed,7.83.1-r4,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2022-42915,1
+kong,CVE-2022-42916,High,libcurl,7.83.1-r3,fixed,7.83.1-r4,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2022-42916,1
+kong,CVE-2022-43551,High,libcurl,7.83.1-r3,fixed,7.83.1-r5,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2022-43551,1
+kong,CVE-2022-4450,High,libcrypto1.1,1.1.1q-r0,fixed,1.1.1t-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2022-4450,1
+kong,CVE-2022-4450,High,libssl1.1,1.1.1q-r0,fixed,1.1.1t-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2022-4450,1
+kong,CVE-2022-4450,High,openssl,1.1.1n,fixed,1.1.1t | 3.0.8,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2022-4450,1
+kong,CVE-2022-4450,High,openssl,1.1.1q-r0,fixed,1.1.1t-r0,exact-direct-match | exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2022-4450,1
+kong,CVE-2023-0215,High,libcrypto1.1,1.1.1q-r0,fixed,1.1.1t-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-0215,1
+kong,CVE-2023-0215,High,libssl1.1,1.1.1q-r0,fixed,1.1.1t-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-0215,1
+kong,CVE-2023-0215,High,openssl,1.1.1n,fixed,1.0.2zg | 1.1.1t | 3.0.8,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2023-0215,1
+kong,CVE-2023-0215,High,openssl,1.1.1q-r0,fixed,1.1.1t-r0,exact-direct-match | exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-0215,1
+kong,CVE-2023-0286,High,libcrypto1.1,1.1.1q-r0,fixed,1.1.1t-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-0286,1
+kong,CVE-2023-0286,High,libssl1.1,1.1.1q-r0,fixed,1.1.1t-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-0286,1
+kong,CVE-2023-0286,High,openssl,1.1.1n,fixed,1.0.2zg | 1.1.1t | 3.0.8,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2023-0286,1
+kong,CVE-2023-0286,High,openssl,1.1.1q-r0,fixed,1.1.1t-r0,exact-direct-match | exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-0286,1
+kong,CVE-2023-0464,High,libcrypto1.1,1.1.1q-r0,fixed,1.1.1t-r1,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-0464,1
+kong,CVE-2023-0464,High,libssl1.1,1.1.1q-r0,fixed,1.1.1t-r1,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-0464,1
+kong,CVE-2023-0464,High,openssl,1.1.1n,fixed,1.0.2zh | 1.1.1u | 3.0.9 | 3.1.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2023-0464,1
+kong,CVE-2023-0464,High,openssl,1.1.1q-r0,fixed,1.1.1t-r1,exact-direct-match | exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-0464,1
+kong,CVE-2023-23946,High,git,2.36.3-r0,fixed,2.36.5-r0,exact-direct-match | exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-23946,1
+kong,CVE-2023-23946,High,git-perl,2.36.3-r0,fixed,2.36.5-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-23946,1
+kong,CVE-2023-23946,High,perl-git,2.36.3-r0,fixed,2.36.5-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-23946,1
+kong,CVE-2023-25652,High,git,2.36.3-r0,fixed,2.36.6-r0,exact-direct-match | exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-25652,1
+kong,CVE-2023-25652,High,git-perl,2.36.3-r0,fixed,2.36.6-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-25652,1
+kong,CVE-2023-25652,High,perl-git,2.36.3-r0,fixed,2.36.6-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-25652,1
+kong,CVE-2023-2603,High,libcap,2.64-r0,fixed,2.64-r1,exact-direct-match | exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-2603,1
+kong,CVE-2023-27533,High,libcurl,7.83.1-r3,fixed,8.0.1-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-27533,1
+kong,CVE-2023-27534,High,libcurl,7.83.1-r3,fixed,8.0.1-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-27534,1
+kong,CVE-2023-28319,High,libcurl,7.83.1-r3,fixed,8.1.0-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-28319,1
+kong,CVE-2023-29007,High,git,2.36.3-r0,fixed,2.36.6-r0,exact-direct-match | exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-29007,1
+kong,CVE-2023-29007,High,git-perl,2.36.3-r0,fixed,2.36.6-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-29007,1
+kong,CVE-2023-29007,High,perl-git,2.36.3-r0,fixed,2.36.6-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-29007,1
+kong,CVE-2023-29491,High,ncurses-libs,6.3_p20220521-r0,fixed,6.3_p20220521-r1,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-29491,1
+kong,CVE-2023-29491,High,ncurses-terminfo-base,6.3_p20220521-r0,fixed,6.3_p20220521-r1,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-29491,1
+kong,CVE-2023-31484,High,perl,5.34.1-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2023-31484,1
+kong,CVE-2023-31486,High,perl,5.34.1-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2023-31486,1
+kong,CVE-2023-35945,High,nghttp2-libs,1.47.0-r0,fixed,1.47.0-r1,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-35945,1
+kong,CVE-2023-38039,High,libcurl,7.83.1-r3,fixed,8.3.0-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-38039,1
+kong,CVE-2023-44487,High,nghttp2-libs,1.47.0-r0,fixed,1.47.0-r2,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-44487,1
+kong,CVE-2023-44487,High,nginx,1.19.9,fixed,1.25.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2023-44487,1
+kong,CVE-2023-47038,High,perl,5.34.1-r0,fixed,5.34.2-r0,exact-direct-match | exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-47038,1
+kong,CVE-2023-4807,High,openssl,1.1.1n,fixed,1.1.1w | 3.0.11 | 3.1.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2023-4807,1
+kong,CVE-2023-52425,High,expat,2.5.0-r0,fixed,2.6.0-r0,exact-direct-match | exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-52425,1
+kong,CVE-2024-28757,High,expat,2.5.0-r0,fixed,2.6.2-r0,exact-direct-match | exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2024-28757,1
+kong,CVE-2024-32004,High,git,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-32004,1
+kong,CVE-2024-32004,High,git-perl,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-32004,1
+kong,CVE-2024-32004,High,perl-git,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-32004,1
+kong,CVE-2024-32021,High,git,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-32021,1
+kong,CVE-2024-32021,High,git-perl,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-32021,1
+kong,CVE-2024-32021,High,perl-git,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-32021,1
+kong,CVE-2024-32465,High,git,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-32465,1
+kong,CVE-2024-32465,High,git-perl,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-32465,1
+kong,CVE-2024-32465,High,perl-git,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-32465,1
+kong,CVE-2024-4741,High,libcrypto1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-4741,1
+kong,CVE-2024-4741,High,libssl1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-4741,1
+kong,CVE-2024-4741,High,openssl,1.1.1n,fixed,1.1.1y | 3.0.14 | 3.1.6 | 3.2.2 | 3.3.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-4741,1
+kong,CVE-2024-4741,High,openssl,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-4741,1
+kong,CVE-2024-52005,High,git,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-52005,1
+kong,CVE-2024-52005,High,git-perl,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-52005,1
+kong,CVE-2024-52005,High,perl-git,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-52005,1
+kong,CVE-2024-52006,High,git,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-52006,1
+kong,CVE-2024-52006,High,git-perl,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-52006,1
+kong,CVE-2024-52006,High,perl-git,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-52006,1
+kong,CVE-2024-56406,High,perl,5.34.1-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-56406,1
+kong,CVE-2025-26519,High,musl,1.2.3-r0,fixed,1.2.3-r4,exact-direct-match | exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2025-26519,1
+kong,CVE-2025-26519,High,musl-utils,1.2.3-r0,fixed,1.2.3-r4,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2025-26519,1
+kong,CVE-2025-48384,High,git,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-48384,1
+kong,CVE-2025-48384,High,git-perl,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-48384,1
+kong,CVE-2025-48384,High,perl-git,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-48384,1
+kong,CVE-2025-48385,High,git,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-48385,1
+kong,CVE-2025-48385,High,git-perl,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-48385,1
+kong,CVE-2025-48385,High,perl-git,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-48385,1
+kong,CVE-2025-69419,High,libcrypto1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-69419,1
+kong,CVE-2025-69419,High,libssl1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-69419,1
+kong,CVE-2025-69419,High,openssl,1.1.1n,fixed,1.1.1ze | 3.0.19 | 3.3.6 | 3.4.4 | 3.5.5 | 3.6.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-69419,1
+kong,CVE-2025-69419,High,openssl,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-69419,1
+kong,CVE-2025-69420,High,libcrypto1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-69420,1
+kong,CVE-2025-69420,High,libssl1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-69420,1
+kong,CVE-2025-69420,High,openssl,1.1.1n,fixed,1.1.1ze | 3.0.19 | 3.3.6 | 3.4.4 | 3.5.5 | 3.6.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-69420,1
+kong,CVE-2025-69420,High,openssl,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-69420,1
+kong,CVE-2025-69421,High,libcrypto1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-69421,1
+kong,CVE-2025-69421,High,libssl1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-69421,1
+kong,CVE-2025-69421,High,openssl,1.1.1n,fixed,1.0.2zn | 1.1.1ze | 3.0.19 | 3.3.6 | 3.4.4 | 3.5.5 | 3.6.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-69421,1
+kong,CVE-2025-69421,High,openssl,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-69421,1
+kong,CVE-2025-9230,High,libcrypto1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-9230,1
+kong,CVE-2025-9230,High,libssl1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-9230,1
+kong,CVE-2025-9230,High,openssl,1.1.1n,fixed,1.0.2zm | 1.1.1zd | 3.0.18 | 3.2.6 | 3.3.5 | 3.4.3 | 3.5.4,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-9230,1
+kong,CVE-2025-9230,High,openssl,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-9230,1
+kong,CVE-2026-1642,High,nginx,1.19.9,fixed,1.29.5,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-1642,1
+kong,CVE-2026-27135,High,nghttp2-libs,1.47.0-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-27135,1
+kong,CVE-2026-27651,High,nginx,1.19.9,fixed,1.28.3 | 1.29.7,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-27651,1
+kong,CVE-2026-27654,High,nginx,1.19.9,fixed,1.28.3 | 1.29.7,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-27654,1
+kong,CVE-2026-28387,High,libcrypto1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-28387,1
+kong,CVE-2026-28387,High,libssl1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-28387,1
+kong,CVE-2026-28387,High,openssl,1.1.1n,fixed,1.1.1zg | 3.0.20 | 3.3.7 | 3.4.5 | 3.5.6 | 3.6.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-28387,1
+kong,CVE-2026-28387,High,openssl,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-28387,1
+kong,CVE-2026-28388,High,libcrypto1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-28388,1
+kong,CVE-2026-28388,High,libssl1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-28388,1
+kong,CVE-2026-28388,High,openssl,1.1.1n,fixed,1.0.2zp | 1.1.1zg | 3.0.20 | 3.3.7 | 3.4.5 | 3.5.6 | 3.6.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-28388,1
+kong,CVE-2026-28388,High,openssl,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-28388,1
+kong,CVE-2026-28389,High,libcrypto1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-28389,1
+kong,CVE-2026-28389,High,libssl1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-28389,1
+kong,CVE-2026-28389,High,openssl,1.1.1n,fixed,1.0.2zp | 1.1.1zg | 3.0.20 | 3.3.7 | 3.4.5 | 3.5.6 | 3.6.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-28389,1
+kong,CVE-2026-28389,High,openssl,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-28389,1
+kong,CVE-2026-28390,High,libcrypto1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-28390,1
+kong,CVE-2026-28390,High,libssl1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-28390,1
+kong,CVE-2026-28390,High,openssl,1.1.1n,fixed,1.0.2zp | 1.1.1zg | 3.0.20 | 3.3.7 | 3.4.5 | 3.5.6 | 3.6.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-28390,1
+kong,CVE-2026-28390,High,openssl,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-28390,1
+kong,CVE-2026-32647,High,nginx,1.19.9,fixed,1.28.3 | 1.29.7,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-32647,1
+kong,CVE-2026-34180,High,libcrypto1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-34180,1
+kong,CVE-2026-34180,High,libssl1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-34180,1
+kong,CVE-2026-34180,High,openssl,1.1.1n,fixed,1.0.2zq | 1.1.1zh | 3.0.21 | 3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-34180,1
+kong,CVE-2026-34180,High,openssl,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-34180,1
+kong,CVE-2026-40200,High,musl,1.2.3-r0,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-40200,1
+kong,CVE-2026-40200,High,musl-utils,1.2.3-r0,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-40200,1
+kong,CVE-2026-42945,High,nginx,1.19.9,fixed,1.30.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-42945,1
+kong,CVE-2026-42946,High,nginx,1.19.9,fixed,1.30.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-42946,1
+kong,CVE-2026-45447,High,libcrypto1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-45447,1
+kong,CVE-2026-45447,High,libssl1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-45447,1
+kong,CVE-2026-45447,High,openssl,1.1.1n,fixed,1.0.2zq | 1.1.1zh | 3.0.21 | 3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-45447,1
+kong,CVE-2026-45447,High,openssl,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-45447,1
+kong,CVE-2026-4878,High,libcap,2.64-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-4878,1
+kong,CVE-2026-54874,High,libcrypto1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-54874,1
+kong,CVE-2026-54874,High,libssl1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-54874,1
+kong,CVE-2026-54874,High,openssl,1.1.1n,fixed,1.0.2zr | 1.1.1zi | 3.0.22 | 3.4.7 | 3.5.8 | 3.6.4 | 4.0.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-54874,1
+kong,CVE-2026-54874,High,openssl,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-54874,1
+kong,CVE-2026-56434,High,nginx,1.19.9,fixed,1.30.4 | 1.31.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-56434,1
+kong,CVE-2026-57432,High,perl,5.34.1-r0,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-57432,1
+kong,CVE-2026-60005,High,nginx,1.19.9,fixed,1.30.4 | 1.31.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-60005,1
+kong,CVE-2026-63072,High,libcrypto1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-63072,1
+kong,CVE-2026-63072,High,libssl1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-63072,1
+kong,CVE-2026-63072,High,openssl,1.1.1n,fixed,1.1.1zi | 3.0.22 | 3.4.7 | 3.5.8 | 3.6.4 | 4.0.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-63072,1
+kong,CVE-2026-63072,High,openssl,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-63072,1
+kong,CVE-2026-7383,High,libcrypto1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-7383,1
+kong,CVE-2026-7383,High,libssl1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-7383,1
+kong,CVE-2026-7383,High,openssl,1.1.1n,fixed,1.0.2zq | 1.1.1zh | 3.0.21 | 3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-7383,1
+kong,CVE-2026-7383,High,openssl,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-7383,1
+kong,CVE-2026-84782,High,libcrypto1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-84782,1
+kong,CVE-2026-84782,High,libssl1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-84782,1
+kong,CVE-2026-84782,High,openssl,1.1.1n,fixed,1.0.2zs | 1.1.1zj | 3.0.23 | 3.4.8 | 3.5.9 | 3.6.5 | 4.0.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-84782,1
+kong,CVE-2026-84782,High,openssl,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-84782,1
+kong,CVE-2026-89157,High,pcre2,10.40-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-89157,1
+kong,CVE-2026-89161,High,pcre2,10.40-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-89161,1
+kong,CVE-2026-9076,High,libcrypto1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-9076,1
+kong,CVE-2026-9076,High,libssl1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-9076,1
+kong,CVE-2026-9076,High,openssl,1.1.1n,fixed,1.0.2zq | 1.1.1zh | 3.0.21 | 3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-9076,1
+kong,CVE-2026-9076,High,openssl,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-9076,1
+kong,CVE-2026-97629,High,nginx,1.19.9,fixed,1.30.6 | 1.31.7,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-97629,1
+kong,CVE-2022-2097,Medium,openssl,1.1.1n,fixed,1.1.1q | 3.0.5,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2022-2097,1
+kong,CVE-2022-4304,Medium,libcrypto1.1,1.1.1q-r0,fixed,1.1.1t-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2022-4304,1
+kong,CVE-2022-4304,Medium,libssl1.1,1.1.1q-r0,fixed,1.1.1t-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2022-4304,1
+kong,CVE-2022-4304,Medium,openssl,1.1.1n,fixed,1.0.2zg | 1.1.1t | 3.0.8,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2022-4304,1
+kong,CVE-2022-4304,Medium,openssl,1.1.1q-r0,fixed,1.1.1t-r0,exact-direct-match | exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2022-4304,1
+kong,CVE-2022-43552,Medium,libcurl,7.83.1-r3,fixed,7.83.1-r5,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2022-43552,1
+kong,CVE-2023-0465,Medium,libcrypto1.1,1.1.1q-r0,fixed,1.1.1t-r2,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-0465,1
+kong,CVE-2023-0465,Medium,libssl1.1,1.1.1q-r0,fixed,1.1.1t-r2,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-0465,1
+kong,CVE-2023-0465,Medium,openssl,1.1.1n,fixed,1.0.2zh | 1.1.1u | 3.0.9 | 3.1.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2023-0465,1
+kong,CVE-2023-0465,Medium,openssl,1.1.1q-r0,fixed,1.1.1t-r2,exact-direct-match | exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-0465,1
+kong,CVE-2023-0466,Medium,libcrypto1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2023-0466,1
+kong,CVE-2023-0466,Medium,libssl1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2023-0466,1
+kong,CVE-2023-0466,Medium,openssl,1.1.1n,fixed,1.0.2zh | 1.1.1u | 3.0.9 | 3.1.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2023-0466,1
+kong,CVE-2023-0466,Medium,openssl,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2023-0466,1
+kong,CVE-2023-22490,Medium,git,2.36.3-r0,fixed,2.36.5-r0,exact-direct-match | exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-22490,1
+kong,CVE-2023-22490,Medium,git-perl,2.36.3-r0,fixed,2.36.5-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-22490,1
+kong,CVE-2023-22490,Medium,perl-git,2.36.3-r0,fixed,2.36.5-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-22490,1
+kong,CVE-2023-23915,Medium,libcurl,7.83.1-r3,fixed,7.83.1-r6,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-23915,1
+kong,CVE-2023-23916,Medium,libcurl,7.83.1-r3,fixed,7.83.1-r6,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-23916,1
+kong,CVE-2023-24056,Medium,pkgconf,1.8.0-r1,fixed,1.8.1-r0,exact-direct-match | exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-24056,1
+kong,CVE-2023-2650,Medium,libcrypto1.1,1.1.1q-r0,fixed,1.1.1u-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-2650,1
+kong,CVE-2023-2650,Medium,libssl1.1,1.1.1q-r0,fixed,1.1.1u-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-2650,1
+kong,CVE-2023-2650,Medium,openssl,1.1.1n,fixed,1.0.2zh | 1.1.1u | 3.0.9 | 3.1.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2023-2650,1
+kong,CVE-2023-2650,Medium,openssl,1.1.1q-r0,fixed,1.1.1u-r0,exact-direct-match | exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-2650,1
+kong,CVE-2023-27535,Medium,libcurl,7.83.1-r3,fixed,8.0.1-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-27535,1
+kong,CVE-2023-27536,Medium,libcurl,7.83.1-r3,fixed,8.0.1-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-27536,1
+kong,CVE-2023-27537,Medium,libcurl,7.83.1-r3,fixed,8.0.1-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-27537,1
+kong,CVE-2023-27538,Medium,libcurl,7.83.1-r3,fixed,8.0.1-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-27538,1
+kong,CVE-2023-28320,Medium,libcurl,7.83.1-r3,fixed,8.1.0-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-28320,1
+kong,CVE-2023-28321,Medium,libcurl,7.83.1-r3,fixed,8.1.0-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-28321,1
+kong,CVE-2023-3446,Medium,libcrypto1.1,1.1.1q-r0,fixed,1.1.1u-r2,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-3446,1
+kong,CVE-2023-3446,Medium,libssl1.1,1.1.1q-r0,fixed,1.1.1u-r2,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-3446,1
+kong,CVE-2023-3446,Medium,openssl,1.1.1n,fixed,1.0.2zi | 1.1.1v | 3.0.10 | 3.1.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2023-3446,1
+kong,CVE-2023-3446,Medium,openssl,1.1.1q-r0,fixed,1.1.1u-r2,exact-direct-match | exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-3446,1
+kong,CVE-2023-3817,Medium,libcrypto1.1,1.1.1q-r0,fixed,1.1.1v-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-3817,1
+kong,CVE-2023-3817,Medium,libssl1.1,1.1.1q-r0,fixed,1.1.1v-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-3817,1
+kong,CVE-2023-3817,Medium,openssl,1.1.1n,fixed,3.0.10 | 3.1.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2023-3817,1
+kong,CVE-2023-3817,Medium,openssl,1.1.1q-r0,fixed,1.1.1v-r0,exact-direct-match | exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-3817,1
+kong,CVE-2023-42366,Medium,busybox,1.35.0-r17,fixed,1.35.0-r18,exact-direct-match | exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-42366,1
+kong,CVE-2023-42366,Medium,ssl_client,1.35.0-r17,fixed,1.35.0-r18,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-42366,1
+kong,CVE-2023-46218,Medium,libcurl,7.83.1-r3,fixed,8.5.0-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-46218,1
+kong,CVE-2023-46219,Medium,libcurl,7.83.1-r3,fixed,8.5.0-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-46219,1
+kong,CVE-2023-52426,Medium,expat,2.5.0-r0,fixed,2.6.0-r0,exact-direct-match | exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-52426,1
+kong,CVE-2023-5678,Medium,libcrypto1.1,1.1.1q-r0,fixed,1.1.1w-r1,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-5678,1
+kong,CVE-2023-5678,Medium,libssl1.1,1.1.1q-r0,fixed,1.1.1w-r1,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-5678,1
+kong,CVE-2023-5678,Medium,openssl,1.1.1n,fixed,1.0.2zj | 1.1.1x | 3.0.13 | 3.1.5,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2023-5678,1
+kong,CVE-2023-5678,Medium,openssl,1.1.1q-r0,fixed,1.1.1w-r1,exact-direct-match | exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-5678,1
+kong,CVE-2024-0727,Medium,libcrypto1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-0727,1
+kong,CVE-2024-0727,Medium,libssl1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-0727,1
+kong,CVE-2024-0727,Medium,openssl,1.1.1n,fixed,1.0.2zj | 1.1.1x | 3.0.13 | 3.1.5,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-0727,1
+kong,CVE-2024-0727,Medium,openssl,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-0727,1
+kong,CVE-2024-13176,Medium,libcrypto1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-13176,1
+kong,CVE-2024-13176,Medium,libssl1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-13176,1
+kong,CVE-2024-13176,Medium,openssl,1.1.1n,fixed,1.0.2zl | 1.1.1zb | 3.0.16 | 3.1.8 | 3.2.4 | 3.3.3 | 3.4.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-13176,1
+kong,CVE-2024-13176,Medium,openssl,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-13176,1
+kong,CVE-2024-2511,Medium,libcrypto1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-2511,1
+kong,CVE-2024-2511,Medium,libssl1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-2511,1
+kong,CVE-2024-2511,Medium,openssl,1.1.1n,fixed,1.1.1y | 3.0.14 | 3.1.6 | 3.2.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-2511,1
+kong,CVE-2024-2511,Medium,openssl,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-2511,1
+kong,CVE-2024-28182,Medium,nghttp2-libs,1.47.0-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-28182,1
+kong,CVE-2024-50349,Medium,git,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-50349,1
+kong,CVE-2024-50349,Medium,git-perl,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-50349,1
+kong,CVE-2024-50349,Medium,perl-git,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-50349,1
+kong,CVE-2024-7347,Medium,nginx,1.19.9,fixed,1.26.2 | 1.27.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-7347,1
+kong,CVE-2024-9143,Medium,libcrypto1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-9143,1
+kong,CVE-2024-9143,Medium,libssl1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-9143,1
+kong,CVE-2024-9143,Medium,openssl,1.1.1n,fixed,1.0.2zl | 1.1.1zb | 3.0.16 | 3.1.8 | 3.2.4 | 3.3.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-9143,1
+kong,CVE-2024-9143,Medium,openssl,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-9143,1
+kong,CVE-2025-23419,Medium,nginx,1.19.9,fixed,1.26.3 | 1.27.4,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-23419,1
+kong,CVE-2025-40909,Medium,perl,5.34.1-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-40909,1
+kong,CVE-2025-48386,Medium,git,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-48386,1
+kong,CVE-2025-48386,Medium,git-perl,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-48386,1
+kong,CVE-2025-48386,Medium,perl-git,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-48386,1
+kong,CVE-2025-53859,Medium,nginx,1.19.9,fixed,1.29.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-53859,1
+kong,CVE-2025-60876,Medium,busybox,1.35.0-r17,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-60876,1
+kong,CVE-2025-60876,Medium,ssl_client,1.35.0-r17,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-60876,1
+kong,CVE-2025-68160,Medium,libcrypto1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-68160,1
+kong,CVE-2025-68160,Medium,libssl1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-68160,1
+kong,CVE-2025-68160,Medium,openssl,1.1.1n,fixed,1.0.2zn | 1.1.1ze | 3.0.19 | 3.3.6 | 3.4.4 | 3.5.5 | 3.6.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-68160,1
+kong,CVE-2025-68160,Medium,openssl,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-68160,1
+kong,CVE-2025-69418,Medium,libcrypto1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-69418,1
+kong,CVE-2025-69418,Medium,libssl1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-69418,1
+kong,CVE-2025-69418,Medium,openssl,1.1.1n,fixed,1.1.1ze | 3.0.19 | 3.3.6 | 3.4.4 | 3.5.5 | 3.6.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-69418,1
+kong,CVE-2025-69418,Medium,openssl,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-69418,1
+kong,CVE-2026-15534,Medium,perl,5.34.1-r0,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-15534,1
+kong,CVE-2026-19487,Medium,perl,5.34.1-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-19487,1
+kong,CVE-2026-22795,Medium,libcrypto1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-22795,1
+kong,CVE-2026-22795,Medium,libssl1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-22795,1
+kong,CVE-2026-22795,Medium,openssl,1.1.1n,fixed,1.1.1ze | 3.0.19 | 3.3.6 | 3.4.4 | 3.5.5 | 3.6.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-22795,1
+kong,CVE-2026-22795,Medium,openssl,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-22795,1
+kong,CVE-2026-22796,Medium,libcrypto1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-22796,1
+kong,CVE-2026-22796,Medium,libssl1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-22796,1
+kong,CVE-2026-22796,Medium,openssl,1.1.1n,fixed,1.0.2zn | 1.1.1ze | 3.0.19 | 3.3.6 | 3.4.4 | 3.5.5 | 3.6.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-22796,1
+kong,CVE-2026-22796,Medium,openssl,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-22796,1
+kong,CVE-2026-27171,Medium,zlib,1.2.12-r3,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-27171,1
+kong,CVE-2026-27171,Medium,zlib-dev,1.2.12-r3,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-27171,1
+kong,CVE-2026-27784,Medium,nginx,1.19.9,fixed,1.28.3 | 1.29.7,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-27784,1
+kong,CVE-2026-28753,Medium,nginx,1.19.9,fixed,1.28.3 | 1.29.7,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-28753,1
+kong,CVE-2026-35189,Medium,libcrypto1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-35189,1
+kong,CVE-2026-35189,Medium,libssl1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-35189,1
+kong,CVE-2026-35189,Medium,openssl,1.1.1n,fixed,1.0.2zs | 1.1.1zj | 3.0.23 | 3.4.8 | 3.5.9 | 3.6.5 | 4.0.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-35189,1
+kong,CVE-2026-35189,Medium,openssl,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-35189,1
+kong,CVE-2026-40701,Medium,nginx,1.19.9,fixed,1.30.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-40701,1
+kong,CVE-2026-42766,Medium,libcrypto1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-42766,1
+kong,CVE-2026-42766,Medium,libssl1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-42766,1
+kong,CVE-2026-42766,Medium,openssl,1.1.1n,fixed,1.0.2zq | 1.1.1zh | 3.0.21 | 3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-42766,1
+kong,CVE-2026-42766,Medium,openssl,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-42766,1
+kong,CVE-2026-42934,Medium,nginx,1.19.9,fixed,1.30.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-42934,1
+kong,CVE-2026-48142,Medium,nginx,1.19.9,fixed,1.30.3 | 1.31.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-48142,1
+kong,CVE-2026-58055,Medium,nghttp2-libs,1.47.0-r0,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-58055,1
+kong,CVE-2026-6042,Medium,musl,1.2.3-r0,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-6042,1
+kong,CVE-2026-6042,Medium,musl-utils,1.2.3-r0,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-6042,1
+kong,CVE-2026-75806,Medium,libcrypto1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-75806,1
+kong,CVE-2026-75806,Medium,libssl1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-75806,1
+kong,CVE-2026-75806,Medium,openssl,1.1.1n,fixed,1.1.1zj | 3.0.23 | 3.4.8 | 3.5.9 | 3.6.5 | 4.0.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-75806,1
+kong,CVE-2026-75806,Medium,openssl,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-75806,1
+kong,CVE-2026-89156,Medium,pcre2,10.40-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-89156,1
+kong,CVE-2026-89158,Medium,pcre2,10.40-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-89158,1
+kong,CVE-2026-89160,Medium,pcre2,10.40-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-89160,1
+kong,CVE-2023-25815,Low,git,2.36.3-r0,fixed,2.36.6-r0,exact-direct-match | exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-25815,1
+kong,CVE-2023-25815,Low,git-perl,2.36.3-r0,fixed,2.36.6-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-25815,1
+kong,CVE-2023-25815,Low,perl-git,2.36.3-r0,fixed,2.36.6-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-25815,1
+kong,CVE-2023-2602,Low,libcap,2.64-r0,fixed,2.64-r1,exact-direct-match | exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-2602,1
+kong,CVE-2023-28322,Low,libcurl,7.83.1-r3,fixed,8.1.0-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-28322,1
+kong,CVE-2023-38546,Low,libcurl,7.83.1-r3,fixed,8.4.0-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2023-38546,1
+kong,CVE-2024-32020,Low,git,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-32020,1
+kong,CVE-2024-32020,Low,git-perl,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-32020,1
+kong,CVE-2024-32020,Low,perl-git,2.36.3-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-32020,1
+kong,CVE-2024-58251,Low,busybox,1.35.0-r17,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-58251,1
+kong,CVE-2024-58251,Low,ssl_client,1.35.0-r17,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-58251,1
+kong,CVE-2025-46394,Low,busybox,1.35.0-r17,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-46394,1
+kong,CVE-2025-46394,Low,ssl_client,1.35.0-r17,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-46394,1
+kong,CVE-2026-54872,Low,libcrypto1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-54872,1
+kong,CVE-2026-54872,Low,libssl1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-54872,1
+kong,CVE-2026-54872,Low,openssl,1.1.1n,fixed,1.0.2zs | 1.1.1zj | 3.0.23 | 3.4.8 | 3.5.9 | 3.6.5 | 4.0.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-54872,1
+kong,CVE-2026-54872,Low,openssl,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-54872,1
+kong,CVE-2026-77696,Low,libcrypto1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-77696,1
+kong,CVE-2026-77696,Low,libssl1.1,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-77696,1
+kong,CVE-2026-77696,Low,openssl,1.1.1n,fixed,1.1.1zj | 3.0.23 | 3.4.8 | 3.5.9 | 3.6.5 | 4.0.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-77696,1
+kong,CVE-2026-77696,Low,openssl,1.1.1q-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-77696,1
+gotrue,CVE-2026-63073,Critical,libcrypto3,3.5.7-r0,fixed,3.5.8-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2026-63073,1
+gotrue,CVE-2026-63073,Critical,libssl3,3.5.7-r0,fixed,3.5.8-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2026-63073,1
+gotrue,CVE-2026-75803,Critical,libcrypto3,3.5.7-r0,fixed,3.5.8-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2026-75803,1
+gotrue,CVE-2026-75803,Critical,libssl3,3.5.7-r0,fixed,3.5.8-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2026-75803,1
+gotrue,GO-2026-6604,Critical,stdlib,go1.27.0,fixed,1.26.9 | 1.27.2,exact-direct-match,https://go.dev/cl/847305,1
+gotrue,GO-2026-6612,Critical,golang.org/x/net,v0.57.0,fixed,0.60.0,exact-direct-match,https://go.dev/cl/847187,1
+gotrue,GO-2026-6612,Critical,stdlib,go1.27.0,fixed,1.27.2,exact-direct-match,https://go.dev/cl/847187,1
+gotrue,CVE-2026-14456,High,libcrypto3,3.5.7-r0,fixed,3.5.8-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2026-14456,1
+gotrue,CVE-2026-14456,High,libssl3,3.5.7-r0,fixed,3.5.8-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2026-14456,1
+gotrue,CVE-2026-14457,High,libcrypto3,3.5.7-r0,fixed,3.5.8-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2026-14457,1
+gotrue,CVE-2026-14457,High,libssl3,3.5.7-r0,fixed,3.5.8-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2026-14457,1
+gotrue,CVE-2026-18798,High,libcrypto3,3.5.7-r0,fixed,3.5.8-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2026-18798,1
+gotrue,CVE-2026-18798,High,libssl3,3.5.7-r0,fixed,3.5.8-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2026-18798,1
+gotrue,CVE-2026-54873,High,libcrypto3,3.5.7-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-54873,1
+gotrue,CVE-2026-54873,High,libssl3,3.5.7-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-54873,1
+gotrue,CVE-2026-54874,High,libcrypto3,3.5.7-r0,fixed,3.5.8-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2026-54874,1
+gotrue,CVE-2026-54874,High,libssl3,3.5.7-r0,fixed,3.5.8-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2026-54874,1
+gotrue,CVE-2026-63072,High,libcrypto3,3.5.7-r0,fixed,3.5.8-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2026-63072,1
+gotrue,CVE-2026-63072,High,libssl3,3.5.7-r0,fixed,3.5.8-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2026-63072,1
+gotrue,CVE-2026-63075,High,libcrypto3,3.5.7-r0,fixed,3.5.8-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2026-63075,1
+gotrue,CVE-2026-63075,High,libssl3,3.5.7-r0,fixed,3.5.8-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2026-63075,1
+gotrue,CVE-2026-63076,High,libcrypto3,3.5.7-r0,fixed,3.5.8-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2026-63076,1
+gotrue,CVE-2026-63076,High,libssl3,3.5.7-r0,fixed,3.5.8-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2026-63076,1
+gotrue,CVE-2026-72897,High,libcrypto3,3.5.7-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-72897,1
+gotrue,CVE-2026-72897,High,libssl3,3.5.7-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-72897,1
+gotrue,CVE-2026-84782,High,libcrypto3,3.5.7-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-84782,1
+gotrue,CVE-2026-84782,High,libssl3,3.5.7-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-84782,1
+gotrue,CVE-2026-84784,High,libcrypto3,3.5.7-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-84784,1
+gotrue,CVE-2026-84784,High,libssl3,3.5.7-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-84784,1
+gotrue,CVE-2026-85091,High,zlib,1.3.2-r0,fixed,1.3.2-r1,exact-direct-match | exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2026-85091,1
+gotrue,GHSA-2v4p-qf9q-27wj,High,google.golang.org/grpc,v1.82.1,fixed,1.82.2,exact-direct-match,https://github.com/advisories/GHSA-2v4p-qf9q-27wj,1
+gotrue,GHSA-jqcq-xjh3-6g23,High,github.com/jackc/pgproto3/v2,v2.3.3,not-fixed,,exact-direct-match,https://github.com/advisories/GHSA-jqcq-xjh3-6g23,1
+gotrue,GHSA-mgcc-cww5-fp2q,High,github.com/go-jose/go-jose/v4,v4.1.4,fixed,4.1.6,exact-direct-match,https://github.com/advisories/GHSA-mgcc-cww5-fp2q,1
+gotrue,GHSA-vp52-pcj8-j9qc,High,google.golang.org/grpc,v1.82.1,fixed,1.83.1,exact-direct-match,https://github.com/advisories/GHSA-vp52-pcj8-j9qc,1
+gotrue,GO-2026-6354,High,golang.org/x/crypto,v0.55.0,fixed,0.56.0,exact-direct-match,https://go.dev/issue/81316,1
+gotrue,GO-2026-6355,High,golang.org/x/crypto,v0.55.0,fixed,0.56.0,exact-direct-match,https://go.dev/issue/81317,1
+gotrue,GO-2026-6603,High,golang.org/x/net,v0.57.0,fixed,0.60.0,exact-direct-match,https://go.dev/cl/847185,1
+gotrue,GO-2026-6603,High,stdlib,go1.27.0,fixed,1.27.2,exact-direct-match,https://go.dev/cl/847185,1
+gotrue,GO-2026-6605,High,stdlib,go1.27.0,fixed,1.26.9 | 1.27.2,exact-direct-match,https://go.dev/cl/847306,1
+gotrue,GO-2026-6607,High,stdlib,go1.27.0,fixed,1.26.9 | 1.27.2,exact-direct-match,https://go.dev/cl/847312,1
+gotrue,GO-2026-6608,High,stdlib,go1.27.0,fixed,1.26.9 | 1.27.2,exact-direct-match,https://go.dev/cl/847307,1
+gotrue,GO-2026-6609,High,stdlib,go1.27.0,fixed,1.26.9 | 1.27.2,exact-direct-match,https://go.dev/cl/847309,1
+gotrue,GO-2026-6610,High,golang.org/x/net,v0.57.0,fixed,0.60.0,exact-direct-match,https://go.dev/cl/835145,1
+gotrue,GO-2026-6610,High,stdlib,go1.27.0,fixed,1.27.2,exact-direct-match,https://go.dev/cl/835145,1
+gotrue,GO-2026-6611,High,golang.org/x/net,v0.57.0,fixed,0.60.0,exact-direct-match,https://go.dev/cl/847186,1
+gotrue,GO-2026-6611,High,stdlib,go1.27.0,fixed,1.27.2,exact-direct-match,https://go.dev/cl/847186,1
+gotrue,GO-2026-6613,High,stdlib,go1.27.0,fixed,1.26.9 | 1.27.2,exact-direct-match,https://go.dev/cl/847311,1
+gotrue,GO-2026-6617,High,golang.org/x/net,v0.57.0,fixed,0.60.0,exact-direct-match,https://go.dev/cl/847188,1
+gotrue,GO-2026-6617,High,stdlib,go1.27.0,fixed,1.27.2,exact-direct-match,https://go.dev/cl/847188,1
+gotrue,CVE-2025-60876,Medium,busybox,1.37.0-r31,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-60876,1
+gotrue,CVE-2025-60876,Medium,busybox-binsh,1.37.0-r31,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-60876,1
+gotrue,CVE-2025-60876,Medium,ssl_client,1.37.0-r31,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-60876,1
+gotrue,CVE-2026-35189,Medium,libcrypto3,3.5.7-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-35189,1
+gotrue,CVE-2026-35189,Medium,libssl3,3.5.7-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-35189,1
+gotrue,CVE-2026-42772,Medium,libcrypto3,3.5.7-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-42772,1
+gotrue,CVE-2026-42772,Medium,libssl3,3.5.7-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-42772,1
+gotrue,CVE-2026-63074,Medium,libcrypto3,3.5.7-r0,fixed,3.5.8-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2026-63074,1
+gotrue,CVE-2026-63074,Medium,libssl3,3.5.7-r0,fixed,3.5.8-r0,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2026-63074,1
+gotrue,CVE-2026-75804,Medium,libcrypto3,3.5.7-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-75804,1
+gotrue,CVE-2026-75804,Medium,libssl3,3.5.7-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-75804,1
+gotrue,CVE-2026-75805,Medium,libcrypto3,3.5.7-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-75805,1
+gotrue,CVE-2026-75805,Medium,libssl3,3.5.7-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-75805,1
+gotrue,CVE-2026-75806,Medium,libcrypto3,3.5.7-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-75806,1
+gotrue,CVE-2026-75806,Medium,libssl3,3.5.7-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-75806,1
+gotrue,GHSA-4w3g-jfj2-cw2q,Medium,github.com/go-jose/go-jose/v4,v4.1.4,fixed,4.1.5,exact-direct-match,https://github.com/advisories/GHSA-4w3g-jfj2-cw2q,1
+gotrue,GHSA-j6qf-3m9c-vwj3,Medium,github.com/go-chi/chi/v5,v5.3.2,fixed,5.4.0,exact-direct-match,https://github.com/advisories/GHSA-j6qf-3m9c-vwj3,1
+gotrue,GHSA-qc2q-p7wx-3px3,Medium,google.golang.org/grpc,v1.82.1,fixed,1.83.1,exact-direct-match,https://github.com/advisories/GHSA-qc2q-p7wx-3px3,1
+gotrue,GHSA-vvm8-gf78-28g4,Medium,github.com/go-jose/go-jose/v4,v4.1.4,fixed,4.1.5,exact-direct-match,https://github.com/advisories/GHSA-vvm8-gf78-28g4,1
+gotrue,GO-2026-6599,Medium,stdlib,go1.27.0,fixed,1.26.9 | 1.27.2,exact-direct-match,https://go.dev/cl/839866,1
+gotrue,GO-2026-6600,Medium,stdlib,go1.27.0,fixed,1.26.9 | 1.27.2,exact-direct-match,https://go.dev/cl/840925,1
+gotrue,GO-2026-6809,Medium,stdlib,go1.27.0,fixed,1.26.10 | 1.27.3,exact-direct-match,https://go.dev/cl/851047,1
+gotrue,CVE-2026-35191,Low,libcrypto3,3.5.7-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-35191,1
+gotrue,CVE-2026-35191,Low,libssl3,3.5.7-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-35191,1
+gotrue,CVE-2026-54872,Low,libcrypto3,3.5.7-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-54872,1
+gotrue,CVE-2026-54872,Low,libssl3,3.5.7-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-54872,1
+gotrue,CVE-2026-54875,Low,libcrypto3,3.5.7-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-54875,1
+gotrue,CVE-2026-54875,Low,libssl3,3.5.7-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-54875,1
+gotrue,CVE-2026-77696,Low,libcrypto3,3.5.7-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-77696,1
+gotrue,CVE-2026-77696,Low,libssl3,3.5.7-r0,unknown,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-77696,1
+gotrue,GHSA-8wmf-6v46-5gfg,Low,go.opentelemetry.io/otel/exporters/otlp/otlptrace,v1.44.0,fixed,1.45.0,exact-direct-match,https://github.com/advisories/GHSA-8wmf-6v46-5gfg,1
+gotrue,GHSA-8wmf-6v46-5gfg,Low,go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc,v1.44.0,fixed,1.45.0,exact-direct-match,https://github.com/advisories/GHSA-8wmf-6v46-5gfg,1
+gotrue,GHSA-8wmf-6v46-5gfg,Low,go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp,v1.44.0,fixed,1.45.0,exact-direct-match,https://github.com/advisories/GHSA-8wmf-6v46-5gfg,1
+gotrue,GHSA-8wmf-6v46-5gfg,Low,go.opentelemetry.io/otel/sdk,v1.44.0,fixed,1.45.0,exact-direct-match,https://github.com/advisories/GHSA-8wmf-6v46-5gfg,1
+gotrue,GHSA-j88v-2chj-qfwx,Low,github.com/jackc/pgx/v4,v4.18.2,not-fixed,,exact-direct-match,https://github.com/advisories/GHSA-j88v-2chj-qfwx,1
+gotrue,CVE-2026-107891,Unknown,musl,1.2.6-r2,fixed,1.2.6-r3,exact-direct-match | exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2026-107891,1
+gotrue,CVE-2026-107891,Unknown,musl-utils,1.2.6-r2,fixed,1.2.6-r3,exact-indirect-match,https://security.alpinelinux.org/vuln/CVE-2026-107891,1
+gotrue,GO-2026-5932,Unknown,golang.org/x/crypto,v0.55.0,fixed,0.58.1-0.20261009181718-2f1f834330b2,exact-direct-match,https://go.dev/issue/44226,1
+gotrue,GO-2026-6860,Unknown,golang.org/x/net,v0.57.0,fixed,0.62.0,exact-direct-match,https://go.dev/cl/849365,1
+gotrue,GO-2026-6866,Unknown,golang.org/x/net,v0.57.0,fixed,0.62.0,exact-direct-match,https://go.dev/cl/855121,1
+postgres,CVE-2025-15467,Critical,openssl,3.6.0,fixed,3.0.19 | 3.3.6 | 3.4.4 | 3.5.5 | 3.6.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-15467,4
+postgres,CVE-2026-13221,Critical,perl,5.42.0,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-13221,1
+postgres,CVE-2026-31789,Critical,openssl,3.6.0,fixed,3.0.20 | 3.3.7 | 3.4.5 | 3.5.6 | 3.6.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-31789,4
+postgres,CVE-2026-34182,Critical,openssl,3.6.0,fixed,3.0.21 | 3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-34182,4
+postgres,CVE-2026-34182,Critical,openssl,3.6.2,fixed,3.0.21 | 3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-34182,1
+postgres,CVE-2026-63073,Critical,openssl,3.6.0,fixed,3.4.7 | 3.5.8 | 3.6.4 | 4.0.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-63073,4
+postgres,CVE-2026-63073,Critical,openssl,3.6.2,fixed,3.4.7 | 3.5.8 | 3.6.4 | 4.0.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-63073,1
+postgres,CVE-2026-75803,Critical,openssl,3.6.0,fixed,3.0.22 | 3.4.7 | 3.5.8 | 3.6.4 | 4.0.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-75803,4
+postgres,CVE-2026-75803,Critical,openssl,3.6.2,fixed,3.0.22 | 3.4.7 | 3.5.8 | 3.6.4 | 4.0.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-75803,1
+postgres,CVE-2026-7598,Critical,libssh2,1.11.1,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-7598,2
+postgres,CVE-2007-3149,High,krb5,1.22.1,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2007-3149,1
+postgres,CVE-2007-3149,High,krb5,1.22.2,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2007-3149,1
+postgres,CVE-2007-5894,High,krb5,1.22.1,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2007-5894,1
+postgres,CVE-2007-5894,High,krb5,1.22.2,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2007-5894,1
+postgres,CVE-2025-69419,High,openssl,3.6.0,fixed,1.1.1ze | 3.0.19 | 3.3.6 | 3.4.4 | 3.5.5 | 3.6.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-69419,4
+postgres,CVE-2025-69420,High,openssl,3.6.0,fixed,1.1.1ze | 3.0.19 | 3.3.6 | 3.4.4 | 3.5.5 | 3.6.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-69420,4
+postgres,CVE-2025-69421,High,openssl,3.6.0,fixed,1.0.2zn | 1.1.1ze | 3.0.19 | 3.3.6 | 3.4.4 | 3.5.5 | 3.6.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-69421,4
+postgres,CVE-2026-107778,High,krb5,1.22.1,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-107778,1
+postgres,CVE-2026-107778,High,krb5,1.22.2,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-107778,1
+postgres,CVE-2026-11824,High,sqlite,3.51.1,fixed,3.53.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-11824,1
+postgres,CVE-2026-11824,High,sqlite,3.51.2,fixed,3.53.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-11824,1
+postgres,CVE-2026-119373,High,sqlite,3.51.1,fixed,3.54.0,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-119373,1
+postgres,CVE-2026-119373,High,sqlite,3.51.2,fixed,3.54.0,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-119373,1
+postgres,CVE-2026-119374,High,sqlite,3.51.1,fixed,3.54.0,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-119374,1
+postgres,CVE-2026-119374,High,sqlite,3.51.2,fixed,3.54.0,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-119374,1
+postgres,CVE-2026-119379,High,sqlite,3.51.1,fixed,3.54.0,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-119379,1
+postgres,CVE-2026-119379,High,sqlite,3.51.2,fixed,3.54.0,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-119379,1
+postgres,CVE-2026-119586,High,sqlite,3.51.1,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-119586,1
+postgres,CVE-2026-119586,High,sqlite,3.51.2,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-119586,1
+postgres,CVE-2026-14456,High,openssl,3.6.0,fixed,3.5.8 | 3.6.4 | 4.0.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-14456,4
+postgres,CVE-2026-14456,High,openssl,3.6.2,fixed,3.5.8 | 3.6.4 | 4.0.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-14456,1
+postgres,CVE-2026-14457,High,openssl,3.6.0,fixed,3.4.7 | 3.5.8 | 3.6.4 | 4.0.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-14457,4
+postgres,CVE-2026-14457,High,openssl,3.6.2,fixed,3.4.7 | 3.5.8 | 3.6.4 | 4.0.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-14457,1
+postgres,CVE-2026-18798,High,openssl,3.6.0,fixed,3.5.8 | 3.6.4 | 4.0.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-18798,4
+postgres,CVE-2026-18798,High,openssl,3.6.2,fixed,3.5.8 | 3.6.4 | 4.0.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-18798,1
+postgres,CVE-2026-27135,High,nghttp2,1.67.1,fixed,1.68.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-27135,1
+postgres,CVE-2026-28386,High,openssl,3.6.0,fixed,3.6.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-28386,4
+postgres,CVE-2026-28387,High,openssl,3.6.0,fixed,1.1.1zg | 3.0.20 | 3.3.7 | 3.4.5 | 3.5.6 | 3.6.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-28387,4
+postgres,CVE-2026-28388,High,openssl,3.6.0,fixed,1.0.2zp | 1.1.1zg | 3.0.20 | 3.3.7 | 3.4.5 | 3.5.6 | 3.6.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-28388,4
+postgres,CVE-2026-28389,High,openssl,3.6.0,fixed,1.0.2zp | 1.1.1zg | 3.0.20 | 3.3.7 | 3.4.5 | 3.5.6 | 3.6.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-28389,4
+postgres,CVE-2026-28390,High,openssl,3.6.0,fixed,1.0.2zp | 1.1.1zg | 3.0.20 | 3.3.7 | 3.4.5 | 3.5.6 | 3.6.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-28390,4
+postgres,CVE-2026-31790,High,openssl,3.6.0,fixed,3.0.20 | 3.3.7 | 3.4.5 | 3.5.6 | 3.6.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-31790,4
+postgres,CVE-2026-34180,High,openssl,3.6.0,fixed,1.0.2zq | 1.1.1zh | 3.0.21 | 3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-34180,4
+postgres,CVE-2026-34180,High,openssl,3.6.2,fixed,1.0.2zq | 1.1.1zh | 3.0.21 | 3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-34180,1
+postgres,CVE-2026-34181,High,openssl,3.6.0,fixed,3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-34181,4
+postgres,CVE-2026-34181,High,openssl,3.6.2,fixed,3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-34181,1
+postgres,CVE-2026-34183,High,openssl,3.6.0,fixed,3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-34183,4
+postgres,CVE-2026-34183,High,openssl,3.6.2,fixed,3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-34183,1
+postgres,CVE-2026-40355,High,krb5,1.22.1,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-40355,1
+postgres,CVE-2026-40355,High,krb5,1.22.2,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-40355,1
+postgres,CVE-2026-40356,High,krb5,1.22.1,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-40356,1
+postgres,CVE-2026-40356,High,krb5,1.22.2,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-40356,1
+postgres,CVE-2026-42764,High,openssl,3.6.0,fixed,3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-42764,4
+postgres,CVE-2026-42764,High,openssl,3.6.2,fixed,3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-42764,1
+postgres,CVE-2026-42765,High,openssl,3.6.0,fixed,3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-42765,4
+postgres,CVE-2026-42765,High,openssl,3.6.2,fixed,3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-42765,1
+postgres,CVE-2026-45445,High,openssl,3.6.0,fixed,3.0.21 | 3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-45445,4
+postgres,CVE-2026-45445,High,openssl,3.6.2,fixed,3.0.21 | 3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-45445,1
+postgres,CVE-2026-45447,High,openssl,3.6.0,fixed,1.0.2zq | 1.1.1zh | 3.0.21 | 3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-45447,4
+postgres,CVE-2026-45447,High,openssl,3.6.2,fixed,1.0.2zq | 1.1.1zh | 3.0.21 | 3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-45447,1
+postgres,CVE-2026-4775,High,libtiff,4.7.1,fixed,4.7.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-4775,1
+postgres,CVE-2026-4878,High,libcap,2.77,fixed,2.78,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-4878,1
+postgres,CVE-2026-53587,High,libgit2,1.9.4,fixed,1.8.6 | 1.9.5,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-53587,1
+postgres,CVE-2026-54873,High,openssl,3.6.0,fixed,3.4.8 | 3.5.9 | 3.6.5 | 4.0.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-54873,4
+postgres,CVE-2026-54873,High,openssl,3.6.2,fixed,3.4.8 | 3.5.9 | 3.6.5 | 4.0.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-54873,1
+postgres,CVE-2026-54874,High,openssl,3.6.0,fixed,1.0.2zr | 1.1.1zi | 3.0.22 | 3.4.7 | 3.5.8 | 3.6.4 | 4.0.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-54874,4
+postgres,CVE-2026-54874,High,openssl,3.6.2,fixed,1.0.2zr | 1.1.1zi | 3.0.22 | 3.4.7 | 3.5.8 | 3.6.4 | 4.0.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-54874,1
+postgres,CVE-2026-54876,High,openssl,3.6.0,fixed,3.6.4 | 4.0.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-54876,4
+postgres,CVE-2026-54876,High,openssl,3.6.2,fixed,3.6.4 | 4.0.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-54876,1
+postgres,CVE-2026-55199,High,libssh2,1.11.1,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-55199,2
+postgres,CVE-2026-55200,High,libssh2,1.11.1,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-55200,2
+postgres,CVE-2026-57432,High,perl,5.42.0,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-57432,1
+postgres,CVE-2026-58050,High,libssh2,1.11.1,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-58050,2
+postgres,CVE-2026-58051,High,libssh2,1.11.1,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-58051,2
+postgres,CVE-2026-63072,High,openssl,3.6.0,fixed,1.1.1zi | 3.0.22 | 3.4.7 | 3.5.8 | 3.6.4 | 4.0.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-63072,4
+postgres,CVE-2026-63072,High,openssl,3.6.2,fixed,1.1.1zi | 3.0.22 | 3.4.7 | 3.5.8 | 3.6.4 | 4.0.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-63072,1
+postgres,CVE-2026-63075,High,openssl,3.6.0,fixed,3.4.7 | 3.5.8 | 3.6.4 | 4.0.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-63075,4
+postgres,CVE-2026-63075,High,openssl,3.6.2,fixed,3.4.7 | 3.5.8 | 3.6.4 | 4.0.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-63075,1
+postgres,CVE-2026-63076,High,openssl,3.6.0,fixed,3.0.22 | 3.4.7 | 3.5.8 | 3.6.4 | 4.0.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-63076,4
+postgres,CVE-2026-63076,High,openssl,3.6.2,fixed,3.0.22 | 3.4.7 | 3.5.8 | 3.6.4 | 4.0.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-63076,1
+postgres,CVE-2026-66032,High,libssh2,1.11.1,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-66032,2
+postgres,CVE-2026-66033,High,libssh2,1.11.1,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-66033,2
+postgres,CVE-2026-66034,High,libssh2,1.11.1,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-66034,2
+postgres,CVE-2026-66035,High,libssh2,1.11.1,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-66035,2
+postgres,CVE-2026-72897,High,openssl,3.6.0,fixed,3.4.8 | 3.5.9 | 3.6.5 | 4.0.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-72897,4
+postgres,CVE-2026-72897,High,openssl,3.6.2,fixed,3.4.8 | 3.5.9 | 3.6.5 | 4.0.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-72897,1
+postgres,CVE-2026-73515,High,postgis,3.3.7,fixed,3.7.0beta2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-73515,1
+postgres,CVE-2026-7383,High,openssl,3.6.0,fixed,1.0.2zq | 1.1.1zh | 3.0.21 | 3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-7383,4
+postgres,CVE-2026-7383,High,openssl,3.6.2,fixed,1.0.2zq | 1.1.1zh | 3.0.21 | 3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-7383,1
+postgres,CVE-2026-84782,High,openssl,3.6.0,fixed,1.0.2zs | 1.1.1zj | 3.0.23 | 3.4.8 | 3.5.9 | 3.6.5 | 4.0.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-84782,4
+postgres,CVE-2026-84782,High,openssl,3.6.2,fixed,1.0.2zs | 1.1.1zj | 3.0.23 | 3.4.8 | 3.5.9 | 3.6.5 | 4.0.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-84782,1
+postgres,CVE-2026-84784,High,openssl,3.6.0,fixed,3.4.8 | 3.5.9 | 3.6.5 | 4.0.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-84784,4
+postgres,CVE-2026-84784,High,openssl,3.6.2,fixed,3.4.8 | 3.5.9 | 3.6.5 | 4.0.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-84784,1
+postgres,CVE-2026-85091,High,zlib,1.3.2,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-85091,1
+postgres,CVE-2026-9076,High,openssl,3.6.0,fixed,1.0.2zq | 1.1.1zh | 3.0.21 | 3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-9076,4
+postgres,CVE-2026-9076,High,openssl,3.6.2,fixed,1.0.2zq | 1.1.1zh | 3.0.21 | 3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-9076,1
+postgres,CVE-2025-11187,Medium,openssl,3.6.0,fixed,3.4.4 | 3.5.5 | 3.6.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-11187,4
+postgres,CVE-2025-15468,Medium,openssl,3.6.0,fixed,3.3.6 | 3.4.4 | 3.5.5 | 3.6.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-15468,4
+postgres,CVE-2025-15469,Medium,openssl,3.6.0,fixed,3.5.5 | 3.6.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-15469,4
+postgres,CVE-2025-15661,Medium,libssh2,1.11.1,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-15661,2
+postgres,CVE-2025-60876,Medium,busybox,1.37.0,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-60876,1
+postgres,CVE-2025-60876,Medium,busybox,1.37.0-r30,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-60876,1
+postgres,CVE-2025-60876,Medium,busybox-binsh,1.37.0-r30,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-60876,1
+postgres,CVE-2025-60876,Medium,ssl_client,1.37.0-r30,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-60876,1
+postgres,CVE-2025-66199,Medium,openssl,3.6.0,fixed,3.3.6 | 3.4.4 | 3.5.5 | 3.6.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-66199,4
+postgres,CVE-2025-68160,Medium,openssl,3.6.0,fixed,1.0.2zn | 1.1.1ze | 3.0.19 | 3.3.6 | 3.4.4 | 3.5.5 | 3.6.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-68160,4
+postgres,CVE-2025-69418,Medium,openssl,3.6.0,fixed,1.1.1ze | 3.0.19 | 3.3.6 | 3.4.4 | 3.5.5 | 3.6.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-69418,4
+postgres,CVE-2026-107708,Medium,krb5,1.22.1,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-107708,1
+postgres,CVE-2026-107708,Medium,krb5,1.22.2,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-107708,1
+postgres,CVE-2026-11822,Medium,sqlite,3.51.1,fixed,3.53.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-11822,1
+postgres,CVE-2026-11822,Medium,sqlite,3.51.2,fixed,3.53.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-11822,1
+postgres,CVE-2026-119371,Medium,sqlite,3.51.1,fixed,3.54.0,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-119371,1
+postgres,CVE-2026-119371,Medium,sqlite,3.51.2,fixed,3.54.0,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-119371,1
+postgres,CVE-2026-119372,Medium,sqlite,3.51.1,fixed,3.54.0,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-119372,1
+postgres,CVE-2026-119372,Medium,sqlite,3.51.2,fixed,3.54.0,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-119372,1
+postgres,CVE-2026-119375,Medium,sqlite,3.51.1,fixed,3.54.0,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-119375,1
+postgres,CVE-2026-119375,Medium,sqlite,3.51.2,fixed,3.54.0,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-119375,1
+postgres,CVE-2026-119376,Medium,sqlite,3.51.1,fixed,3.54.0,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-119376,1
+postgres,CVE-2026-119376,Medium,sqlite,3.51.2,fixed,3.54.0,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-119376,1
+postgres,CVE-2026-119378,Medium,sqlite,3.51.1,fixed,3.54.0,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-119378,1
+postgres,CVE-2026-119378,Medium,sqlite,3.51.2,fixed,3.54.0,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-119378,1
+postgres,CVE-2026-119591,Medium,sqlite,3.51.1,fixed,3.54.0,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-119591,1
+postgres,CVE-2026-119591,Medium,sqlite,3.51.2,fixed,3.54.0,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-119591,1
+postgres,CVE-2026-22795,Medium,openssl,3.6.0,fixed,1.1.1ze | 3.0.19 | 3.3.6 | 3.4.4 | 3.5.5 | 3.6.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-22795,4
+postgres,CVE-2026-22796,Medium,openssl,3.6.0,fixed,1.0.2zn | 1.1.1ze | 3.0.19 | 3.3.6 | 3.4.4 | 3.5.5 | 3.6.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-22796,4
+postgres,CVE-2026-2673,Medium,openssl,3.6.0,fixed,3.5.6 | 3.6.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-2673,4
+postgres,CVE-2026-27171,Medium,zlib,1.3.1,fixed,1.3.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-27171,2
+postgres,CVE-2026-35188,Medium,openssl,3.6.0,fixed,3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-35188,4
+postgres,CVE-2026-35188,Medium,openssl,3.6.2,fixed,3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-35188,1
+postgres,CVE-2026-35189,Medium,openssl,3.6.0,fixed,1.0.2zs | 1.1.1zj | 3.0.23 | 3.4.8 | 3.5.9 | 3.6.5 | 4.0.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-35189,4
+postgres,CVE-2026-35189,Medium,openssl,3.6.2,fixed,1.0.2zs | 1.1.1zj | 3.0.23 | 3.4.8 | 3.5.9 | 3.6.5 | 4.0.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-35189,1
+postgres,CVE-2026-42766,Medium,openssl,3.6.0,fixed,1.0.2zq | 1.1.1zh | 3.0.21 | 3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-42766,4
+postgres,CVE-2026-42766,Medium,openssl,3.6.2,fixed,1.0.2zq | 1.1.1zh | 3.0.21 | 3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-42766,1
+postgres,CVE-2026-42767,Medium,openssl,3.6.0,fixed,3.0.21 | 3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-42767,4
+postgres,CVE-2026-42767,Medium,openssl,3.6.2,fixed,3.0.21 | 3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-42767,1
+postgres,CVE-2026-42769,Medium,openssl,3.6.0,fixed,3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-42769,4
+postgres,CVE-2026-42769,Medium,openssl,3.6.2,fixed,3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-42769,1
+postgres,CVE-2026-42772,Medium,openssl,3.6.0,fixed,3.4.8 | 3.5.9 | 3.6.5 | 4.0.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-42772,4
+postgres,CVE-2026-42772,Medium,openssl,3.6.2,fixed,3.4.8 | 3.5.9 | 3.6.5 | 4.0.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-42772,1
+postgres,CVE-2026-45446,Medium,openssl,3.6.0,fixed,3.0.21 | 3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-45446,4
+postgres,CVE-2026-45446,Medium,openssl,3.6.2,fixed,3.0.21 | 3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-45446,1
+postgres,CVE-2026-53583,Medium,libgit2,1.9.4,fixed,1.8.6 | 1.9.5,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-53583,1
+postgres,CVE-2026-53584,Medium,libgit2,1.9.4,fixed,1.8.6 | 1.9.5,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-53584,1
+postgres,CVE-2026-53585,Medium,libgit2,1.9.4,fixed,1.8.6 | 1.9.5,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-53585,1
+postgres,CVE-2026-53586,Medium,libgit2,1.9.4,fixed,1.8.6 | 1.9.5,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-53586,1
+postgres,CVE-2026-5745,Medium,libarchive,3.8.7,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-5745,1
+postgres,CVE-2026-58055,Medium,nghttp2,1.67.1,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-58055,1
+postgres,CVE-2026-58055,Medium,nghttp2,1.69.0,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-58055,1
+postgres,CVE-2026-58055,Medium,nghttp2-libs,1.69.0-r0,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-58055,1
+postgres,CVE-2026-63074,Medium,openssl,3.6.0,fixed,3.0.22 | 3.4.7 | 3.5.8 | 3.6.4 | 4.0.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-63074,4
+postgres,CVE-2026-63074,Medium,openssl,3.6.2,fixed,3.0.22 | 3.4.7 | 3.5.8 | 3.6.4 | 4.0.2,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-63074,1
+postgres,CVE-2026-75804,Medium,openssl,3.6.0,fixed,3.4.8 | 3.5.9 | 3.6.5 | 4.0.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-75804,4
+postgres,CVE-2026-75804,Medium,openssl,3.6.2,fixed,3.4.8 | 3.5.9 | 3.6.5 | 4.0.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-75804,1
+postgres,CVE-2026-75805,Medium,openssl,3.6.0,fixed,3.0.23 | 3.4.8 | 3.5.9 | 3.6.5 | 4.0.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-75805,4
+postgres,CVE-2026-75805,Medium,openssl,3.6.2,fixed,3.0.23 | 3.4.8 | 3.5.9 | 3.6.5 | 4.0.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-75805,1
+postgres,CVE-2026-75806,Medium,openssl,3.6.0,fixed,1.1.1zj | 3.0.23 | 3.4.8 | 3.5.9 | 3.6.5 | 4.0.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-75806,4
+postgres,CVE-2026-75806,Medium,openssl,3.6.2,fixed,1.1.1zj | 3.0.23 | 3.4.8 | 3.5.9 | 3.6.5 | 4.0.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-75806,1
+postgres,GHSA-9gj3-hwp5-pmwc,Medium,jquery-ui,1.12.1,fixed,1.13.0,exact-direct-match,https://github.com/advisories/GHSA-9gj3-hwp5-pmwc,1
+postgres,GHSA-gpqq-952q-5327,Medium,jquery-ui,1.12.1,fixed,1.13.0,exact-direct-match,https://github.com/advisories/GHSA-gpqq-952q-5327,1
+postgres,GHSA-h6gj-6jjq-h8g9,Medium,jquery-ui,1.12.1,fixed,1.13.2,exact-direct-match,https://github.com/advisories/GHSA-h6gj-6jjq-h8g9,1
+postgres,GHSA-j7qv-pgf6-hvh4,Medium,jquery-ui,1.12.1,fixed,1.13.0,exact-direct-match,https://github.com/advisories/GHSA-j7qv-pgf6-hvh4,1
+postgres,CVE-2024-58251,Low,busybox,1.37.0,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2024-58251,1
+postgres,CVE-2025-46394,Low,busybox,1.37.0,,,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2025-46394,1
+postgres,CVE-2026-119377,Low,sqlite,3.51.1,fixed,3.54.0,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-119377,1
+postgres,CVE-2026-119377,Low,sqlite,3.51.2,fixed,3.54.0,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-119377,1
+postgres,CVE-2026-35191,Low,openssl,3.6.0,fixed,3.5.9 | 3.6.5 | 4.0.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-35191,4
+postgres,CVE-2026-35191,Low,openssl,3.6.2,fixed,3.5.9 | 3.6.5 | 4.0.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-35191,1
+postgres,CVE-2026-42768,Low,openssl,3.6.0,fixed,3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-42768,4
+postgres,CVE-2026-42768,Low,openssl,3.6.2,fixed,3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-42768,1
+postgres,CVE-2026-42770,Low,openssl,3.6.0,fixed,3.0.21 | 3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-42770,4
+postgres,CVE-2026-42770,Low,openssl,3.6.2,fixed,3.0.21 | 3.4.6 | 3.5.7 | 3.6.3 | 4.0.1,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-42770,1
+postgres,CVE-2026-54872,Low,openssl,3.6.0,fixed,1.0.2zs | 1.1.1zj | 3.0.23 | 3.4.8 | 3.5.9 | 3.6.5 | 4.0.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-54872,4
+postgres,CVE-2026-54872,Low,openssl,3.6.2,fixed,1.0.2zs | 1.1.1zj | 3.0.23 | 3.4.8 | 3.5.9 | 3.6.5 | 4.0.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-54872,1
+postgres,CVE-2026-54875,Low,openssl,3.6.0,fixed,3.4.8 | 3.5.9 | 3.6.5 | 4.0.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-54875,4
+postgres,CVE-2026-54875,Low,openssl,3.6.2,fixed,3.4.8 | 3.5.9 | 3.6.5 | 4.0.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-54875,1
+postgres,CVE-2026-77696,Low,openssl,3.6.0,fixed,1.1.1zj | 3.0.23 | 3.4.8 | 3.5.9 | 3.6.5 | 4.0.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-77696,4
+postgres,CVE-2026-77696,Low,openssl,3.6.2,fixed,1.1.1zj | 3.0.23 | 3.4.8 | 3.5.9 | 3.6.5 | 4.0.3,cpe-match,https://nvd.nist.gov/vuln/detail/CVE-2026-77696,1
