@@ -1,0 +1,207 @@
+{
+  "tool": "axe-core 4.10.3",
+  "engine": "Chromium",
+  "revision": "96a87e3",
+  "rules": [
+    "wcag2a",
+    "wcag2aa",
+    "wcag21a",
+    "wcag21aa",
+    "wcag22aa"
+  ],
+  "states": [
+    {
+      "width": 1440,
+      "name": "Вход",
+      "violations": [],
+      "rulesPassed": 19,
+      "incomplete": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 1440,
+      "name": "Ошибки входа",
+      "violations": [],
+      "rulesPassed": 19,
+      "incomplete": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 1440,
+      "name": "Объекты постановщика",
+      "violations": [],
+      "rulesPassed": 17,
+      "incomplete": []
+    },
+    {
+      "width": 1440,
+      "name": "Создание объекта",
+      "violations": [],
+      "rulesPassed": 23,
+      "incomplete": [
+        "aria-hidden-focus"
+      ]
+    },
+    {
+      "width": 1440,
+      "name": "Карточка объекта",
+      "violations": [],
+      "rulesPassed": 20,
+      "incomplete": []
+    },
+    {
+      "width": 1440,
+      "name": "Назначение",
+      "violations": [],
+      "rulesPassed": 24,
+      "incomplete": [
+        "aria-hidden-focus",
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 1440,
+      "name": "Проверка и история",
+      "violations": [],
+      "rulesPassed": 25,
+      "incomplete": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 1440,
+      "name": "Причина возврата",
+      "violations": [],
+      "rulesPassed": 23,
+      "incomplete": [
+        "aria-hidden-focus",
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 1440,
+      "name": "Подтверждение удаления",
+      "violations": [],
+      "rulesPassed": 21,
+      "incomplete": [
+        "aria-hidden-focus",
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 1440,
+      "name": "Мои задачи",
+      "violations": [],
+      "rulesPassed": 18,
+      "incomplete": []
+    },
+    {
+      "width": 1440,
+      "name": "Задача исполнителя",
+      "violations": [],
+      "rulesPassed": 25,
+      "incomplete": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 360,
+      "name": "Вход",
+      "violations": [],
+      "rulesPassed": 19,
+      "incomplete": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 360,
+      "name": "Ошибки входа",
+      "violations": [],
+      "rulesPassed": 19,
+      "incomplete": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 360,
+      "name": "Объекты постановщика",
+      "violations": [],
+      "rulesPassed": 17,
+      "incomplete": []
+    },
+    {
+      "width": 360,
+      "name": "Создание объекта",
+      "violations": [],
+      "rulesPassed": 23,
+      "incomplete": [
+        "aria-hidden-focus",
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 360,
+      "name": "Карточка объекта",
+      "violations": [],
+      "rulesPassed": 20,
+      "incomplete": []
+    },
+    {
+      "width": 360,
+      "name": "Назначение",
+      "violations": [],
+      "rulesPassed": 25,
+      "incomplete": [
+        "aria-hidden-focus",
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 360,
+      "name": "Проверка и история",
+      "violations": [],
+      "rulesPassed": 25,
+      "incomplete": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 360,
+      "name": "Причина возврата",
+      "violations": [],
+      "rulesPassed": 23,
+      "incomplete": [
+        "aria-hidden-focus",
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 360,
+      "name": "Подтверждение удаления",
+      "violations": [],
+      "rulesPassed": 21,
+      "incomplete": [
+        "aria-hidden-focus",
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 360,
+      "name": "Мои задачи",
+      "violations": [],
+      "rulesPassed": 18,
+      "incomplete": []
+    },
+    {
+      "width": 360,
+      "name": "Задача исполнителя",
+      "violations": [],
+      "rulesPassed": 25,
+      "incomplete": [
+        "color-contrast"
+      ]
+    }
+  ]
+}
