@@ -78,8 +78,8 @@ Supabase CLI нужно повторить проверку сетевых пр�
 |---|---|---|
 | Версии frontend-зависимостей | Закреплены в [manifest](../package.json) и [lockfile](../pnpm-lock.yaml) | Проверены типизацией, тестами и production-сборкой |
 | Supabase Cloud | Free `slgwsnfjxapsjpdzezui`, Frankfurt, создан с разрешения пользователя | 10 миграций и Auth/RLS проверены в Cloud; локальные reset/seed изолированы |
-| Hosting SPA | Vercel Hobby, `2-b-studio-test/2b-studio-crm` | Настройка и внешняя приёмка выполняются в S8-03 |
-| GitHub | `pytkin/2b-studio-crm`, public | Исходники опубликованы, readback SHA выполнен; финальный clone проверяется после deployment config |
+| Hosting SPA | Vercel Hobby, `2-b-studio-test/2b-studio-crm` | https://2b-studio-crm.vercel.app, READY; публичная приёмка desktop/mobile прошла |
+| GitHub | `pytkin/2b-studio-crm`, public | Исходники опубликованы, readback SHA выполнен; HTTPS clone 5879296 без Kit принят, readback кода и автоматический deploy подтверждены |
 | Доступы Cloud | Локальный игнорируемый файл `.local/cloud/demo-accounts.json`, 0600 | Передача третьим лицам и отправка сдачи остаются отдельными действиями |
 
 ## Осознанные границы
@@ -97,3 +97,8 @@ Vercel выбирает Node по major `26.x` и обновляет patch. По
 `saveExact` задаются в `pnpm-workspace.yaml`; исходный security override сохранён.
 Новый patch, старый patch, другой major и несовместимая зависимость проверяются
 реальным offline pnpm install в изолированных фикстурах.
+
+Строгая CSP сохраняет script-src self. Zod запускается с jitless:true до импорта
+схем: это предотвращает даже перехватываемую eval-пробу, вызывающую CSP violation.
+Порядок импортов, валидация и unsafe-контроль закреплены startup-тестом;
+нулевое число нарушений проверено в публичном браузере после выкладки.

@@ -1,0 +1,13 @@
+{
+  "checkedAt": "2026-11-04T20:43:56.067Z",
+  "revision": "58792965e03bc4184f42ee0a5344dfa9f394e7d8",
+  "deployment": "dpl_76QiR4vnFa9dkiU4StkdEDAh88xw",
+  "origin": "https://2b-studio-crm.vercel.app",
+  "assets": [
+    "/assets/index-Bo-IaUdu.js",
+    "/assets/index-DASLzFQA.css"
+  ],
+  "privateValuesAbsent": true,
+  "cloudUrlEmbedded": true,
+  "privatePathsNotServed": true
+}

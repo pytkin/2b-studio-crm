@@ -1,0 +1,1508 @@
+{
+  "projectRef": "slgwsnfjxapsjpdzezui",
+  "url": "https://slgwsnfjxapsjpdzezui.supabase.co",
+  "startedAt": "2026-11-04T20:23:50.539Z",
+  "checks": [
+    {
+      "name": "real sign-in account 0",
+      "passed": true,
+      "evidence": {
+        "role": "manager",
+        "error": null
+      }
+    },
+    {
+      "name": "real sign-in account 1",
+      "passed": true,
+      "evidence": {
+        "role": "executor",
+        "error": null
+      }
+    },
+    {
+      "name": "real sign-in account 2",
+      "passed": true,
+      "evidence": {
+        "role": "executor",
+        "error": null
+      }
+    },
+    {
+      "name": "sample baseline inventory",
+      "passed": true,
+      "evidence": {
+        "objects": 3,
+        "tasks": 3,
+        "history": 6
+      }
+    },
+    {
+      "name": "task visibility manager",
+      "passed": true,
+      "evidence": {
+        "actual": 3,
+        "expected": 3
+      }
+    },
+    {
+      "name": "history visibility manager",
+      "passed": true,
+      "evidence": {
+        "actual": 6,
+        "expected": 6
+      }
+    },
+    {
+      "name": "object and nested visibility manager",
+      "passed": true,
+      "evidence": {
+        "objects": 3,
+        "nestedTasks": 3
+      }
+    },
+    {
+      "name": "allowed RLS exact count manager",
+      "passed": true,
+      "evidence": {
+        "actual": 3,
+        "expected": 3
+      }
+    },
+    {
+      "name": "allowed RLS nested count manager",
+      "passed": true,
+      "evidence": {
+        "objects": 3
+      }
+    },
+    {
+      "name": "minimal profile visibility manager",
+      "passed": true,
+      "evidence": {
+        "rows": 3,
+        "fields": [
+          "active",
+          "display_name",
+          "id",
+          "role"
+        ]
+      }
+    },
+    {
+      "name": "task visibility executor-0",
+      "passed": true,
+      "evidence": {
+        "actual": 2,
+        "expected": 2
+      }
+    },
+    {
+      "name": "history visibility executor-0",
+      "passed": true,
+      "evidence": {
+        "actual": 4,
+        "expected": 4
+      }
+    },
+    {
+      "name": "object and nested visibility executor-0",
+      "passed": true,
+      "evidence": {
+        "objects": 2,
+        "nestedTasks": 2
+      }
+    },
+    {
+      "name": "allowed RLS exact count executor-0",
+      "passed": true,
+      "evidence": {
+        "actual": 2,
+        "expected": 2
+      }
+    },
+    {
+      "name": "allowed RLS nested count executor-0",
+      "passed": true,
+      "evidence": {
+        "objects": 2
+      }
+    },
+    {
+      "name": "minimal profile visibility executor-0",
+      "passed": true,
+      "evidence": {
+        "rows": 1,
+        "fields": [
+          "active",
+          "display_name",
+          "id",
+          "role"
+        ]
+      }
+    },
+    {
+      "name": "task visibility executor-1",
+      "passed": true,
+      "evidence": {
+        "actual": 1,
+        "expected": 1
+      }
+    },
+    {
+      "name": "history visibility executor-1",
+      "passed": true,
+      "evidence": {
+        "actual": 2,
+        "expected": 2
+      }
+    },
+    {
+      "name": "object and nested visibility executor-1",
+      "passed": true,
+      "evidence": {
+        "objects": 1,
+        "nestedTasks": 1
+      }
+    },
+    {
+      "name": "allowed RLS exact count executor-1",
+      "passed": true,
+      "evidence": {
+        "actual": 1,
+        "expected": 1
+      }
+    },
+    {
+      "name": "allowed RLS nested count executor-1",
+      "passed": true,
+      "evidence": {
+        "objects": 1
+      }
+    },
+    {
+      "name": "minimal profile visibility executor-1",
+      "passed": true,
+      "evidence": {
+        "rows": 1,
+        "fields": [
+          "active",
+          "display_name",
+          "id",
+          "role"
+        ]
+      }
+    },
+    {
+      "name": "anon read denied profiles",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "anon read denied objects",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "anon read denied tasks",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "anon read denied task_status_history",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "foreign task and history hidden executor-0 ff847643-798a-4e32-8123-e97c4bed943a",
+      "passed": true,
+      "evidence": {
+        "tasks": 0,
+        "history": 0
+      }
+    },
+    {
+      "name": "foreign task and history hidden executor-1 a9c40945-31b7-4ea6-9e4b-55d6acfee752",
+      "passed": true,
+      "evidence": {
+        "tasks": 0,
+        "history": 0
+      }
+    },
+    {
+      "name": "foreign task and history hidden executor-1 c6b14fa6-1a1c-4cc0-b6dd-862a98b8432e",
+      "passed": true,
+      "evidence": {
+        "tasks": 0,
+        "history": 0
+      }
+    },
+    {
+      "name": "guard anon GET planned",
+      "passed": true,
+      "evidence": {
+        "status": 400,
+        "code": "PT400",
+        "contentRange": null
+      }
+    },
+    {
+      "name": "guard anon GET estimated",
+      "passed": true,
+      "evidence": {
+        "status": 400,
+        "code": "PT400",
+        "contentRange": null
+      }
+    },
+    {
+      "name": "guard anon GET exact",
+      "passed": true,
+      "evidence": {
+        "status": 400,
+        "code": "PT400",
+        "contentRange": null
+      }
+    },
+    {
+      "name": "guard anon HEAD planned",
+      "passed": true,
+      "evidence": {
+        "status": 400,
+        "code": null,
+        "contentRange": null
+      }
+    },
+    {
+      "name": "guard anon HEAD estimated",
+      "passed": true,
+      "evidence": {
+        "status": 400,
+        "code": null,
+        "contentRange": null
+      }
+    },
+    {
+      "name": "guard anon HEAD exact",
+      "passed": true,
+      "evidence": {
+        "status": 400,
+        "code": null,
+        "contentRange": null
+      }
+    },
+    {
+      "name": "explain blocked anon json",
+      "passed": true,
+      "evidence": {
+        "status": 406,
+        "code": "PGRST107"
+      }
+    },
+    {
+      "name": "explain blocked anon text",
+      "passed": true,
+      "evidence": {
+        "status": 406,
+        "code": "PGRST107"
+      }
+    },
+    {
+      "name": "guard manager GET planned",
+      "passed": true,
+      "evidence": {
+        "status": 400,
+        "code": "PT400",
+        "contentRange": null
+      }
+    },
+    {
+      "name": "guard manager GET estimated",
+      "passed": true,
+      "evidence": {
+        "status": 400,
+        "code": "PT400",
+        "contentRange": null
+      }
+    },
+    {
+      "name": "guard manager GET exact",
+      "passed": true,
+      "evidence": {
+        "status": 400,
+        "code": "PT400",
+        "contentRange": null
+      }
+    },
+    {
+      "name": "guard manager HEAD planned",
+      "passed": true,
+      "evidence": {
+        "status": 400,
+        "code": null,
+        "contentRange": null
+      }
+    },
+    {
+      "name": "guard manager HEAD estimated",
+      "passed": true,
+      "evidence": {
+        "status": 400,
+        "code": null,
+        "contentRange": null
+      }
+    },
+    {
+      "name": "guard manager HEAD exact",
+      "passed": true,
+      "evidence": {
+        "status": 400,
+        "code": null,
+        "contentRange": null
+      }
+    },
+    {
+      "name": "explain blocked manager json",
+      "passed": true,
+      "evidence": {
+        "status": 406,
+        "code": "PGRST107"
+      }
+    },
+    {
+      "name": "explain blocked manager text",
+      "passed": true,
+      "evidence": {
+        "status": 406,
+        "code": "PGRST107"
+      }
+    },
+    {
+      "name": "guard executor-0 GET planned",
+      "passed": true,
+      "evidence": {
+        "status": 400,
+        "code": "PT400",
+        "contentRange": null
+      }
+    },
+    {
+      "name": "guard executor-0 GET estimated",
+      "passed": true,
+      "evidence": {
+        "status": 400,
+        "code": "PT400",
+        "contentRange": null
+      }
+    },
+    {
+      "name": "guard executor-0 GET exact",
+      "passed": true,
+      "evidence": {
+        "status": 400,
+        "code": "PT400",
+        "contentRange": null
+      }
+    },
+    {
+      "name": "guard executor-0 HEAD planned",
+      "passed": true,
+      "evidence": {
+        "status": 400,
+        "code": null,
+        "contentRange": null
+      }
+    },
+    {
+      "name": "guard executor-0 HEAD estimated",
+      "passed": true,
+      "evidence": {
+        "status": 400,
+        "code": null,
+        "contentRange": null
+      }
+    },
+    {
+      "name": "guard executor-0 HEAD exact",
+      "passed": true,
+      "evidence": {
+        "status": 400,
+        "code": null,
+        "contentRange": null
+      }
+    },
+    {
+      "name": "explain blocked executor-0 json",
+      "passed": true,
+      "evidence": {
+        "status": 406,
+        "code": "PGRST107"
+      }
+    },
+    {
+      "name": "explain blocked executor-0 text",
+      "passed": true,
+      "evidence": {
+        "status": 406,
+        "code": "PGRST107"
+      }
+    },
+    {
+      "name": "guard executor-1 GET planned",
+      "passed": true,
+      "evidence": {
+        "status": 400,
+        "code": "PT400",
+        "contentRange": null
+      }
+    },
+    {
+      "name": "guard executor-1 GET estimated",
+      "passed": true,
+      "evidence": {
+        "status": 400,
+        "code": "PT400",
+        "contentRange": null
+      }
+    },
+    {
+      "name": "guard executor-1 GET exact",
+      "passed": true,
+      "evidence": {
+        "status": 400,
+        "code": "PT400",
+        "contentRange": null
+      }
+    },
+    {
+      "name": "guard executor-1 HEAD planned",
+      "passed": true,
+      "evidence": {
+        "status": 400,
+        "code": null,
+        "contentRange": null
+      }
+    },
+    {
+      "name": "guard executor-1 HEAD estimated",
+      "passed": true,
+      "evidence": {
+        "status": 400,
+        "code": null,
+        "contentRange": null
+      }
+    },
+    {
+      "name": "guard executor-1 HEAD exact",
+      "passed": true,
+      "evidence": {
+        "status": 400,
+        "code": null,
+        "contentRange": null
+      }
+    },
+    {
+      "name": "explain blocked executor-1 json",
+      "passed": true,
+      "evidence": {
+        "status": 406,
+        "code": "PGRST107"
+      }
+    },
+    {
+      "name": "explain blocked executor-1 text",
+      "passed": true,
+      "evidence": {
+        "status": 406,
+        "code": "PGRST107"
+      }
+    },
+    {
+      "name": "repeated Prefer rejected count=planned|return=minimal",
+      "passed": true,
+      "evidence": {
+        "status": 400,
+        "code": "PT400",
+        "contentRange": null
+      }
+    },
+    {
+      "name": "repeated Prefer rejected return=minimal|count=planned",
+      "passed": true,
+      "evidence": {
+        "status": 400,
+        "code": "PT400",
+        "contentRange": null
+      }
+    },
+    {
+      "name": "repeated Prefer rejected count=planned|",
+      "passed": true,
+      "evidence": {
+        "status": 400,
+        "code": "PT400",
+        "contentRange": null
+      }
+    },
+    {
+      "name": "repeated Prefer rejected count=estimated|count=exact",
+      "passed": true,
+      "evidence": {
+        "status": 400,
+        "code": "PT400",
+        "contentRange": null
+      }
+    },
+    {
+      "name": "tampered JWT role rejected",
+      "passed": true,
+      "evidence": {
+        "status": 401,
+        "code": "PGRST301"
+      }
+    },
+    {
+      "name": "temporary auth user created",
+      "passed": true,
+      "evidence": {
+        "error": null
+      }
+    },
+    {
+      "name": "temporary auth password set",
+      "passed": true,
+      "evidence": {
+        "error": null
+      }
+    },
+    {
+      "name": "temporary real executor session",
+      "passed": true,
+      "evidence": {
+        "error": null
+      }
+    },
+    {
+      "name": "manager create object allowed",
+      "passed": true,
+      "evidence": {
+        "error": null
+      }
+    },
+    {
+      "name": "manager create task allowed",
+      "passed": true,
+      "evidence": {
+        "error": null
+      }
+    },
+    {
+      "name": "direct insert denied anon profiles",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct update denied anon profiles",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct delete denied anon profiles",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct insert denied anon objects",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct update denied anon objects",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct delete denied anon objects",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct insert denied anon tasks",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct update denied anon tasks",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct delete denied anon tasks",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct insert denied anon task_status_history",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct update denied anon task_status_history",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct delete denied anon task_status_history",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct insert denied manager profiles",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct update denied manager profiles",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct delete denied manager profiles",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct insert denied manager objects",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct update denied manager objects",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct delete denied manager objects",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct insert denied manager tasks",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct update denied manager tasks",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct delete denied manager tasks",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct insert denied manager task_status_history",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct update denied manager task_status_history",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct delete denied manager task_status_history",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct insert denied executor-0 profiles",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct update denied executor-0 profiles",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct delete denied executor-0 profiles",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct insert denied executor-0 objects",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct update denied executor-0 objects",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct delete denied executor-0 objects",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct insert denied executor-0 tasks",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct update denied executor-0 tasks",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct delete denied executor-0 tasks",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct insert denied executor-0 task_status_history",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct update denied executor-0 task_status_history",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct delete denied executor-0 task_status_history",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct insert denied executor-1 profiles",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct update denied executor-1 profiles",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct delete denied executor-1 profiles",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct insert denied executor-1 objects",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct update denied executor-1 objects",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct delete denied executor-1 objects",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct insert denied executor-1 tasks",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct update denied executor-1 tasks",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct delete denied executor-1 tasks",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct insert denied executor-1 task_status_history",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct update denied executor-1 task_status_history",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct delete denied executor-1 task_status_history",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct insert denied temporary-executor profiles",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct update denied temporary-executor profiles",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct delete denied temporary-executor profiles",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct insert denied temporary-executor objects",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct update denied temporary-executor objects",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct delete denied temporary-executor objects",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct insert denied temporary-executor tasks",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct update denied temporary-executor tasks",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct delete denied temporary-executor tasks",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct insert denied temporary-executor task_status_history",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct update denied temporary-executor task_status_history",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "direct delete denied temporary-executor task_status_history",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "42501",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "manager RPC denied executor-0 create_object",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "P0001",
+          "status": null
+        },
+        "message": "FORBIDDEN"
+      }
+    },
+    {
+      "name": "manager RPC denied executor-0 update_object",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "P0001",
+          "status": null
+        },
+        "message": "FORBIDDEN"
+      }
+    },
+    {
+      "name": "manager RPC denied executor-0 delete_object",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "P0001",
+          "status": null
+        },
+        "message": "FORBIDDEN"
+      }
+    },
+    {
+      "name": "manager RPC denied executor-0 create_task",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "P0001",
+          "status": null
+        },
+        "message": "FORBIDDEN"
+      }
+    },
+    {
+      "name": "manager RPC denied executor-0 update_task",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "P0001",
+          "status": null
+        },
+        "message": "FORBIDDEN"
+      }
+    },
+    {
+      "name": "manager RPC denied executor-0 delete_task",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "P0001",
+          "status": null
+        },
+        "message": "FORBIDDEN"
+      }
+    },
+    {
+      "name": "RPC role argument rejected executor-0",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "PGRST202",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "RPC actor argument rejected executor-0",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "PGRST202",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "manager RPC denied executor-1 create_object",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "P0001",
+          "status": null
+        },
+        "message": "FORBIDDEN"
+      }
+    },
+    {
+      "name": "manager RPC denied executor-1 update_object",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "P0001",
+          "status": null
+        },
+        "message": "FORBIDDEN"
+      }
+    },
+    {
+      "name": "manager RPC denied executor-1 delete_object",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "P0001",
+          "status": null
+        },
+        "message": "FORBIDDEN"
+      }
+    },
+    {
+      "name": "manager RPC denied executor-1 create_task",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "P0001",
+          "status": null
+        },
+        "message": "FORBIDDEN"
+      }
+    },
+    {
+      "name": "manager RPC denied executor-1 update_task",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "P0001",
+          "status": null
+        },
+        "message": "FORBIDDEN"
+      }
+    },
+    {
+      "name": "manager RPC denied executor-1 delete_task",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "P0001",
+          "status": null
+        },
+        "message": "FORBIDDEN"
+      }
+    },
+    {
+      "name": "RPC role argument rejected executor-1",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "PGRST202",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "RPC actor argument rejected executor-1",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "PGRST202",
+          "status": null
+        }
+      }
+    },
+    {
+      "name": "temporary editable metadata control",
+      "passed": true,
+      "evidence": {
+        "error": null
+      }
+    },
+    {
+      "name": "temporary metadata JWT refreshed",
+      "passed": true,
+      "evidence": {
+        "error": null
+      }
+    },
+    {
+      "name": "metadata cannot change profile role",
+      "passed": true,
+      "evidence": {
+        "role": "executor",
+        "active": true
+      }
+    },
+    {
+      "name": "metadata role spoof cannot create object",
+      "passed": true,
+      "evidence": {
+        "error": {
+          "code": "P0001",
+          "status": null
+        },
+        "message": "FORBIDDEN"
+      }
+    },
+    {
+      "name": "temporary old JWT positive control",
+      "passed": true,
+      "evidence": {
+        "status": 200,
+        "rows": 1
+      }
+    },
+    {
+      "name": "deactivation revokes old JWT read profiles",
+      "passed": true,
+      "evidence": {
+        "status": 200,
+        "rows": 0
+      }
+    },
+    {
+      "name": "deactivation revokes old JWT read objects",
+      "passed": true,
+      "evidence": {
+        "status": 200,
+        "rows": 0
+      }
+    },
+    {
+      "name": "deactivation revokes old JWT read tasks",
+      "passed": true,
+      "evidence": {
+        "status": 200,
+        "rows": 0
+      }
+    },
+    {
+      "name": "deactivation revokes old JWT read task_status_history",
+      "passed": true,
+      "evidence": {
+        "status": 200,
+        "rows": 0
+      }
+    },
+    {
+      "name": "deactivation revokes old JWT RPC",
+      "passed": true,
+      "evidence": {
+        "status": 400,
+        "code": "P0001",
+        "message": "FORBIDDEN"
+      }
+    }
+  ],
+  "cleanup": {
+    "auditRecordsHidden": true,
+    "samplesUnchanged": true,
+    "temporaryProfileDeleted": true,
+    "temporaryAuthUserDeleted": true
+  },
+  "limitations": [
+    "Managed service environment was not inspected; active gateway behavior is tested.",
+    "Only isolated audit records are mutated; demo records are compared before and after."
+  ],
+  "completedAt": "2026-11-04T20:24:10.976Z",
+  "passed": true,
+  "summary": {
+    "checks": 157,
+    "passed": 157,
+    "failed": []
+  },
+  "terminalDbReadback": {
+    "target": "slgwsnfjxapsjpdzezui",
+    "auditObjectsDeleted": 1,
+    "auditObjectsLive": 0,
+    "auditTasksDeleted": 1,
+    "auditTasksLive": 0,
+    "temporaryProfiles": 0,
+    "temporaryAuthUsers": 0
+  },
+  "artifactVerification": {
+    "mode": "600",
+    "knownCredentialsInReport": 0
+  },
+  "executedThrough": [
+    "rtk proxy node --input-type=module (one-off SDK/HTTP smoke; no secrets in arguments)",
+    "rtk proxy ./node_modules/.bin/supabase db query --remote=slgwsnfjxapsjpdzezui --yes --output-format=json (isolated temporary profile lifecycle)",
+    "rtk proxy ./node_modules/.bin/supabase db query --remote=slgwsnfjxapsjpdzezui --read-only --output-format=json (terminal cleanup counts)"
+  ]
+}

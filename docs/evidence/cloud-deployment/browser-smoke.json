@@ -1,0 +1,397 @@
+{
+  "projectRef": "slgwsnfjxapsjpdzezui",
+  "publicURL": "https://2b-studio-crm.vercel.app",
+  "run": "2026-11-04T20-42-56-301Z-a0f5a5",
+  "startedAt": "2026-11-04T20:42:56.302Z",
+  "checks": [
+    {
+      "name": "SDK sample snapshot before UI acceptance",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "desktop public direct link login fallback",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "desktop manager direct link sign-in",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "desktop executor 1 login route",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "desktop executor 1 real password login",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "desktop executor 1 task list isolation",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "desktop executor 2 login route",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "desktop executor 2 real password login",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "desktop executor 2 task list isolation",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "desktop UI object validation and creation",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "desktop UI task creation",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "desktop created task foreign URL denied",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "desktop transition 2 В работе",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "desktop transition 3 На проверке",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "desktop required return reason and focus",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "desktop transition 5 В работе",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "desktop transition 6 На проверке",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "desktop transition 7 Принята",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "desktop matching final history and terminal actions",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "desktop actual Cloud network observed",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "mobile public direct link login fallback",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "mobile manager direct link sign-in",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "mobile executor 1 login route",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "mobile executor 1 real password login",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "mobile executor 1 task list isolation",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "mobile executor 2 login route",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "mobile executor 2 real password login",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "mobile executor 2 task list isolation",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "mobile UI object validation and creation",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "mobile UI task creation",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "mobile created task foreign URL denied",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "mobile transition 2 В работе",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "mobile transition 3 На проверке",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "mobile required return reason and focus",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "mobile transition 5 В работе",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "mobile transition 6 На проверке",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "mobile transition 7 Принята",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "mobile matching final history and terminal actions",
+      "passed": true,
+      "evidence": {}
+    },
+    {
+      "name": "mobile actual Cloud network observed",
+      "passed": true,
+      "evidence": {}
+    }
+  ],
+  "screenshots": [
+    {
+      "viewport": "desktop",
+      "label": "login",
+      "path": "desktop-login.png",
+      "sha256": "f1ddf91c0030f137a260655e8be425dac799c16ba665d637c5ea21e2de0f418d",
+      "width": 1440,
+      "height": 900,
+      "mode": "600"
+    },
+    {
+      "viewport": "desktop",
+      "label": "object",
+      "path": "desktop-object.png",
+      "sha256": "845e7fcf4ff611ceef9c0c6b59b8fb054c2e808a1a93eb723868ba337e487009",
+      "width": 1440,
+      "height": 900,
+      "mode": "600"
+    },
+    {
+      "viewport": "desktop",
+      "label": "foreign-task",
+      "path": "desktop-foreign-task.png",
+      "sha256": "196f8757ddfe56629095b410f8bd98960ba1db8f8a369ca5a5adbbc37ac3cefa",
+      "width": 1440,
+      "height": 900,
+      "mode": "600"
+    },
+    {
+      "viewport": "desktop",
+      "label": "accepted-history",
+      "path": "desktop-accepted-history.png",
+      "sha256": "02af8d3739134920fac670b02a50e2d760f845b0c3f0753392c7e2829da841e8",
+      "width": 1440,
+      "height": 1561,
+      "mode": "600"
+    },
+    {
+      "viewport": "mobile",
+      "label": "login",
+      "path": "mobile-login.png",
+      "sha256": "19bde0c1101e4f4c43c0a02621993294bea3b5f9ae98cbd4d4a70289ff5545e0",
+      "width": 360,
+      "height": 800,
+      "mode": "600"
+    },
+    {
+      "viewport": "mobile",
+      "label": "object",
+      "path": "mobile-object.png",
+      "sha256": "7293375c171a39f903c5ceeb63835b77d7bcf289dd4a6a8d6dd3355995bd9bac",
+      "width": 360,
+      "height": 800,
+      "mode": "600"
+    },
+    {
+      "viewport": "mobile",
+      "label": "foreign-task",
+      "path": "mobile-foreign-task.png",
+      "sha256": "981a17f508e279288f75f9cfa881ac7b01df91c9629e872b2b13a3605f4f2681",
+      "width": 360,
+      "height": 800,
+      "mode": "600"
+    },
+    {
+      "viewport": "mobile",
+      "label": "accepted-history",
+      "path": "mobile-accepted-history.png",
+      "sha256": "b3eebdf41733258fcd867345485f61fc19271f0cfd125520a7cb1bc18a44cf55",
+      "width": 360,
+      "height": 1821,
+      "mode": "600"
+    }
+  ],
+  "browserAssets": [
+    "https://2b-studio-crm.vercel.app/assets/index-Bo-IaUdu.js"
+  ],
+  "auditRecords": [
+    {
+      "viewport": "desktop",
+      "objectName": "Проверка HTTPS · desktop · a0f5a5",
+      "taskTitle": "Осмотр QA · desktop · a0f5a5",
+      "objectPath": "/objects/6881e92b-bb04-4d8e-9ba6-642a355435e8",
+      "taskPath": "/tasks/206ac1c3-b985-4d21-8763-132cd2b8f867",
+      "historyEvents": 7
+    },
+    {
+      "viewport": "mobile",
+      "objectName": "Проверка HTTPS · mobile · a0f5a5",
+      "taskTitle": "Осмотр QA · mobile · a0f5a5",
+      "objectPath": "/objects/8d88a1bf-340a-4962-a689-fa608585de3e",
+      "taskPath": "/tasks/f920c39c-e0c1-419b-b77b-d41876ccc3d8",
+      "historyEvents": 7
+    }
+  ],
+  "cleanup": [
+    {
+      "viewport": "desktop",
+      "removedThroughUI": true,
+      "objectAndTaskUnavailable": true,
+      "passed": true
+    },
+    {
+      "viewport": "mobile",
+      "removedThroughUI": true,
+      "objectAndTaskUnavailable": true,
+      "passed": true
+    }
+  ],
+  "network": {
+    "desktop": {
+      "origins": [
+        "https://2b-studio-crm.vercel.app",
+        "https://slgwsnfjxapsjpdzezui.supabase.co"
+      ],
+      "failedRequestCount": 1,
+      "requestFailures": [
+        {
+          "origin": "https://slgwsnfjxapsjpdzezui.supabase.co",
+          "pathTemplate": "/rest/v1/objects",
+          "method": "GET",
+          "errorCode": "net::ERR_ABORTED",
+          "actor": "manager",
+          "requestedDuring": "desktop UI object validation and creation",
+          "phase": "desktop UI object validation and creation",
+          "pagePathAtFailure": "/objects/:id"
+        }
+      ],
+      "unexpectedNetworkFailureCount": 0,
+      "pageErrorCount": 0,
+      "cspViolationCount": 0,
+      "cspViolations": []
+    },
+    "mobile": {
+      "origins": [
+        "https://2b-studio-crm.vercel.app",
+        "https://slgwsnfjxapsjpdzezui.supabase.co"
+      ],
+      "failedRequestCount": 1,
+      "requestFailures": [
+        {
+          "origin": "https://slgwsnfjxapsjpdzezui.supabase.co",
+          "pathTemplate": "/rest/v1/objects",
+          "method": "GET",
+          "errorCode": "net::ERR_ABORTED",
+          "actor": "manager",
+          "requestedDuring": "mobile UI object validation and creation",
+          "phase": "mobile UI object validation and creation",
+          "pagePathAtFailure": "/objects/:id"
+        }
+      ],
+      "unexpectedNetworkFailureCount": 0,
+      "pageErrorCount": 0,
+      "cspViolationCount": 0,
+      "cspViolations": []
+    }
+  },
+  "limitations": [
+    "No trace, HAR, video, storageState, browser console, raw errors, or authentication payloads are saved."
+  ],
+  "samplesUnchanged": true,
+  "completedAt": "2026-11-04T20:43:34.871Z",
+  "passed": true,
+  "summary": {
+    "checks": 39,
+    "passed": 39,
+    "failed": [],
+    "screenshots": 8
+  },
+  "deployment": "dpl_76QiR4vnFa9dkiU4StkdEDAh88xw",
+  "networkAbortAssessment": {
+    "expectedClientAbortCount": 2,
+    "unexplainedFailureCount": 0,
+    "observation": "Manager GET /rest/v1/objects is cancelled with net::ERR_ABORTED during successful object creation after the page has navigated to /objects/:id, on both viewport sizes.",
+    "sourceAttribution": "ObjectDialog.openRecord invalidates lists before navigation; readObjects passes its query AbortSignal to the request. The collection revalidation is cancelled when its observer unmounts.",
+    "sourceEvidence": [
+      "src/modules/objects/ObjectDialog.tsx:59-68",
+      "src/modules/objects/api.ts:12-21"
+    ],
+    "mutationFailure": false
+  },
+  "visualInspection": {
+    "screenshotsReviewed": 8,
+    "horizontalOverflow": false,
+    "credentialTextVisible": false,
+    "findings": []
+  },
+  "artifactVerification": {
+    "reportMode": "600",
+    "screenshotModes": "600",
+    "knownPasswordsInReport": 0,
+    "tracesOrStorageStateSaved": false
+  },
+  "revision": "58792965e03bc4184f42ee0a5344dfa9f394e7d8"
+}
