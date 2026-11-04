@@ -1,0 +1,12 @@
+set local role authenticated;
+select pg_temp.claim(1);
+select is(public.create_object(pg_temp.uid(15),'  Name ',' Address ')->'object'->>'id',pg_temp.uid(15)::text,'create uses requested UUID');
+select is((select row(name,address,version)::text from public.objects where id=pg_temp.uid(15)), '(Name,Address,1)','normalized v1');
+select is(pg_temp.failure($q$select public.create_object(pg_temp.uid(16),'Name','  ')$q$),'INVALID_INPUT','blank address denied');
+select is(pg_temp.failure($q$select public.create_object(pg_temp.uid(15),'Swap','Address')$q$),'ID_UNAVAILABLE','duplicate rejected');
+select pg_temp.claim(2);
+select is(public.update_object(pg_temp.uid(15),1,'New','Addr')->'object'->>'version','2','other manager updates');
+select is(pg_temp.failure($q$select public.update_object(pg_temp.uid(15),1,'Stale','Addr')$q$),'CONFLICT','stale version denied');
+select is((select row(name,address,version)::text from public.objects where id=pg_temp.uid(15)), '(New,Addr,2)','unchanged after stale write');
+select pg_temp.claim(3);
+select is(pg_temp.failure($q$select public.create_object(pg_temp.uid(16),'No','Addr')$q$),'FORBIDDEN','executor cannot create objects');

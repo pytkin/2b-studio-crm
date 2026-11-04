@@ -18,12 +18,13 @@
     "lint": "biome lint . --diagnostic-level=warn",
     "format:check": "biome format src",
     "test": "pnpm test:infra && vitest run",
-    "verify": "pnpm lint && pnpm typecheck && pnpm test && pnpm build",
+    "verify": "pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm check:artifacts",
     "test:db": "node scripts/test-database.mjs",
     "test:api": "node --test --test-concurrency=1 tests/integration/*.test.mjs",
     "test:e2e": "node scripts/demo-e2e.mjs",
     "demo:start": "node scripts/demo.mjs start",
-    "demo:stop": "node scripts/demo.mjs stop"
+    "demo:stop": "node scripts/demo.mjs stop",
+    "check:artifacts": "node scripts/artifact-secrets.mjs"
   },
   "devDependencies": {
     "@biomejs/biome": "2.6.4",

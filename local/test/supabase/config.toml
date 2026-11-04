@@ -28,6 +28,8 @@ enabled = false
 sql_paths = []
 
 [auth]
+# Isolated tests exercise actual access-token expiration and refresh denial.
+jwt_expiry = 60
 enabled = true
 site_url = "http://127.0.0.1:5173"
 additional_redirect_urls = []

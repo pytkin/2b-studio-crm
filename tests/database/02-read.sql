@@ -1,0 +1,17 @@
+set local role authenticated;
+select pg_temp.claim(3);
+select is((select array_agg(name order by name) from public.objects),array['A'],'E1 sees A');
+select is((select array_agg(title order by title) from public.tasks),array['A-E1'],'E1 reads only own active task');
+select is((select count(*)::int from public.task_status_history),1,'E1 own history');
+select is((select array_agg(display_name) from public.profiles),array['E1'],'no executor directory');
+select pg_temp.claim(4);
+select is((select array_agg(name order by name) from public.objects),array['A','B'],'E2 sees A/B');
+select pg_temp.claim(1);
+select is((select array_agg(name order by name) from public.objects),array['A','B','C'],'M1 sees A/B/C');
+select is((select array_agg(display_name order by display_name) from public.profiles),array['E1','E2','M1'],'assignment directory');
+select pg_temp.claim(2);
+select is((select count(*)::int from public.tasks),3,'M2 reads three active tasks');
+select pg_temp.claim(5);
+select is((select count(*)::int from public.objects),0,'inactive cannot read objects');
+select pg_temp.claim(6);
+select is((select count(*)::int from public.task_status_history),0,'missing profile cannot read history');
