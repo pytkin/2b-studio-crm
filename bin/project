@@ -53,6 +53,7 @@ case "${1:-help}" in
     printf '%s\n' 'Kit setup: passed'
     ;;
   lint)
+    pnpm lint
     lint_docs
     ;;
   verify)
@@ -61,18 +62,18 @@ case "${1:-help}" in
     check_source
     git diff --check
     git diff --cached --check
-    printf '%s\n' 'Project verify: passed (Kit and documentation only)'
+    pnpm verify
+    printf '%s\n' 'Project verify: passed (Kit, documents, application checks and build)'
     ;;
   dev|test|build)
-    printf '%s\n' "Операция $1 неприменима на этапе Kit и документов; см. agent-platform.json." >&2
-    exit 2
+    exec pnpm "$1"
     ;;
   help|-h|--help)
-    printf '%s\n' 'Usage: rtk proxy ./bin/project {setup|lint|verify}' \
+    printf '%s\n' 'Usage: rtk proxy ./bin/project {setup|dev|lint|test|build|verify}' \
       'setup: initialize the pinned Kit submodule' \
       'lint: check local Markdown links' \
       'verify: check Kit, binding, documents, source checksum and Git whitespace' \
-      'dev, test, build: not applicable until application implementation'
+      'dev, test, build: run the corresponding application command'
     ;;
   *)
     printf '%s\n' "Неизвестная операция: $1" >&2

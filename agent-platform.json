@@ -1,12 +1,26 @@
 {
   "entrypoint": "AGENTS.md",
-  "instructions": [".agent-platform/shared/AGENTS.md"],
+  "instructions": [
+    ".agent-platform/shared/AGENTS.md"
+  ],
   "operations": {
-    "setup": { "command": "./bin/project setup" },
-    "dev": { "notApplicable": "Этап Kit и документов: приложение и dev-сервер ещё не созданы. Заменить реальной командой на этапе S1." },
-    "lint": { "command": "./bin/project lint" },
-    "test": { "notApplicable": "Поведение CRM ещё не реализовано; будущие тесты описаны в docs/acceptance-plan.md. Добавить реальные тестовые команды с реализацией." },
-    "build": { "notApplicable": "На текущем этапе нет собираемого приложения. Заменить реальной сборкой SPA на этапе S1." },
-    "verify": { "command": "./bin/project verify" }
+    "setup": {
+      "command": "./bin/project setup"
+    },
+    "dev": {
+      "command": "./bin/project dev"
+    },
+    "lint": {
+      "command": "./bin/project lint"
+    },
+    "test": {
+      "command": "./bin/project test"
+    },
+    "build": {
+      "command": "./bin/project build"
+    },
+    "verify": {
+      "command": "./bin/project verify"
+    }
   }
 }
