@@ -118,13 +118,37 @@ export function TaskForm({
     },
   });
   const { errors, isSubmitting } = form.formState;
+  const unavailable =
+    choices.data &&
+    (!choices.data.objects.length
+      ? 'Нет доступных объектов.'
+      : !choices.data.people.length
+        ? 'Нет доступных исполнителей.'
+        : '');
   function attrs(key: keyof Values) {
     return {
       ...form.register(key),
       id: `task-${key}`,
+      required: key === 'title' || key === 'object_id' || key === 'assignee_id',
       'aria-invalid': !!errors[key],
       'aria-describedby': errors[key] ? `task-${key}-error` : undefined,
     };
+  }
+  async function refreshChoices() {
+    const fresh = await choices.refetch();
+    if (!verify.alive.current || fresh.isError || !fresh.data) return;
+    const values = form.getValues();
+    const missingObject =
+      values.object_id && !fresh.data.objects.some((o) => o.id === values.object_id);
+    const missingPerson =
+      values.assignee_id && !fresh.data.people.some((p) => p.id === values.assignee_id);
+    if (missingObject) form.setValue('object_id', '');
+    if (missingPerson) form.setValue('assignee_id', '');
+    if (missingObject || missingPerson) {
+      setNote(
+        'Объект или исполнитель больше недоступен. Проверьте выбор и подтвердите сохранение.',
+      );
+    }
   }
   async function saved() {
     if (!verify.alive.current) return;
@@ -147,18 +171,18 @@ export function TaskForm({
         return;
       }
       if (task && row) {
-        setBase(row);
-        setUnknown(null);
         const same =
           row.title === values.title &&
           row.description === values.description &&
           row.assignee_id === values.assignee_id &&
           row.object_id === values.object_id;
-        setNote(
-          same
-            ? 'В карточке уже сохранены указанные значения.'
-            : 'Данные изменились. Сверьте текущие поля и подтвердите правку.',
-        );
+        if (same) {
+          await saved();
+          return;
+        }
+        setBase(row);
+        setUnknown(null);
+        setNote('Данные изменились. Сверьте текущие поля и подтвердите правку.');
       } else if (!task && !row) {
         setUnknown(values);
         setNote('Запись пока не найдена. Можно повторить создание с прежними полями.');
@@ -214,24 +238,25 @@ export function TaskForm({
         setNote('Не удалось подтвердить сессию.');
         return;
       }
-      if (error.message === 'UNAVAILABLE') {
-        if (task && !(await verify.read())) return;
+      if (error.message === 'UNAVAILABLE' || error.message === 'INVALID_INPUT') {
+        if (error.message === 'UNAVAILABLE' && task && !(await verify.read())) return;
         setUnknown(null);
         setNeedsRead(false);
         setNote(
-          'Объект или исполнитель больше недоступен. Проверьте выбор и подтвердите сохранение.',
+          error.message === 'INVALID_INPUT'
+            ? 'Проверьте поля и повторите сохранение.'
+            : 'Объект или исполнитель больше недоступен. Проверьте выбор и подтвердите сохранение.',
         );
-        const fresh = await choices.refetch();
-        if (!verify.alive.current || fresh.isError || !fresh.data) return;
-        if (!fresh.data.objects.some((o) => o.id === args.object_id))
-          form.setValue('object_id', '');
-        if (!fresh.data.people.some((o) => o.id === args.assignee_id))
-          form.setValue('assignee_id', '');
+        await refreshChoices();
         return;
       }
       if (error.message === 'FORBIDDEN') {
         setNote('Это действие недоступно для вашей роли.');
         await verify.recheckAccess();
+        return;
+      }
+      if (!task && unknown && error.message === 'ID_UNAVAILABLE') {
+        await reconcile(args);
         return;
       }
       const domain = domainMessage(error.message);
@@ -249,6 +274,7 @@ export function TaskForm({
   return (
     <Modal
       title={task ? 'Редактировать задачу' : 'Создать задачу'}
+      description="Заполните название, объект и исполнителя. Остальные поля необязательны."
       onClose={() => {
         if (!isSubmitting) onClose();
       }}
@@ -287,10 +313,19 @@ export function TaskForm({
             </Field>
           )}
         </fieldset>
+        {choices.isPending && <p role="status">Загружаем объекты и исполнителей…</p>}
+        {unavailable && !choices.isError && (
+          <div>
+            <p role="status">{unavailable}</p>
+            <button type="button" className="button" onClick={() => void refreshChoices()}>
+              Обновить список
+            </button>
+          </div>
+        )}
         {choices.isError && (
           <p role="alert">
             Не удалось загрузить объекты и исполнителей.{' '}
-            <button type="button" onClick={() => void choices.refetch()}>
+            <button type="button" className="button" onClick={() => void refreshChoices()}>
               Повторить чтение
             </button>
           </p>
@@ -313,7 +348,9 @@ export function TaskForm({
           <button
             type="submit"
             className="button primary"
-            disabled={isSubmitting || (!needsRead && (choices.isError || !choices.data))}
+            disabled={
+              isSubmitting || (!needsRead && (choices.isError || !choices.data || !!unavailable))
+            }
           >
             {isSubmitting
               ? 'Проверяем…'

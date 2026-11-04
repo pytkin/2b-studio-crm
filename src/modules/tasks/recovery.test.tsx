@@ -1,3 +1,4 @@
+import { onlineManager } from '@tanstack/react-query';
 import { fireEvent, screen, waitFor, within } from '@testing-library/react';
 import { HttpResponse, http } from 'msw';
 import { expect, it, vi } from 'vitest';
@@ -369,4 +370,242 @@ it('forbidden single transition refreshes authorization and retains a still-auth
   expect(await screen.findByText('Это действие недоступно для вашей роли.')).toBeVisible();
   expect(screen.getByRole('heading', { name: newTask.title })).toBeVisible();
   expect(screen.getByLabelText('Комментарий')).toHaveValue('Проверить позже');
+});
+
+it('offline action exposes read-only recovery without enqueuing a write for reconnect', async () => {
+  server.use(http.get(`${api}/tasks`, () => HttpResponse.json([newTask])));
+  await signIn('executor');
+  const { user } = openPage(`/tasks/${ids.task}`);
+  const start = await screen.findByRole('button', { name: 'Взять в работу' });
+  const transition = vi.fn(() => HttpResponse.json({}));
+  server.use(
+    http.get(`${api}/tasks`, () => HttpResponse.error()),
+    http.post(`${api}/rpc/transition_task`, transition),
+  );
+  onlineManager.setOnline(false);
+  try {
+    await user.click(start);
+    expect(await screen.findByRole('button', { name: 'Проверить результат' })).toBeEnabled();
+    expect(transition).not.toHaveBeenCalled();
+  } finally {
+    onlineManager.setOnline(true);
+  }
+  server.use(http.get(`${api}/tasks`, () => HttpResponse.json([newTask])));
+  fireEvent(window, new Event('online'));
+  await user.click(screen.getByRole('button', { name: 'Проверить результат' }));
+  expect(await screen.findByRole('button', { name: 'Взять в работу' })).toBeEnabled();
+  expect(transition).not.toHaveBeenCalled();
+});
+
+it('reconciles an in-flight first create that commits between an empty read and explicit retry', async () => {
+  await signIn('manager');
+  const { user, router } = openPage(`/objects/${ids.object}`);
+  await user.click(await screen.findByRole('button', { name: 'Создать задачу' }));
+  const dialog = within(screen.getByRole('dialog'));
+  await user.type(dialog.getByLabelText('Название'), 'Запоздавшая запись');
+  await user.selectOptions(dialog.getByLabelText('Исполнитель'), ids.executor);
+  const sent: string[] = [];
+  server.use(
+    http.post(`${api}/rpc/create_task`, async ({ request }: { request: Request }) => {
+      sent.push(String((await request.json()).p_id));
+      return sent.length === 1
+        ? HttpResponse.error()
+        : HttpResponse.json({ message: 'ID_UNAVAILABLE', code: 'P0001' }, { status: 400 });
+    }),
+    http.get(`${api}/tasks`, () =>
+      HttpResponse.json(
+        sent.length < 2 ? [] : [{ ...newTask, title: 'Запоздавшая запись', id: sent[0] }],
+      ),
+    ),
+  );
+  await user.click(dialog.getByRole('button', { name: 'Сохранить' }));
+  await user.click(await dialog.findByRole('button', { name: 'Повторить создание' }));
+  expect(await screen.findByRole('heading', { name: 'Запоздавшая запись' })).toBeVisible();
+  expect(router.state.location.pathname).toBe(`/tasks/${sent[0]}`);
+  expect(sent).toEqual([sent[0], sent[0]]);
+});
+
+it('a readback matching the submitted edit returns to the saved fields without inviting a duplicate write', async () => {
+  let saved = false;
+  const update = vi.fn(() => {
+    saved = true;
+    return HttpResponse.error();
+  });
+  server.use(
+    http.post(`${api}/rpc/update_task`, update),
+    http.get(`${api}/tasks`, () =>
+      HttpResponse.json([
+        { ...newTask, title: saved ? 'Фактическая правка' : newTask.title, version: saved ? 4 : 3 },
+      ]),
+    ),
+  );
+  await signIn('manager');
+  const { user } = openPage(`/tasks/${ids.task}`);
+  await user.click(await screen.findByRole('button', { name: 'Редактировать' }));
+  const dialog = within(screen.getByRole('dialog'));
+  await user.clear(dialog.getByLabelText('Название'));
+  await user.type(dialog.getByLabelText('Название'), 'Фактическая правка');
+  await user.click(dialog.getByRole('button', { name: 'Сохранить' }));
+  expect(await screen.findByRole('heading', { name: 'Фактическая правка' })).toBeVisible();
+  expect(screen.queryByRole('dialog')).toBeNull();
+  expect(update).toHaveBeenCalledTimes(1);
+});
+
+it('a lost delete response requires detail and list readback before another deletion', async () => {
+  const remove = vi.fn(() => HttpResponse.error());
+  const list = vi
+    .fn()
+    .mockImplementationOnce(() => HttpResponse.error())
+    .mockImplementation(() => HttpResponse.json([{ ...objectRow, tasks: [newTask] }]));
+  server.use(http.post(`${api}/rpc/delete_task`, remove), http.get(`${api}/objects`, list));
+  await signIn('manager');
+  const { user } = openPage(`/tasks/${ids.task}`);
+  await user.click(await screen.findByRole('button', { name: 'Удалить задачу' }));
+  const dialog = within(screen.getByRole('dialog'));
+  await user.click(dialog.getByRole('button', { name: 'Удалить задачу' }));
+  await user.click(await dialog.findByRole('button', { name: 'Проверить результат' }));
+  expect(await dialog.findByRole('button', { name: 'Удалить задачу' })).toBeEnabled();
+  expect(list).toHaveBeenCalledTimes(2);
+  expect(remove).toHaveBeenCalledTimes(1);
+});
+
+it('manual transition readback disables repeat clicks while the single read is pending', async () => {
+  server.use(http.get(`${api}/tasks`, () => HttpResponse.json([newTask])));
+  await signIn('executor');
+  const { user } = openPage(`/tasks/${ids.task}`);
+  const start = await screen.findByRole('button', { name: 'Взять в работу' });
+  server.use(http.get(`${api}/tasks`, () => HttpResponse.error()));
+  await user.click(start);
+  const retry = await screen.findByRole('button', { name: 'Проверить результат' });
+  let release!: () => void;
+  const pending = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  const read = vi.fn(async () => {
+    await pending;
+    return HttpResponse.json([newTask]);
+  });
+  server.use(http.get(`${api}/tasks`, read));
+  try {
+    await user.dblClick(retry);
+    expect(retry).toBeDisabled();
+    expect(read).toHaveBeenCalledTimes(1);
+  } finally {
+    release();
+  }
+  expect(await screen.findByRole('button', { name: 'Взять в работу' })).toBeEnabled();
+});
+
+it.each(['revoked', 'authorized', 'still offline'])(
+  'reopening a blocked workspace waits for the task readback when access is %s',
+  async (outcome) => {
+    server.use(http.get(`${api}/tasks`, () => HttpResponse.json([newTask])));
+    await signIn('executor');
+    const { user } = openPage(`/tasks/${ids.task}`);
+    await user.type(await screen.findByLabelText('Комментарий'), 'Рабочий черновик');
+    server.use(
+      http.get(`${api}/profiles`, () => HttpResponse.error()),
+      http.get(`${api}/tasks`, () => HttpResponse.error()),
+    );
+    fireEvent(window, new Event('focus'));
+    expect(
+      await screen.findByRole('heading', { name: 'Не удалось проверить доступ' }),
+    ).toBeVisible();
+    let release!: () => void;
+    const held = new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    const read = vi.fn(async () => {
+      await held;
+      return outcome === 'still offline'
+        ? HttpResponse.error()
+        : HttpResponse.json(outcome === 'authorized' ? [newTask] : []);
+    });
+    server.resetHandlers();
+    server.use(http.get(`${api}/tasks`, read));
+    try {
+      await user.click(screen.getByRole('button', { name: 'Проверить снова' }));
+      await waitFor(() => expect(read).toHaveBeenCalledTimes(1));
+      expect(screen.queryByRole('heading', { name: newTask.title })).toBeNull();
+      expect(screen.queryByRole('list', { name: 'История статусов' })).toBeNull();
+      expect(screen.queryByRole('textbox', { name: 'Комментарий' })).toBeNull();
+    } finally {
+      release();
+    }
+    if (outcome === 'still offline') {
+      expect(await screen.findByRole('button', { name: 'Проверить снова' })).toBeEnabled();
+      expect(screen.queryByRole('heading', { name: newTask.title })).toBeNull();
+      server.use(http.get(`${api}/tasks`, () => HttpResponse.json([newTask])));
+      await user.click(screen.getByRole('button', { name: 'Проверить снова' }));
+    }
+    if (outcome === 'revoked') {
+      expect(await screen.findByRole('heading', { name: 'Запись недоступна' })).toBeVisible();
+      expect(screen.queryByDisplayValue('Рабочий черновик')).toBeNull();
+      expect(screen.queryByText(firstEvent.comment)).toBeNull();
+    } else {
+      expect(await screen.findByRole('textbox', { name: 'Комментарий' })).toHaveValue(
+        'Рабочий черновик',
+      );
+    }
+  },
+);
+
+it.each(['create', 'update'])(
+  'refreshes a deactivated assignee on %s_task INVALID_INPUT without replaying the draft',
+  async (operation) => {
+    const create = operation === 'create';
+    await signIn('manager');
+    const { user } = openPage(create ? `/objects/${ids.object}` : `/tasks/${ids.task}`);
+    await user.click(
+      await screen.findByRole('button', { name: create ? 'Создать задачу' : 'Редактировать' }),
+    );
+    const form = within(screen.getByRole('dialog'));
+    await user.clear(form.getByLabelText('Название'));
+    await user.type(form.getByLabelText('Название'), 'Уточнение фасада');
+    await user.selectOptions(form.getByLabelText('Исполнитель'), ids.executor);
+    const replacement = 'e0000000-0000-4000-8000-000000000009';
+    const assignments: string[] = [];
+    server.use(
+      http.get(`${api}/profiles`, () =>
+        HttpResponse.json([{ id: replacement, display_name: 'Анна' }]),
+      ),
+      http.post(`${api}/rpc/${operation}_task`, async ({ request }: { request: Request }) => {
+        assignments.push((await request.json()).p_assignee_id);
+        return assignments.length === 1
+          ? HttpResponse.json({ message: 'INVALID_INPUT', code: 'P0001' }, { status: 400 })
+          : HttpResponse.json({});
+      }),
+    );
+    await user.click(form.getByRole('button', { name: 'Сохранить' }));
+    expect(await form.findByRole('option', { name: 'Анна' })).toBeInTheDocument();
+    expect(form.queryByRole('option', { name: 'Евгений' })).toBeNull();
+    expect(form.getByLabelText('Исполнитель')).toHaveValue('');
+    expect(form.getByLabelText('Название')).toHaveValue('Уточнение фасада');
+    expect(form.getByText(/исполнитель больше недоступен/i)).toBeVisible();
+    await user.selectOptions(form.getByLabelText('Исполнитель'), replacement);
+    expect(assignments).toEqual([ids.executor]);
+    await user.click(
+      form.getByRole('button', { name: create ? 'Сохранить' : 'Подтвердить правку' }),
+    );
+    await waitFor(() => expect(assignments).toEqual([ids.executor, replacement]));
+  },
+);
+
+it('keeps ordinary field validation when INVALID_INPUT leaves both task choices available', async () => {
+  await signIn('manager');
+  const { user } = openPage(`/objects/${ids.object}`);
+  await user.click(await screen.findByRole('button', { name: 'Создать задачу' }));
+  const form = within(screen.getByRole('dialog'));
+  await user.type(form.getByLabelText('Название'), 'Подготовить форму');
+  await user.selectOptions(form.getByLabelText('Исполнитель'), ids.executor);
+  const people = vi.fn(() => HttpResponse.json([{ id: ids.executor, display_name: 'Евгений' }]));
+  const create = vi.fn(() =>
+    HttpResponse.json({ message: 'INVALID_INPUT', code: 'P0001' }, { status: 400 }),
+  );
+  server.use(http.post(`${api}/rpc/create_task`, create), http.get(`${api}/profiles`, people));
+  await user.click(form.getByRole('button', { name: 'Сохранить' }));
+  expect(await form.findByText('Проверьте поля и повторите сохранение.')).toBeVisible();
+  expect(people).toHaveBeenCalledTimes(1);
+  expect(form.getByLabelText('Исполнитель')).toHaveValue(ids.executor);
+  expect(create).toHaveBeenCalledTimes(1);
 });

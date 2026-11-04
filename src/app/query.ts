@@ -5,6 +5,8 @@ export function makeQueryClient() {
     defaultOptions: {
       mutations: { retry: false },
       queries: {
+        // Offline reads must fail visibly instead of resuming a pending write preflight on reconnect.
+        networkMode: 'always',
         retry: false,
         staleTime: 0,
         refetchOnWindowFocus: false,

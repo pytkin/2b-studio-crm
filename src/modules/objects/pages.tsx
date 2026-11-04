@@ -2,7 +2,7 @@ import { useVisitRead } from '../../shared/useVisitRead';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Link } from '@tanstack/react-router';
 import { ArrowUpRight, Building2, MapPin, Pencil, Plus, Trash2 } from 'lucide-react';
-import { type ReactNode, useEffect, useEffectEvent, useRef, useState } from 'react';
+import { type ReactNode, useEffect, useEffectEvent, useState } from 'react';
 import { PageHeading } from '../../shared/ui/PageHeading';
 import { StatusBadge } from '../../shared/ui/StatusBadge';
 import { useSession } from '../auth';
@@ -33,32 +33,27 @@ export function ObjectsPage() {
     queryKey: objectListKey(profile.id),
     queryFn: ({ signal }) => readObjects(signal, checkSession),
   });
+  const confirmed = useVisitRead(profile.id, query);
   const [creating, setCreating] = useState(false);
-  const heading = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    heading.current?.querySelector('h1')?.focus();
-  }, []);
   return (
     <>
-      <div ref={heading}>
-        <PageHeading
-          eyebrow="Реестр объектов"
-          actions={
-            profile.role === 'manager' && (
-              <button type="button" className="button primary" onClick={() => setCreating(true)}>
-                <Plus size={18} aria-hidden="true" />
-                Создать объект
-              </button>
-            )
-          }
-        >
-          Объекты
-        </PageHeading>
-      </div>
+      <PageHeading
+        eyebrow="Реестр объектов"
+        actions={
+          profile.role === 'manager' && (
+            <button type="button" className="button primary" onClick={() => setCreating(true)}>
+              <Plus size={18} aria-hidden="true" />
+              Создать объект
+            </button>
+          )
+        }
+      >
+        Объекты
+      </PageHeading>
       {creating && profile.role === 'manager' && (
         <ObjectDialog intent={{ mode: 'create' }} onClose={() => setCreating(false)} />
       )}
-      {query.isPending ? (
+      {query.isPending || (!confirmed && !query.isError) ? (
         <p role="status">Загружаем объекты…</p>
       ) : query.isError ? (
         <ReadProblem retry={() => void query.refetch()} />
@@ -192,11 +187,11 @@ function ObjectDetail({
         ) : (
           <ul aria-label="Задачи объекта" className="task-list">
             {item.tasks.map((task) => (
-              <li className="task-row" key={task.id}>
-                <Link to="/tasks/$taskId" params={{ taskId: task.id }}>
-                  {task.title}
+              <li key={task.id}>
+                <Link className="task-row" to="/tasks/$taskId" params={{ taskId: task.id }}>
+                  <span>{task.title}</span>
+                  <StatusBadge status={task.status} />
                 </Link>
-                <StatusBadge status={task.status} />
               </li>
             ))}
           </ul>

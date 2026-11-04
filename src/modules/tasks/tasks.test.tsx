@@ -23,7 +23,7 @@ it('S5-01 includes accepted work and opens its chronological history', async () 
   const task = await screen.findByRole('link', { name: new RegExp(taskRow.title) });
   expect(screen.getByText('Принята')).toBeVisible();
   await user.click(task);
-  expect(await screen.findByRole('heading', { name: taskRow.title })).toBeVisible();
+  expect(await screen.findByRole('heading', { name: taskRow.title })).toHaveFocus();
   const history = within(await screen.findByRole('list', { name: 'История статусов' }));
   const rows = history.getAllByRole('listitem');
   expect(rows[0]).toHaveTextContent(firstEvent.comment);
@@ -44,6 +44,8 @@ it('S5-02 task creation starts at the current object and validates before its si
   await user.click(await screen.findByRole('button', { name: 'Создать задачу' }));
   const dialog = within(screen.getByRole('dialog'));
   expect(await dialog.findByLabelText('Объект')).toHaveValue(ids.object);
+  for (const label of ['Название', 'Объект', 'Исполнитель'])
+    expect(dialog.getByLabelText(label)).toBeRequired();
   await user.click(dialog.getByRole('button', { name: 'Сохранить' }));
   expect(await dialog.findByText('Укажите название')).toBeVisible();
   expect(dialog.getByText('Выберите исполнителя')).toBeVisible();
@@ -106,8 +108,11 @@ it('S6-01 accepts a single pending transition and renders its confirmed status',
   await user.dblClick(begin);
   await waitFor(() => expect(transition).toHaveBeenCalledTimes(1));
   expect(begin).toBeDisabled();
+  expect(screen.getByRole('status')).toHaveTextContent('Сохраняем изменение статуса');
   release?.();
   expect(await screen.findByRole('button', { name: 'Отправить на проверку' })).toBeVisible();
+  const receipt = await screen.findByText('В истории сохранён переход в статус «В работе».');
+  await waitFor(() => expect(receipt).toHaveFocus());
 });
 it('S6-02 blank return reason focuses its field without transitioning', async () => {
   server.use(
@@ -129,4 +134,40 @@ it('S6-02 blank return reason focuses its field without transitioning', async ()
   expect(await dialog.findByText('Укажите причину возврата')).toBeVisible();
   expect(reason).toHaveFocus();
   expect(transition).not.toHaveBeenCalled();
+});
+
+it('S5-02 explains pending and empty choices and lets the manager refresh them', async () => {
+  let release!: () => void;
+  const pending = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  let available = false;
+  server.use(
+    http.get(api + '/profiles', async ({ request }) => {
+      if (!new URL(request.url).searchParams.has('role')) {
+        return HttpResponse.json([
+          { id: ids.manager, display_name: 'Ирина', role: 'manager', active: true },
+        ]);
+      }
+      await pending;
+      return HttpResponse.json(
+        available ? [{ id: ids.executor, display_name: 'Исполнитель теста' }] : [],
+      );
+    }),
+  );
+  await signIn('manager');
+  const { user } = openPage('/objects/' + ids.object);
+  await user.click(await screen.findByRole('button', { name: 'Создать задачу' }));
+  const dialog = within(screen.getByRole('dialog'));
+  try {
+    expect(dialog.getByRole('status')).toHaveTextContent('Загружаем объекты и исполнителей');
+  } finally {
+    release();
+  }
+  expect(await dialog.findByText('Нет доступных исполнителей.')).toBeVisible();
+  expect(dialog.getByRole('button', { name: 'Сохранить' })).toBeDisabled();
+  available = true;
+  await user.click(dialog.getByRole('button', { name: 'Обновить список' }));
+  expect(await dialog.findByRole('option', { name: 'Исполнитель теста' })).toBeInTheDocument();
+  expect(dialog.getByRole('button', { name: 'Сохранить' })).toBeEnabled();
 });

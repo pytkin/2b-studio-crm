@@ -9,6 +9,7 @@
   --pine: #163f35;
   --accent: #ad571e;
   --edge: #d5dbd0;
+  --control-edge: #788b7d;
   --muted: #586b62;
   --paper: #fffefa;
 }
@@ -309,7 +310,8 @@ h3 {
   justify-content: space-between;
   min-width: 0;
 }
-.task-row + .task-row {
+.task-row + .task-row,
+.task-list :where(li) + li {
   border-top: 1px solid var(--edge);
 }
 .badge {
@@ -351,7 +353,7 @@ h3 {
 input:not([type="checkbox"]),
 textarea,
 select {
-  border: 1px solid #aebcaf;
+  border: 1px solid var(--control-edge);
   border-radius: 5px;
   background: #fffefa;
   color: #1e352c;
@@ -361,12 +363,17 @@ select {
   font-size: 1rem;
   line-height: 1.45;
 }
+input::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
 textarea {
   min-height: 86px;
   resize: vertical;
 }
 .field input[aria-invalid="true"],
-.field textarea[aria-invalid="true"] {
+.field textarea[aria-invalid="true"],
+.field select[aria-invalid="true"] {
   border-color: #a04328;
 }
 .form-error,
@@ -409,16 +416,10 @@ textarea {
 .history {
   padding: 18px 22px;
 }
-.history li {
-  padding: 10px 0;
-  border-bottom: 1px solid var(--edge);
-}
-.history li:last-child {
-  border: 0;
-}
 @media (max-width: 800px) {
   .app-shell {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
   }
   .sidebar {
     min-height: 0;
@@ -540,7 +541,9 @@ textarea {
 }
 
 .main-content > a:first-child {
-  display: inline-flex;
+  display: inline-block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
   margin: 0 0 16px;
   text-decoration: none;
   font-size: 0.92rem;
@@ -622,9 +625,18 @@ textarea {
 .task-row:hover {
   background: #f2f5ed;
 }
-.task-row a {
+a.task-row {
   overflow-wrap: anywhere;
 }
+.record-address {
+  overflow-wrap: anywhere;
+}
+.dialog-content fieldset {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+
 .record-meta {
   margin-top: auto;
   justify-content: space-between;

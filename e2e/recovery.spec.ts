@@ -14,6 +14,10 @@ test('E2E-03/04 · пустой список, ожидающий запрос, �
     ),
   ).toBeVisible();
   await expect(page.getByRole('button', { name: 'Создать задачу' })).toHaveCount(0);
+  if (info.project.use.isMobile) {
+    const header = await page.getByRole('complementary').boundingBox();
+    expect(header?.height).toBeLessThan(150);
+  }
   await snapshot(page, info, 'empty-executor');
   let release!: () => void;
   const pending = new Promise<void>((resolve) => {

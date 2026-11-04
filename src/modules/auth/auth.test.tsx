@@ -1,4 +1,4 @@
-import { screen, waitFor } from '@testing-library/react';
+import { act, screen, waitFor, within } from '@testing-library/react';
 import { HttpResponse, http } from 'msw';
 import { expect, it, vi } from 'vitest';
 import {
@@ -92,4 +92,85 @@ it('confirmed invalid session on a profile read returns to login and clears cach
   await cache.invalidateQueries({ queryKey: ['user', ids.executor, 'profile'] });
   expect(await screen.findByRole('heading', { name: 'Вход' })).toBeVisible();
   expect(cache.getQueryData(['user', ids.executor, 'draft'])).toBeUndefined();
+});
+
+it('confirmed session loss hides the previous account while remote sign-out is still pending', async () => {
+  await signIn('executor');
+  const { cache } = openPage('/my-tasks');
+  expect(await screen.findByText('Подготовить чертёж')).toBeVisible();
+  cache.setQueryData(['user', ids.executor, 'draft'], 'Защищённый текст');
+  let release!: () => void;
+  const logout = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  server.use(
+    http.get(`${api}/tasks`, () => HttpResponse.json({ code: 'PGRST301' }, { status: 401 })),
+    http.get(`${base}/auth/v1/user`, () =>
+      HttpResponse.json({ error: 'invalid_token' }, { status: 401 }),
+    ),
+    http.post(`${base}/auth/v1/logout`, async () => {
+      await logout;
+      return new HttpResponse(null, { status: 204 });
+    }),
+  );
+  try {
+    await act(() => cache.invalidateQueries({ queryKey: ['user', ids.executor, 'my-tasks'] }));
+    expect(await screen.findByRole('heading', { name: 'Вход' })).toBeVisible();
+    expect(cache.getQueryData(['user', ids.executor, 'draft'])).toBeUndefined();
+  } finally {
+    release();
+  }
+});
+
+it('preserves the current draft across a failed background profile check and a successful retry', async () => {
+  await signIn('manager');
+  const { cache, user } = openPage(`/objects/${ids.object}`);
+  await user.click(await screen.findByRole('button', { name: 'Редактировать' }));
+  await user.type(within(screen.getByRole('dialog')).getByLabelText('Название'), ' черновик');
+  server.use(http.get(`${api}/profiles`, () => HttpResponse.error()));
+  await act(() => cache.invalidateQueries({ queryKey: ['user', ids.manager, 'profile'] }));
+  expect(await screen.findByRole('heading', { name: 'Не удалось проверить доступ' })).toBeVisible();
+  expect(screen.queryByRole('dialog', { name: 'Редактировать объект' })).toBeNull();
+  server.resetHandlers();
+  await user.click(screen.getByRole('button', { name: 'Проверить снова' }));
+  const restored = within(await screen.findByRole('dialog'));
+  expect(restored.getByLabelText('Название')).toHaveValue('Корпус А черновик');
+});
+
+it('a background profile outage does not abort a submitted object write or lose its receipt', async () => {
+  await signIn('manager');
+  const { cache, user, router } = openPage('/objects');
+  await user.click(await screen.findByRole('button', { name: 'Создать объект' }));
+  const dialog = within(screen.getByRole('dialog'));
+  await user.type(dialog.getByLabelText('Название'), 'Павильон');
+  await user.type(dialog.getByLabelText('Адрес'), 'Проспект, 5');
+  let release!: () => void;
+  const held = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  let id = '';
+  const create = vi.fn(async ({ request }: { request: Request }) => {
+    id = (await request.json()).p_id;
+    await held;
+    return HttpResponse.json({
+      object: { id, name: 'Павильон', address: 'Проспект, 5', version: 1 },
+    });
+  });
+  server.use(http.post(`${api}/rpc/create_object`, create));
+  await user.click(dialog.getByRole('button', { name: 'Сохранить' }));
+  await waitFor(() => expect(create).toHaveBeenCalledTimes(1));
+  try {
+    server.use(http.get(`${api}/profiles`, () => HttpResponse.error()));
+    await act(() => cache.invalidateQueries({ queryKey: ['user', ids.manager, 'profile'] }));
+    expect(
+      await screen.findByRole('heading', { name: 'Не удалось проверить доступ' }),
+    ).toBeVisible();
+    server.resetHandlers();
+    await user.click(screen.getByRole('button', { name: 'Проверить снова' }));
+  } finally {
+    release();
+  }
+  await waitFor(() => expect(router.state.location.pathname).toBe(`/objects/${id}`));
+  expect(screen.queryByRole('dialog')).toBeNull();
+  expect(create).toHaveBeenCalledTimes(1);
 });

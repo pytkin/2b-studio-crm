@@ -32,3 +32,34 @@ it.each([
     expect(screen.queryByRole('heading', { name: heading })).toBeNull();
   },
 );
+
+it.each([
+  { path: '/objects' as const, table: 'objects', title: 'Корпус А' },
+  { path: '/my-tasks' as const, table: 'tasks', title: 'Подготовить чертёж' },
+])(
+  'returning to $path waits for the current list before showing cached records',
+  async ({ path, table, title }) => {
+    await signIn('executor');
+    const { router } = openPage(path);
+    expect(await screen.findByText(title)).toBeVisible();
+    await act(() => router.navigate({ to: '/tasks/$taskId', params: { taskId: ids.task } }));
+    expect(await screen.findByRole('heading', { name: 'История статусов' })).toBeVisible();
+    let release!: () => void;
+    const pending = new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    server.use(
+      http.get(api + '/' + table, async () => {
+        await pending;
+        return HttpResponse.json([]);
+      }),
+    );
+    try {
+      await act(() => router.navigate({ to: path }));
+      expect(screen.queryByText(title)).not.toBeInTheDocument();
+    } finally {
+      release();
+    }
+    expect(await screen.findByRole('heading', { name: /пока нет/ })).toBeVisible();
+  },
+);

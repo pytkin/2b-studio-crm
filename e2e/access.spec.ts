@@ -17,7 +17,8 @@ test('E2E-02a · смешанный объект, редактирование, 
     await page.getByRole('button', { name: 'Создать объект' }).click();
     const creation = page.getByRole('dialog');
     await creation.getByLabel('Название').fill(object.name);
-    await creation.getByLabel('Адрес').fill('Лесная улица, 1');
+    const address = 'Лесная улица, участок ' + 'А'.repeat(90);
+    await creation.getByLabel('Адрес').fill(address);
     await creation.getByRole('button', { name: 'Сохранить' }).click();
     await expect(page.getByRole('heading', { name: object.name })).toBeVisible();
     const url = new URL(page.url()).pathname;
@@ -38,6 +39,9 @@ test('E2E-02a · смешанный объект, редактирование, 
     await signIn(executor, accounts[1], '/objects');
     const restricted = executor.locator(`a[href="${url}"]`);
     await expect(restricted).toContainText(object.name);
+    expect(
+      await restricted.getByText(address).evaluate((el) => el.scrollWidth <= el.clientWidth),
+    ).toBe(true);
     await expect(restricted).toContainText(/1 задача/);
     await restricted.click();
     await expect(executor.getByRole('link', { name: new RegExp(rows[0].title) })).toBeVisible();

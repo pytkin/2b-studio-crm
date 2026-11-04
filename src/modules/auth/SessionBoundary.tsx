@@ -14,6 +14,7 @@ import {
 import { observeReadAccess } from '../../app/query';
 import type { Tables } from '../../shared/database.types';
 import { getSupabase } from '../../shared/supabase';
+import { ModalAccessNotice } from '../../shared/ui/Modal';
 import { Login } from './Login';
 
 type Access = {
@@ -119,12 +120,17 @@ export function SessionBoundary({ children }: { children: ReactNode }) {
         .maybeSingle();
       if (status === 401 && identity.current === userId) await checkSession();
       if (error) throw Error('Не удалось проверить профиль.');
-      const previous = cache.getQueryData<Tables<'profiles'>>(['user', userId, 'profile']);
-      if (previous && (!data || data.role !== previous.role)) {
-        cache.removeQueries({
-          predicate: (q) =>
-            q.queryKey[0] === 'user' && q.queryKey[1] === userId && q.queryKey[2] !== 'profile',
-        });
+      if (signal.aborted) return null;
+      const previous = cache.getQueryState<Tables<'profiles'>>(['user', userId, 'profile']);
+      const businessData = {
+        predicate: (q: { queryKey: readonly unknown[] }) =>
+          q.queryKey[0] === 'user' && q.queryKey[1] === userId && q.queryKey[2] !== 'profile',
+      };
+      if (previous?.data && (!data || data.role !== previous.data.role)) {
+        cache.removeQueries(businessData);
+      } else if (data && previous?.status === 'error') {
+        // Keep the workspace locked until its visible rows and open form choices are authorized again.
+        await cache.refetchQueries({ ...businessData, type: 'active' }, { throwOnError: true });
       }
       return data;
     },
@@ -158,9 +164,16 @@ export function SessionBoundary({ children }: { children: ReactNode }) {
     }
   }
   async function checkSession() {
+    const epoch = sessionEpoch.current;
     const { error } = await getSupabase().auth.getUser();
-    if (identity.current === userId && error && [401, 403].includes(error.status ?? 0)) {
-      await signOut();
+    if (
+      sessionEpoch.current === epoch &&
+      identity.current === userId &&
+      error &&
+      [401, 403].includes(error.status ?? 0)
+    ) {
+      applySession(null);
+      await getSupabase().auth.signOut({ scope: 'local' });
     }
   }
   useEffect(() => {
@@ -187,24 +200,29 @@ export function SessionBoundary({ children }: { children: ReactNode }) {
       </main>
     );
   if (!session) return <Login configurationError={fault} />;
-  if (!profile.data || profile.isError)
-    return (
-      <main className="main-content">
-        <h1>{profile.isError ? 'Не удалось проверить доступ' : 'Профиль недоступен'}</h1>
-        <p>
-          {profile.isError
-            ? 'Проверьте соединение и повторите проверку.'
-            : 'Для работы нужен активный профиль сотрудника.'}
-        </p>
-        <button type="button" className="button" onClick={() => void profile.refetch()}>
-          Проверить снова
-        </button>
-        <button type="button" className="button" onClick={() => void signOut()}>
-          Выйти
-        </button>
-        {message && <p role="alert">{message}</p>}
-      </main>
-    );
+  const accessProblem = (!profile.data || profile.isError) && (
+    <section>
+      <h1>{profile.isError ? 'Не удалось проверить доступ' : 'Профиль недоступен'}</h1>
+      <p>
+        {profile.isError
+          ? 'Проверьте соединение и повторите проверку.'
+          : 'Для работы нужен активный профиль сотрудника.'}
+      </p>
+      <button
+        className="button"
+        type="button"
+        onClick={() => void profile.refetch()}
+        disabled={profile.isFetching}
+      >
+        {profile.isFetching ? 'Проверяем…' : 'Проверить снова'}
+      </button>
+      <button type="button" className="button" onClick={() => void signOut()}>
+        Выйти
+      </button>
+      {message && <p role="alert">{message}</p>}
+    </section>
+  );
+  if (!profile.data) return <main className="main-content">{accessProblem}</main>;
   if (path === '/login' || path === '/')
     return <main role="status">Открываем рабочее пространство…</main>;
   if (path === '/my-tasks' && profile.data.role === 'manager')
@@ -215,7 +233,8 @@ export function SessionBoundary({ children }: { children: ReactNode }) {
       key={`${active.id}-${active.role}`}
       value={{ profile: active, signOut, checkSession, recheckAccess }}
     >
-      <div className="app-shell">
+      {accessProblem && <main className="main-content">{accessProblem}</main>}
+      <div className="app-shell" style={accessProblem ? { display: 'none' } : undefined}>
         <aside className="sidebar">
           <span className="brand">
             <DraftingCompass aria-hidden="true" />
@@ -246,7 +265,7 @@ export function SessionBoundary({ children }: { children: ReactNode }) {
           </header>
           <main className="main-content">
             {message && <p role="alert">{message}</p>}
-            {children}
+            <ModalAccessNotice value={accessProblem}>{children}</ModalAccessNotice>
           </main>
         </div>
       </div>

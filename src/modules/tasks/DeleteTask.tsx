@@ -1,26 +1,49 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from '@tanstack/react-router';
 import { useState } from 'react';
 import { getSupabase } from '../../shared/supabase';
 import { Modal } from '../../shared/ui/Modal';
+import { useSession } from '../auth';
+import { objectKey, readObject } from '../objects/api';
 import type { Task } from './data';
 import { domainMessage, useTaskReadback } from './useTaskReadback';
 
 export function DeleteTask({ task, onClose }: { task: Task; onClose: () => void }) {
   const navigate = useNavigate();
+  const cache = useQueryClient();
+  const { profile, checkSession } = useSession();
   const [version, setVersion] = useState(task.version);
   const [busy, setBusy] = useState(false);
   const [readOnly, setReadOnly] = useState(false);
   const [note, setNote] = useState('');
   const verify = useTaskReadback(task.id);
+  async function inspectDeletion() {
+    setReadOnly(true);
+    const [after] = await Promise.all([
+      verify.read(),
+      cache.fetchQuery({
+        queryKey: objectKey(profile.id, task.object_id),
+        queryFn: ({ signal }) => readObject(task.object_id, signal, checkSession),
+      }),
+    ]);
+    if (after && verify.alive.current) {
+      setVersion(after.version);
+      setReadOnly(false);
+      setNote('Задача остаётся доступна. Проверьте данные и подтвердите удаление ещё раз.');
+    }
+  }
   async function confirm() {
     setBusy(true);
     setNote('');
     try {
+      if (readOnly) {
+        await inspectDeletion();
+        return;
+      }
       const current = await verify.read();
       if (!current || !verify.alive.current) return;
-      if (readOnly || current.version !== version) {
+      if (current.version !== version) {
         setVersion(current.version);
-        setReadOnly(false);
         setNote('Задача доступна. Сверьте название и подтвердите удаление ещё раз.');
         return;
       }
@@ -55,13 +78,7 @@ export function DeleteTask({ task, onClose }: { task: Task; onClose: () => void 
         setNote(domain);
         return;
       }
-      setReadOnly(true);
-      const after = await verify.read();
-      if (after) {
-        setVersion(after.version);
-        setReadOnly(false);
-        setNote('Задача остаётся доступна. Проверьте данные и подтвердите удаление ещё раз.');
-      }
+      await inspectDeletion();
     } catch {
       setReadOnly(true);
       setNote('Результат неизвестен. Проверьте соединение и перечитайте задачу.');

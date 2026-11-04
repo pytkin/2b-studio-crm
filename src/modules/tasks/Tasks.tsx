@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Link } from '@tanstack/react-router';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Pencil, Trash2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { PageHeading } from '../../shared/ui/PageHeading';
 import { StatusBadge, statusLabels } from '../../shared/ui/StatusBadge';
@@ -40,10 +40,11 @@ export function MyTasksPage() {
     queryKey: mineKey(profile.id),
     queryFn: ({ signal }) => readMine(profile.id, signal),
   });
+  const confirmed = useVisitRead(profile.id, query);
   return (
     <>
       <PageHeading eyebrow="Рабочий журнал">Мои задачи</PageHeading>
-      {query.isPending ? (
+      {query.isPending || (!confirmed && !query.isError) ? (
         <p role="status">Загружаем задачи…</p>
       ) : query.isError ? (
         <ReadProblem error={query.error} retry={() => void query.refetch()} />
@@ -106,11 +107,13 @@ function TaskDetail({ task }: { task: Task }) {
         actions={
           profile.role === 'manager' && (
             <>
-              <button type="button" className="button" onClick={() => setRemove(true)}>
-                Удалить задачу
-              </button>
               <button className="button" type="button" onClick={() => setEdit(true)}>
+                <Pencil size={16} aria-hidden="true" />
                 Редактировать
+              </button>
+              <button type="button" className="button danger" onClick={() => setRemove(true)}>
+                <Trash2 size={16} aria-hidden="true" />
+                Удалить задачу
               </button>
             </>
           )

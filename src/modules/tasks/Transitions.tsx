@@ -1,10 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import type { Enums } from '../../shared/database.types';
 import { getSupabase } from '../../shared/supabase';
 import { Modal } from '../../shared/ui/Modal';
+import { statusLabels } from '../../shared/ui/StatusBadge';
 import { useSession } from '../auth';
 import type { Task } from './data';
 import { domainMessage, useTaskReadback } from './useTaskReadback';
@@ -34,9 +35,17 @@ export function Transitions({ task }: { task: Task }) {
   const [uncertain, setUncertain] = useState(false);
   const [message, setMessage] = useState('');
   const locked = useRef(false);
+  const feedback = useRef<HTMLParagraphElement>(null);
+  const initiator = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    const active = document.activeElement;
+    if (!busy && message && (active === document.body || active === initiator.current))
+      feedback.current?.focus();
+  }, [busy, message]);
   const allowed = actions(task, profile.id, profile.role);
   async function reconcile() {
     setUncertain(true);
+    setBusy(true);
     try {
       const row = await verify.read();
       if (!row || !verify.alive.current) return;
@@ -45,6 +54,8 @@ export function Transitions({ task }: { task: Task }) {
       setMessage('Карточка и история обновлены. Проверьте текущий статус.');
     } catch {
       setMessage('Результат неизвестен. Восстановите соединение и проверьте результат.');
+    } finally {
+      if (verify.alive.current) setBusy(false);
     }
   }
   async function submit(target: Status, text = comment) {
@@ -96,7 +107,9 @@ export function Transitions({ task }: { task: Task }) {
       setComment('');
       setInitialVersion(undefined);
       await verify.refresh();
-      await verify.read();
+      if ((await verify.read()) && verify.alive.current) {
+        setMessage(`В истории сохранён переход в статус «${statusLabels[target]}».`);
+      }
     } catch {
       await reconcile();
     } finally {
@@ -104,7 +117,7 @@ export function Transitions({ task }: { task: Task }) {
       if (verify.alive.current) setBusy(false);
     }
   }
-  if (!allowed.length && !message && !uncertain) return null;
+  if (!allowed.length && !message && !uncertain && !busy) return null;
   return (
     <section className="panel">
       <h2>Работа с задачей</h2>
@@ -122,11 +135,15 @@ export function Transitions({ task }: { task: Task }) {
           />
         </div>
       )}
-      {message && <p role="status">{message}</p>}
+      {(busy || message) && (
+        <p ref={feedback} role="status" tabIndex={-1}>
+          {busy ? 'Сохраняем изменение статуса…' : message}
+        </p>
+      )}
       <div className="actions">
         {uncertain ? (
           <button type="button" className="button" disabled={busy} onClick={() => void reconcile()}>
-            Проверить результат
+            {busy ? 'Проверяем…' : 'Проверить результат'}
           </button>
         ) : (
           allowed.map((action) => (
@@ -135,7 +152,8 @@ export function Transitions({ task }: { task: Task }) {
               key={action.target}
               className="button primary"
               disabled={busy}
-              onClick={() => {
+              onClick={(event) => {
+                initiator.current = event.currentTarget;
                 if (action.target === 'rework') {
                   setInitialVersion(initialVersion ?? task.version);
                   setReturning(true);

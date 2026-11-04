@@ -44,6 +44,7 @@ test('E2E-01/03 · две роли проходят полный цикл, вк�
       await p.getByRole('button', { name: button, exact: true }).click();
       await expect(history(p)).toHaveCount(index);
       await expect(history(p).last()).toContainText(status);
+      await expect(p.getByText(`В истории сохранён переход в статус «${status}».`)).toBeFocused();
     };
     await transition(executor, 'Взять в работу', 'В работе', 2);
     await transition(executor, 'Отправить на проверку', 'На проверке', 3);
