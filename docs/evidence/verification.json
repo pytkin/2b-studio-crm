@@ -1,0 +1,193 @@
+{
+  "commands": [
+    {
+      "command": "pnpm demo:start",
+      "exit": 0,
+      "seconds": 21.1,
+      "counts": []
+    },
+    {
+      "command": "node .local/demo-acceptance.mjs",
+      "exit": 0,
+      "seconds": 3.4,
+      "counts": []
+    },
+    {
+      "command": "node .local/demo-visual-check.mjs .local/screens",
+      "exit": 0,
+      "seconds": 1.6,
+      "counts": [
+        "desktop 1440 900 Снять размеры окон",
+        "mobile 360 800 Снять размеры окон"
+      ]
+    },
+    {
+      "command": "pnpm demo:start",
+      "exit": 0,
+      "seconds": 2.7,
+      "counts": []
+    },
+    {
+      "command": "node .local/demo-acceptance.mjs",
+      "exit": 0,
+      "seconds": 3.3,
+      "counts": []
+    },
+    {
+      "command": "pnpm demo:stop",
+      "exit": 0,
+      "seconds": 1.0,
+      "counts": []
+    },
+    {
+      "command": "pnpm install --frozen-lockfile",
+      "exit": 0,
+      "seconds": 0.1,
+      "counts": []
+    },
+    {
+      "command": "pnpm format:check",
+      "exit": 0,
+      "seconds": 1.2,
+      "counts": [
+        "Checked 37 files in 16ms. No fixes applied."
+      ]
+    },
+    {
+      "command": "pnpm verify",
+      "exit": 0,
+      "seconds": 6.3,
+      "counts": [
+        "ℹ tests 15",
+        "ℹ pass 15",
+        "ℹ fail 0",
+        "Test Files  10 passed (10)",
+        "Tests  51 passed (51)",
+        "Проверка привилегированных ключей и известных демо-паролей пройдена. Файлов: 127",
+        "Checked 62 files in 22ms. No fixes applied."
+      ]
+    },
+    {
+      "command": "pnpm db:test start",
+      "exit": 0,
+      "seconds": 13.2,
+      "counts": []
+    },
+    {
+      "command": "pnpm db:test reset",
+      "exit": 0,
+      "seconds": 12.0,
+      "counts": []
+    },
+    {
+      "command": "pnpm test:db",
+      "exit": 0,
+      "seconds": 1.9,
+      "counts": [
+        "01-schema.sql: 5 assertions passed",
+        "02-read.sql: 10 assertions passed",
+        "03-objects.sql: 8 assertions passed",
+        "04-cascade.sql: 7 assertions passed",
+        "05-create-task.sql: 11 assertions passed",
+        "06-task-fields.sql: 20 assertions passed",
+        "07-executor.sql: 8 assertions passed",
+        "08-manager.sql: 6 assertions passed",
+        "09-matrix.sql: 215 assertions passed"
+      ]
+    },
+    {
+      "command": "pnpm test:api",
+      "exit": 0,
+      "seconds": 105.1,
+      "counts": [
+        "✔ API-02/03: RLS, exact counts, no direct writes or impersonation, revocation under live sessions (3727.930208ms)",
+        "ℹ tests 22",
+        "ℹ pass 22",
+        "ℹ fail 0"
+      ]
+    },
+    {
+      "command": "node scripts/demo-seed.integration.mjs",
+      "exit": 0,
+      "seconds": 1.2,
+      "counts": []
+    },
+    {
+      "command": "pnpm test:e2e",
+      "exit": 0,
+      "seconds": 173.9,
+      "counts": [
+        "✓   3 [desktop] › e2e/cycle.spec.ts:4:1 › E2E-01/03 · две роли проходят полный цикл, включая возврат и принятие (3.5s)",
+        "✓   4 [desktop] › e2e/recovery.spec.ts:5:1 › E2E-03/04 · пустой список, ожидающий запрос, отказ чтения и ручной повтор (685ms)",
+        "✓  11 [mobile] › e2e/cycle.spec.ts:4:1 › E2E-01/03 · две роли проходят полный цикл, включая возврат и принятие (3.5s)",
+        "✓  12 [mobile] › e2e/recovery.spec.ts:5:1 › E2E-03/04 · пустой список, ожидающий запрос, отказ чтения и ручной повтор (672ms)",
+        "16 passed (2.9m)"
+      ]
+    },
+    {
+      "command": "pnpm check:artifacts",
+      "exit": 0,
+      "seconds": 0.2,
+      "counts": [
+        "Проверка привилегированных ключей и известных демо-паролей пройдена. Файлов: 148"
+      ]
+    },
+    {
+      "command": "pnpm demo:stop",
+      "exit": 0,
+      "seconds": 0.8,
+      "counts": []
+    },
+    {
+      "command": "pnpm db:test stop",
+      "exit": 0,
+      "seconds": 1.0,
+      "counts": []
+    }
+  ],
+  "revision": "8126dbdb84f1e82f3ea0211a94b96e4b6b7bacbe",
+  "initial_node_modules": false,
+  "private_kit": false,
+  "demo_roles": [
+    {
+      "role": "manager",
+      "objects": 3,
+      "tasks": 3,
+      "statuses": [
+        "new",
+        "in_progress",
+        "in_review"
+      ],
+      "signedOut": true
+    },
+    {
+      "role": "executor",
+      "objects": 2,
+      "tasks": 2,
+      "statuses": [
+        "new",
+        "in_review"
+      ],
+      "signedOut": true
+    },
+    {
+      "role": "executor",
+      "objects": 1,
+      "tasks": 1,
+      "statuses": [
+        "in_progress"
+      ],
+      "signedOut": true
+    }
+  ],
+  "test_counts_after_cleanup": "0|0|0|0|0",
+  "clean_git_status": true,
+  "closed_ports": [
+    5173,
+    56321,
+    56322,
+    56421,
+    56422
+  ],
+  "date": "2026-11-04T19:45:12+03:00"
+}

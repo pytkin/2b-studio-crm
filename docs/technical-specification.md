@@ -32,8 +32,7 @@ Supabase SDK. PostgreSQL владеет данными, полномочиями
 | Данные | Supabase SDK, типы из мигрированной схемы |
 | Тесты | Vitest, React Testing Library, MSW, Playwright |
 
-Точные совместимые версии и lockfile фиксируются на этапе S1; копирование
-полного manifest Seller Platform не требуется. XState, React Compiler pilot,
+Совместимые версии закреплены в [manifest](../package.json) и [lockfile](../pnpm-lock.yaml). XState, React Compiler pilot,
 монорепозиторий, NestJS и Go в согласованный стек не входят.
 
 ### Маршруты и состояние

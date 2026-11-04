@@ -51,6 +51,7 @@ pnpm demo:stop
 - [Объяснение для руководителя](docs/manager-guide.md)
 - [Требования](docs/business-requirements.md) и [пользовательские сценарии](docs/scenarios.md)
 - [Техническая спецификация](docs/technical-specification.md) и [решения](docs/decisions.md)
+- [Результаты локальной приёмки и снимки desktop/mobile](docs/evidence/README.md)
 - [Матрица приёмки](docs/acceptance-plan.md) и [карточки с результатами](docs/implementation-plan.md)
 - [Исходное задание](docs/source/README.md)
 
