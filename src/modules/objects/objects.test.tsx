@@ -228,6 +228,29 @@ it('S4-01 the refreshed unavailable record drops the old name and task links', a
   expect(screen.queryByRole('link', { name: new RegExp(taskRow.title) })).not.toBeInTheDocument();
 });
 
+it.each([
+  { role: 'executor' as const, to: '/my-tasks', name: 'К моим задачам', heading: 'Мои задачи' },
+  { role: 'manager' as const, to: '/objects', name: 'К списку объектов', heading: 'Объекты' },
+])(
+  'S4-01 unavailable object guides $role to an available list',
+  async ({ role, to, name, heading }) => {
+    server.use(http.get(`${api}/objects`, () => HttpResponse.json([])));
+    await signIn(role);
+    const { user } = openPage(`/objects/${ids.object}`);
+
+    expect(await screen.findByRole('heading', { name: 'Запись недоступна' })).toBeVisible();
+    expect(
+      screen.getByText(
+        'По этой ссылке нет доступных вам данных. Перейдите к списку, чтобы продолжить работу.',
+      ),
+    ).toBeVisible();
+    const back = screen.getByRole('link', { name });
+    expect(back).toHaveAttribute('href', to);
+    await user.click(back);
+    expect(await screen.findByRole('heading', { name: heading })).toBeVisible();
+  },
+);
+
 it('S4-03 a failed list refresh cannot restore an object confirmed unavailable by the detail read', async () => {
   let removed = false;
   server.use(

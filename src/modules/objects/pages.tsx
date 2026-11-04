@@ -128,9 +128,12 @@ function UnavailableObject() {
   return (
     <>
       <PageHeading>Запись недоступна</PageHeading>
-      <Link to="/objects" className="button">
-        К списку объектов
-      </Link>
+      <div className="panel">
+        <p>По этой ссылке нет доступных вам данных. Перейдите к списку, чтобы продолжить работу.</p>
+        <Link to={profile.role === 'manager' ? '/objects' : '/my-tasks'} className="button">
+          {profile.role === 'manager' ? 'К списку объектов' : 'К моим задачам'}
+        </Link>
+      </div>
     </>
   );
 }

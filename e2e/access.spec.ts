@@ -69,6 +69,11 @@ test('E2E-02a · смешанный объект, редактирование, 
     for (const p of [executor, page]) {
       await p.goto(url);
       await expect(p.getByText('Запись недоступна', { exact: true })).toBeVisible();
+      await snapshot(
+        p,
+        info,
+        p === executor ? 'deleted-object-executor' : 'deleted-object-manager',
+      );
       await p.goto('/objects');
       await expect(p.locator(`a[href="${url}"]`)).toHaveCount(0);
     }
@@ -127,6 +132,7 @@ test('E2E-02b · правка в пяти статусах, передача п�
     await old.evaluate(() => window.dispatchEvent(new Event('focus')));
     await expect(old.getByText('Запись недоступна', { exact: true })).toBeVisible();
     await expect(old.getByText(accepted.title, { exact: true })).toHaveCount(0);
+    await snapshot(old, info, 'task-access-revoked');
     await old.goto('/my-tasks');
     await expect(old.getByRole('link', { name: new RegExp(accepted.title) })).toHaveCount(0);
     await signIn(next, accounts[2], '/my-tasks');
@@ -143,6 +149,7 @@ test('E2E-02b · правка в пяти статусах, передача п�
     for (const p of [page, next]) {
       await p.goto(url);
       await expect(p.getByText('Запись недоступна', { exact: true })).toBeVisible();
+      await snapshot(p, info, p === page ? 'deleted-task-manager' : 'deleted-task-executor');
     }
   } finally {
     await old.context().close();

@@ -21,6 +21,7 @@ test('E2E-01/03 · две роли проходят полный цикл, вк�
     await page.keyboard.press('Enter');
     await dialog.getByRole('button', { name: 'Сохранить' }).click();
     await expect(dialog.getByLabel('Название')).toHaveAttribute('aria-invalid', 'true');
+    await snapshot(page, info, 'object-form-validation');
     const object = `${run} ${info.project.name} · учебная мастерская`;
     await dialog.getByLabel('Название').fill(object);
     await dialog.getByLabel('Адрес').fill('Садовая улица, 14');
@@ -54,6 +55,8 @@ test('E2E-01/03 · две роли проходят полный цикл, вк�
     await reason.fill('   ');
     await page.getByRole('dialog').getByRole('button', { name: 'Вернуть на доработку' }).click();
     await expect(reason).toBeVisible();
+    await expect(reason).toBeFocused();
+    await snapshot(page, info, 'return-reason-validation');
     await reason.fill('Измерить высоту верхней полки');
     await page.getByRole('dialog').getByRole('button', { name: 'Вернуть на доработку' }).click();
     await expect(history(page)).toHaveCount(4);

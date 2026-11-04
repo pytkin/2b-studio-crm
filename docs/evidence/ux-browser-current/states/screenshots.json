@@ -1,0 +1,758 @@
+[
+  {
+    "file": "1-restricted-object.png",
+    "project": "desktop",
+    "state": "restricted-object",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "2-mixed-object.png",
+    "project": "desktop",
+    "state": "mixed-object",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "3-deleted-object-executor.png",
+    "project": "desktop",
+    "state": "deleted-object-executor",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "4-deleted-object-manager.png",
+    "project": "desktop",
+    "state": "deleted-object-manager",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "5-task-access-revoked.png",
+    "project": "desktop",
+    "state": "task-access-revoked",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "6-transferred-accepted-task.png",
+    "project": "desktop",
+    "state": "transferred-accepted-task",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "7-deleted-task-manager.png",
+    "project": "desktop",
+    "state": "deleted-task-manager",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "8-deleted-task-executor.png",
+    "project": "desktop",
+    "state": "deleted-task-executor",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "9-object-form-validation.png",
+    "project": "desktop",
+    "state": "object-form-validation",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "10-return-reason-validation.png",
+    "project": "desktop",
+    "state": "return-reason-validation",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "11-accepted-manager.png",
+    "project": "desktop",
+    "state": "accepted-manager",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "12-accepted-history.png",
+    "project": "desktop",
+    "state": "accepted-history",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "13-accepted-executor.png",
+    "project": "desktop",
+    "state": "accepted-executor",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "14-login-pending.png",
+    "project": "desktop",
+    "state": "login-pending",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "15-login-timeout.png",
+    "project": "desktop",
+    "state": "login-timeout",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "16-empty-executor.png",
+    "project": "desktop",
+    "state": "empty-executor",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "17-task-list-loading.png",
+    "project": "desktop",
+    "state": "task-list-loading",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "18-task-list-read-error.png",
+    "project": "desktop",
+    "state": "task-list-read-error",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "19-conflict-draft.png",
+    "project": "desktop",
+    "state": "conflict-draft",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "20-object-update-readback.png",
+    "project": "desktop",
+    "state": "object-update-readback",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "21-session-expired-login.png",
+    "project": "desktop",
+    "state": "session-expired-login",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "22-task-create-readback.png",
+    "project": "desktop",
+    "state": "task-create-readback",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "23-task-transition-readback.png",
+    "project": "desktop",
+    "state": "task-transition-readback",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "24-task-delete-readback.png",
+    "project": "desktop",
+    "state": "task-delete-readback",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "25-object-create-timeout.png",
+    "project": "desktop",
+    "state": "object-create-timeout",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "26-login-validation.png",
+    "project": "desktop",
+    "state": "login-validation",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "27-login-invalid-credentials.png",
+    "project": "desktop",
+    "state": "login-invalid-credentials",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "28-unknown-task.png",
+    "project": "desktop",
+    "state": "unknown-task",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "29-unknown-object.png",
+    "project": "desktop",
+    "state": "unknown-object",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "30-profile-outage-dialog.png",
+    "project": "desktop",
+    "state": "profile-outage-dialog",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "31-profile-restored-dialog.png",
+    "project": "desktop",
+    "state": "profile-restored-dialog",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "32-task-form-actions-at-top-900.png",
+    "project": "desktop",
+    "state": "task-form-actions-at-top-900",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "33-task-form-last-field-900.png",
+    "project": "desktop",
+    "state": "task-form-last-field-900",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "34-profile-loading.png",
+    "project": "desktop",
+    "state": "profile-loading",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "35-profile-read-error.png",
+    "project": "desktop",
+    "state": "profile-read-error",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "36-profile-unavailable.png",
+    "project": "desktop",
+    "state": "profile-unavailable",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "37-task-choices-loading.png",
+    "project": "desktop",
+    "state": "task-choices-loading",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "38-task-choices-read-error.png",
+    "project": "desktop",
+    "state": "task-choices-read-error",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "39-task-choices-empty.png",
+    "project": "desktop",
+    "state": "task-choices-empty",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "40-task-assignee-validation.png",
+    "project": "desktop",
+    "state": "task-assignee-validation",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "file": "41-restricted-object.png",
+    "project": "mobile",
+    "state": "restricted-object",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "42-mixed-object.png",
+    "project": "mobile",
+    "state": "mixed-object",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "43-deleted-object-executor.png",
+    "project": "mobile",
+    "state": "deleted-object-executor",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "44-deleted-object-manager.png",
+    "project": "mobile",
+    "state": "deleted-object-manager",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "45-task-access-revoked.png",
+    "project": "mobile",
+    "state": "task-access-revoked",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "46-transferred-accepted-task.png",
+    "project": "mobile",
+    "state": "transferred-accepted-task",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "47-deleted-task-manager.png",
+    "project": "mobile",
+    "state": "deleted-task-manager",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "48-deleted-task-executor.png",
+    "project": "mobile",
+    "state": "deleted-task-executor",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "49-object-form-validation.png",
+    "project": "mobile",
+    "state": "object-form-validation",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "50-return-reason-validation.png",
+    "project": "mobile",
+    "state": "return-reason-validation",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "51-accepted-manager.png",
+    "project": "mobile",
+    "state": "accepted-manager",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "52-accepted-history.png",
+    "project": "mobile",
+    "state": "accepted-history",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "53-accepted-executor.png",
+    "project": "mobile",
+    "state": "accepted-executor",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "54-login-pending.png",
+    "project": "mobile",
+    "state": "login-pending",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "55-login-timeout.png",
+    "project": "mobile",
+    "state": "login-timeout",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "56-empty-executor.png",
+    "project": "mobile",
+    "state": "empty-executor",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "57-task-list-loading.png",
+    "project": "mobile",
+    "state": "task-list-loading",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "58-task-list-read-error.png",
+    "project": "mobile",
+    "state": "task-list-read-error",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "59-conflict-draft.png",
+    "project": "mobile",
+    "state": "conflict-draft",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "60-object-update-readback.png",
+    "project": "mobile",
+    "state": "object-update-readback",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "61-session-expired-login.png",
+    "project": "mobile",
+    "state": "session-expired-login",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "62-task-create-readback.png",
+    "project": "mobile",
+    "state": "task-create-readback",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "63-task-transition-readback.png",
+    "project": "mobile",
+    "state": "task-transition-readback",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "64-task-delete-readback.png",
+    "project": "mobile",
+    "state": "task-delete-readback",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "65-object-create-timeout.png",
+    "project": "mobile",
+    "state": "object-create-timeout",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "66-login-validation.png",
+    "project": "mobile",
+    "state": "login-validation",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "67-login-invalid-credentials.png",
+    "project": "mobile",
+    "state": "login-invalid-credentials",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "68-unknown-task.png",
+    "project": "mobile",
+    "state": "unknown-task",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "69-unknown-object.png",
+    "project": "mobile",
+    "state": "unknown-object",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "70-profile-outage-dialog.png",
+    "project": "mobile",
+    "state": "profile-outage-dialog",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "71-profile-restored-dialog.png",
+    "project": "mobile",
+    "state": "profile-restored-dialog",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "72-task-form-actions-at-top-800.png",
+    "project": "mobile",
+    "state": "task-form-actions-at-top-800",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "73-task-form-last-field-800.png",
+    "project": "mobile",
+    "state": "task-form-last-field-800",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "74-task-form-actions-at-top-500.png",
+    "project": "mobile",
+    "state": "task-form-actions-at-top-500",
+    "viewport": {
+      "width": 360,
+      "height": 500
+    }
+  },
+  {
+    "file": "75-task-form-last-field-500.png",
+    "project": "mobile",
+    "state": "task-form-last-field-500",
+    "viewport": {
+      "width": 360,
+      "height": 500
+    }
+  },
+  {
+    "file": "76-task-form-actions-at-top-400.png",
+    "project": "mobile",
+    "state": "task-form-actions-at-top-400",
+    "viewport": {
+      "width": 360,
+      "height": 400
+    }
+  },
+  {
+    "file": "77-task-form-last-field-400.png",
+    "project": "mobile",
+    "state": "task-form-last-field-400",
+    "viewport": {
+      "width": 360,
+      "height": 400
+    }
+  },
+  {
+    "file": "78-profile-loading.png",
+    "project": "mobile",
+    "state": "profile-loading",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "79-profile-read-error.png",
+    "project": "mobile",
+    "state": "profile-read-error",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "80-profile-unavailable.png",
+    "project": "mobile",
+    "state": "profile-unavailable",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "81-task-choices-loading.png",
+    "project": "mobile",
+    "state": "task-choices-loading",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "82-task-choices-read-error.png",
+    "project": "mobile",
+    "state": "task-choices-read-error",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "83-task-choices-empty.png",
+    "project": "mobile",
+    "state": "task-choices-empty",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  },
+  {
+    "file": "84-task-assignee-validation.png",
+    "project": "mobile",
+    "state": "task-assignee-validation",
+    "viewport": {
+      "width": 360,
+      "height": 800
+    }
+  }
+]

@@ -30,9 +30,11 @@ test('E2E-03/04 · пустой список, ожидающий запрос, �
   });
   await page.reload();
   await expect(page.getByText(/загружа|загрузк/i).first()).toBeVisible();
+  await snapshot(page, info, 'task-list-loading');
   release();
   const retry = page.getByRole('button', { name: /Повторить|Попробовать снова/ });
   await expect(retry).toBeVisible();
+  await snapshot(page, info, 'task-list-read-error');
   await page.unroute(match);
   await retry.click();
   await expect(
@@ -83,6 +85,7 @@ test('E2E-04 · конфликт сохраняет черновик, потер
     .single();
   expect(error).toBe(null);
   expect(data).toEqual({ address: 'Мой незавершённый адрес', version: object.version + 2 });
+  await snapshot(page, info, 'object-update-readback');
 });
 
 test('E2E-04 · истечение сессии очищает открытый черновик и защищённые данные', async ({
@@ -112,6 +115,7 @@ test('E2E-04 · истечение сессии очищает открытый 
     timeout: 75_000,
   });
   await expect(page.getByRole('dialog')).toHaveCount(0);
+  await snapshot(page, info, 'session-expired-login');
   expect(
     await page
       .locator('input,textarea')
@@ -152,6 +156,7 @@ test('E2E-04 · потери ответов на создание, перехо�
     );
     await dialog.getByRole('button', { name: 'Сохранить' }).click();
     await expect(page.getByRole('heading', { name: title })).toBeVisible();
+    await snapshot(page, info, 'task-create-readback');
     const taskUrl = new URL(page.url()).pathname;
     const id = taskUrl.split('/').at(-1);
     await signIn(executor, accounts[1], taskUrl);
@@ -163,6 +168,7 @@ test('E2E-04 · потери ответов на создание, перехо�
     const history = executor.getByRole('list', { name: 'История статусов' }).getByRole('listitem');
     await expect(history).toHaveCount(2);
     await expect(history.last()).toContainText('В работе');
+    await snapshot(executor, info, 'task-transition-readback');
     await page.reload();
     await page.getByRole('button', { name: 'Удалить задачу', exact: true }).click();
     dialog = page.getByRole('dialog');
@@ -173,6 +179,7 @@ test('E2E-04 · потери ответов на создание, перехо�
     await dialog.getByRole('button', { name: 'Удалить задачу' }).click();
     await expect(page.getByText(/запись недоступна|задача недоступна/i).first()).toBeVisible();
     await expect(page.getByText(/успешно удалена|задача удалена/i)).toHaveCount(0);
+    await snapshot(page, info, 'task-delete-readback');
     expect([created, transitions, deleted]).toEqual([1, 1, 1]);
     const result = await manager.from('tasks').select('id').eq('id', id);
     expect(result.error).toBe(null);
@@ -206,6 +213,7 @@ test('E2E-04 · зависший запрос создания завершае�
     await expect(retry).toBeEnabled({ timeout: 15_000 });
     expect(requests).toHaveLength(1);
     await expect(dialog.getByLabel('Название')).toHaveValue(name);
+    await snapshot(page, info, 'object-create-timeout');
     await retry.click();
     await expect(page.getByRole('heading', { name })).toBeVisible();
     expect(requests).toHaveLength(2);

@@ -229,3 +229,47 @@ it('S5-02 explains pending and empty choices and lets the manager refresh them',
   expect(await dialog.findByRole('option', { name: 'Исполнитель теста' })).toBeInTheDocument();
   expect(dialog.getByRole('button', { name: 'Сохранить' })).toBeEnabled();
 });
+
+it.each(['Объект', 'Исполнитель'])(
+  'S5-02 retains keyboard focus on %s when task choices finish loading',
+  async (label) => {
+    let release!: () => void;
+    const pending = new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    server.use(
+      http.get(`${api}/profiles`, async ({ request }) => {
+        if (!new URL(request.url).searchParams.has('role')) {
+          return HttpResponse.json([
+            { id: ids.manager, display_name: 'Ирина', role: 'manager', active: true },
+          ]);
+        }
+        await pending;
+        return HttpResponse.json([{ id: ids.executor, display_name: 'Исполнитель теста' }]);
+      }),
+    );
+    await signIn('manager');
+    const { user } = openPage(`/tasks/${ids.task}`);
+    await user.click(await screen.findByRole('button', { name: 'Редактировать' }));
+    const dialog = within(screen.getByRole('dialog'));
+    const title = dialog.getByLabelText('Название');
+    await user.click(title);
+    await user.tab();
+    await user.tab();
+    if (label === 'Исполнитель') await user.tab();
+    const field = dialog.getByLabelText(label);
+    try {
+      expect(dialog.getByRole('status')).toHaveTextContent('Загружаем объекты и исполнителей');
+      expect(field).toHaveFocus();
+    } finally {
+      release();
+    }
+    await dialog.findByRole('option', { name: 'Исполнитель теста' });
+    await waitFor(() => {
+      expect(dialog.getByLabelText('Объект')).toHaveValue(ids.object);
+      expect(dialog.getByLabelText('Исполнитель')).toHaveValue(ids.executor);
+    });
+    expect(document.activeElement?.id).toBe(field.id);
+    expect(dialog.getByLabelText(label)).toHaveFocus();
+  },
+);

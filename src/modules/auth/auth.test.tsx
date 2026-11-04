@@ -149,10 +149,14 @@ it('preserves the current draft across a failed background profile check and a s
   await act(() => cache.invalidateQueries({ queryKey: ['user', ids.manager, 'profile'] }));
   expect(await screen.findByRole('heading', { name: 'Не удалось проверить доступ' })).toBeVisible();
   expect(screen.queryByRole('dialog', { name: 'Редактировать объект' })).toBeNull();
+  expect(screen.getByRole('button', { name: 'Проверить снова' })).toHaveFocus();
+  await user.tab();
+  expect(within(screen.getByRole('dialog')).getByRole('button', { name: 'Выйти' })).toHaveFocus();
   server.resetHandlers();
   await user.click(screen.getByRole('button', { name: 'Проверить снова' }));
   const restored = within(await screen.findByRole('dialog'));
   expect(restored.getByLabelText('Название')).toHaveValue('Корпус А черновик');
+  expect(restored.getByLabelText('Название')).toHaveFocus();
 });
 
 it('a background profile outage does not abort a submitted object write or lose its receipt', async () => {

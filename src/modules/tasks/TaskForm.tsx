@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from '@tanstack/react-router';
 import { Plus } from 'lucide-react';
 import { type ReactNode, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useController, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { collectPages } from '../../shared/pagination';
 import { getSupabase } from '../../shared/supabase';
@@ -118,6 +118,8 @@ export function TaskForm({
       comment: '',
     },
   });
+  const objectField = useController({ control: form.control, name: 'object_id' }).field;
+  const assigneeField = useController({ control: form.control, name: 'assignee_id' }).field;
   const { errors, isSubmitting } = form.formState;
   const unavailable =
     choices.data &&
@@ -128,7 +130,11 @@ export function TaskForm({
         : '');
   function attrs(key: keyof Values) {
     return {
-      ...form.register(key),
+      ...(key === 'object_id'
+        ? objectField
+        : key === 'assignee_id'
+          ? assigneeField
+          : form.register(key)),
       id: `task-${key}`,
       required: key === 'title' || key === 'object_id' || key === 'assignee_id',
       'aria-invalid': !!errors[key],
@@ -289,7 +295,7 @@ export function TaskForm({
             <textarea {...attrs('description')} />
           </Field>
           <Field name="task-object_id" label="Объект" error={errors.object_id?.message}>
-            <select {...attrs('object_id')} key={choices.data ? 'ready' : 'loading'}>
+            <select {...attrs('object_id')}>
               <option value="">Выберите объект</option>
               {choices.data?.objects.map((o) => (
                 <option key={o.id} value={o.id}>
@@ -299,7 +305,7 @@ export function TaskForm({
             </select>
           </Field>
           <Field name="task-assignee_id" label="Исполнитель" error={errors.assignee_id?.message}>
-            <select {...attrs('assignee_id')} key={choices.data ? 'ready' : 'loading'}>
+            <select {...attrs('assignee_id')}>
               <option value="">Не выбран</option>
               {choices.data?.people.map((p) => (
                 <option key={p.id} value={p.id}>

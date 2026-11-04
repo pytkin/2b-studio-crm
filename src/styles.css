@@ -468,6 +468,15 @@ textarea {
   }
   .dialog-content {
     padding: 20px;
+    scroll-padding-block: 20px 104px;
+  }
+  .dialog-content .form-actions {
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+    padding-block: 12px;
+    background: var(--paper);
+    border-top: 1px solid var(--edge);
   }
   .sidebar h2,
   .sidebar .eyebrow {
