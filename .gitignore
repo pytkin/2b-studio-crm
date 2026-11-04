@@ -12,6 +12,8 @@ test-results/
 .local/
 supabase/.temp/
 supabase/.branches/
+local/test/supabase/.temp/
+local/test/supabase/.branches/
 *.log
 __pycache__/
 *.py[cod]

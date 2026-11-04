@@ -1,0 +1,61 @@
+# Local Docker project only. See README.md, section «Локальная среда».
+project_id = "2b-studio-crm-test"
+
+[api]
+enabled = true
+port = 56421
+schemas = ["public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+auto_expose_new_tables = false
+
+[db]
+port = 56422
+shadow_port = 56420
+major_version = 17
+health_timeout = "2m"
+
+[db.pooler]
+enabled = false
+port = 56429
+
+[db.migrations]
+enabled = true
+schema_paths = []
+
+[db.seed]
+enabled = false
+sql_paths = []
+
+[auth]
+enabled = true
+site_url = "http://127.0.0.1:5173"
+additional_redirect_urls = []
+enable_signup = false
+enable_anonymous_sign_ins = false
+
+# These services are outside v1 requirements and are not needed for the empty stack.
+[studio]
+enabled = false
+port = 56423
+
+[local_smtp]
+enabled = false
+port = 56424
+
+[realtime]
+enabled = false
+
+[storage]
+enabled = false
+
+[edge_runtime]
+enabled = false
+inspector_port = 56428
+
+[analytics]
+enabled = false
+port = 56427
+
+[experimental]
+stack = false
