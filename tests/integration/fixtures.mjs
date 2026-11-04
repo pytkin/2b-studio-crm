@@ -1,56 +1,15 @@
-import { execFileSync } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
 import { createClient } from '@supabase/supabase-js';
 import pg from 'pg';
 
-const root = new URL('../../', import.meta.url);
-const url = 'http://127.0.0.1:56421';
+import { localConfig } from '../../scripts/supabase-local.mjs';
 const auth = { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false };
 
-function readTestConfig() {
-  try {
-    const env = Object.fromEntries(
-      Object.entries(process.env).filter(([key]) => !key.startsWith('SUPABASE_')),
-    );
-    env.SUPABASE_EXPERIMENTAL_STACK = '0';
-    const output = execFileSync(
-      'node_modules/.bin/supabase',
-      ['status', '--workdir', 'local/test', '-o', 'env'],
-      {
-        cwd: root,
-        env,
-        encoding: 'utf8',
-        stdio: ['ignore', 'pipe', 'ignore'],
-      },
-    );
-    const config = Object.fromEntries(
-      [...output.matchAll(/^(\w+)="([^"]*)"$/gm)].map(([, k, v]) => [k, v]),
-    );
-    const target = new URL(config.DB_URL);
-    if (
-      config.API_URL !== url ||
-      !['postgresql:', 'postgres:'].includes(target.protocol) ||
-      target.search ||
-      target.hostname !== '127.0.0.1' ||
-      target.port !== '56422' ||
-      target.pathname !== '/postgres'
-    ) {
-      throw new Error('Expected the isolated local test project.');
-    }
-    if (!config.PUBLISHABLE_KEY || !config.SERVICE_ROLE_KEY) throw new Error();
-    return config;
-  } catch {
-    // ChildProcess errors include captured stdout; URL errors include the original input.
-    throw new Error('Could not read the isolated test configuration.');
-  }
-}
-
 export async function openFixtures() {
-  const config = readTestConfig();
-  const publicKey = config.PUBLISHABLE_KEY;
+  const { url, key: publicKey, adminKey, db: connectionString } = localConfig('test');
   const guest = createClient(url, publicKey, { auth });
-  const admin = createClient(url, config.SERVICE_ROLE_KEY, { auth });
-  const db = new pg.Client({ connectionString: config.DB_URL });
+  const admin = createClient(url, adminKey, { auth });
+  const db = new pg.Client({ connectionString });
   await db.connect();
   const users = {};
   async function close() {

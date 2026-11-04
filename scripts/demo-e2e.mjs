@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import pg from 'pg';
 import { newAccounts } from './demo-accounts.mjs';
-import { cliEnv, localConfig, root } from './demo.mjs';
+import { cliEnv, localConfig, root } from './supabase-local.mjs';
 import { provision } from './fixtures-local.mjs';
 
 const config = localConfig('test');

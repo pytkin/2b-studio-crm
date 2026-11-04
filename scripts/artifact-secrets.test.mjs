@@ -22,3 +22,20 @@ test('flags privileged tokens and known demo credentials by filename only', () =
     [],
   );
 });
+
+test('rejects a bearer token of a signed-in user but allows a public anonymous JWT', () => {
+  const token = (role) =>
+    [
+      Buffer.from(JSON.stringify({ alg: 'HS256', typ: 'JWT' })).toString('base64url'),
+      Buffer.from(JSON.stringify({ role, sub: 'test-user' })).toString('base64url'),
+      'synthetic-signature',
+    ].join('.');
+  const paths = inspectArtifacts(
+    [
+      ['public.js', Buffer.from(token('anon'))],
+      ['failure.log', Buffer.from(token('authenticated'))],
+    ],
+    [],
+  );
+  assert.deepEqual(paths, ['failure.log']);
+});

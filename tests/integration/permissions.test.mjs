@@ -119,10 +119,9 @@ test('API-02/03: RLS, exact counts, no direct writes or impersonation, revocatio
       { id: a, tasks: [{ id: t1, task_status_history: [{ actor_name: 'm1' }] }] },
     ]);
     assert.deepEqual((await objects(e2.client)).map((r) => r.id).sort(), [a, b].sort());
-    const counted = await e1.client
-      .from('tasks')
-      .select('id', { count: 'exact', head: true })
-      .eq('object_id', a);
+    const counted = await value(
+      e1.client.from('tasks').select('count').eq('object_id', a).single(),
+    );
     assert.equal(counted.count, 1);
     for (const id of [t2, t4, randomUUID()]) {
       assert.deepEqual(await value(e1.client.from('tasks').select('*').eq('id', id)), []);

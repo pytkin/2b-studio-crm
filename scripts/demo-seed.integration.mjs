@@ -3,7 +3,7 @@ import pg from 'pg';
 import { randomUUID } from 'node:crypto';
 import { createClient } from '@supabase/supabase-js';
 import { newAccounts } from './demo-accounts.mjs';
-import { localConfig } from './demo.mjs';
+import { localConfig } from './supabase-local.mjs';
 import { provision, seedRows } from './fixtures-local.mjs';
 
 // Execute in a rolled-back transaction; the test command only targets the local test DB.

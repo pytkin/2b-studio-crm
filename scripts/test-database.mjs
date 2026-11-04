@@ -1,6 +1,9 @@
 import { execFileSync } from 'node:child_process';
 import { readdirSync, readFileSync } from 'node:fs';
 
+import { localDockerEnv } from './supabase-local.mjs';
+
+const env = localDockerEnv();
 const directory = new URL('../tests/database/', import.meta.url);
 const subjects = process.argv.slice(2);
 const files = readdirSync(directory).filter(
@@ -30,7 +33,7 @@ for (const file of files) {
       '-v',
       'ON_ERROR_STOP=1',
     ],
-    { input, encoding: 'utf8' },
+    { input, env, encoding: 'utf8' },
   );
   const plan = output.match(/^1\.\.(\d+)$/m);
   const results = output.match(/^(?:not )?ok \d+\b/gm) ?? [];

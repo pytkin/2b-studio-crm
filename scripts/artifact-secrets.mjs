@@ -5,7 +5,11 @@ function privileged(text) {
   if (/\bsb_secret_[\w-]{24,}/.test(text)) return true;
   for (const match of text.matchAll(/\beyJ[\w-]+\.([\w-]+)\.[\w-]+/g)) {
     try {
-      if (JSON.parse(Buffer.from(match[1], 'base64url').toString()).role === 'service_role')
+      if (
+        ['service_role', 'authenticated'].includes(
+          JSON.parse(Buffer.from(match[1], 'base64url').toString()).role,
+        )
+      )
         return true;
     } catch {
       /* Not a JWT payload. */
@@ -55,7 +59,7 @@ if (import.meta.main) {
     process.exitCode = 1;
   } else
     console.log(
-      'Проверка привилегированных ключей и известных демо-паролей пройдена. Файлов:',
+      'Проверка ключей, токенов сессии и известных демо-паролей пройдена. Файлов:',
       paths.size,
     );
 }

@@ -5,22 +5,39 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { test } from 'node:test';
 import { openAccounts } from './demo-accounts.mjs';
-import { localConfig, runDemo } from './demo.mjs';
+import { runDemo } from './demo.mjs';
+import { localConfig } from './supabase-local.mjs';
 
 test('demo starts from a clean checkout and applies pending migrations without resetting', async () => {
   const calls = [];
   const operations = Object.fromEntries(
-    ['install', 'start', 'migrate', 'provision', 'build', 'serve', 'shutdown', 'stop'].map(
-      (name) => [
-        name,
-        () => {
-          calls.push(name);
-        },
-      ],
-    ),
+    [
+      'install',
+      'start',
+      'migrate',
+      'activate',
+      'provision',
+      'build',
+      'serve',
+      'shutdown',
+      'stop',
+    ].map((name) => [
+      name,
+      () => {
+        calls.push(name);
+      },
+    ]),
   );
   await runDemo('start', operations);
-  assert.deepEqual(calls, ['install', 'start', 'migrate', 'provision', 'build', 'serve']);
+  assert.deepEqual(calls, [
+    'install',
+    'start',
+    'migrate',
+    'activate',
+    'provision',
+    'build',
+    'serve',
+  ]);
   calls.length = 0;
   await runDemo('stop', operations);
   assert.deepEqual(calls, ['shutdown', 'stop']);
@@ -97,11 +114,59 @@ test('standalone entry point completes shutdown through the real preview module'
   }
   writeFileSync(
     join(dir, 'scripts', 'supabase-local.mjs'),
-    'export function runLocalSupabase() {}',
+    'export const cliEnv={},root=process.cwd(); export function localConfig() {} export function migrateLocal() {} export function runLocalSupabase() {}',
   );
   const result = spawnSync(process.execPath, ['scripts/demo.mjs', 'stop'], {
     cwd: dir,
     encoding: 'utf8',
   });
   assert.equal(result.status, 0, result.stderr);
+});
+
+test('demo cannot provision accounts or publish a URL before the REST read guard is confirmed', async () => {
+  const events = [];
+  const ops = Object.fromEntries(
+    ['install', 'start', 'migrate', 'activate', 'provision', 'build', 'serve'].map((name) => [
+      name,
+      () => {
+        events.push(name);
+        if (name === 'activate') throw new Error('Guard did not reject the client');
+      },
+    ]),
+  );
+  await assert.rejects(runDemo('start', ops), /Guard/);
+  assert.deepEqual(events, ['install', 'start', 'migrate', 'activate']);
+});
+
+test('an unverified REST service cannot reopen CRM tables, including after a reload failure', async () => {
+  const { enableVerifiedReads } = await import('./local-read-access.mjs');
+  for (const fault of ['wrong-response', 'configure-failed', 'reloaded-without-hook', 'ready']) {
+    const changes = [];
+    let probes = 0;
+    const ops = {
+      probe: async () => {
+        probes++;
+        return fault === 'ready' || (fault === 'reloaded-without-hook' && probes === 1);
+      },
+      wait: async () => {},
+      restrict: async () => {
+        changes.push('closed');
+      },
+      configure: async () => {
+        changes.push('configure');
+        if (fault === 'configure-failed') throw Error('cannot compose hook');
+      },
+      restore: async () => {
+        changes.push('opened');
+      },
+    };
+    if (fault === 'ready') {
+      await enableVerifiedReads(ops);
+      assert.deepEqual(changes, ['configure', 'opened']);
+    } else {
+      await assert.rejects(enableVerifiedReads(ops), /Чтение CRM закрыто/);
+      assert.ok(!changes.includes('opened'));
+      assert.equal(changes.at(-1), 'closed');
+    }
+  }
 });

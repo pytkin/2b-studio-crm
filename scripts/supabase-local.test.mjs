@@ -1,6 +1,11 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { runLocalSupabase } from './supabase-local.mjs';
+import { runLocalSupabase as runProjectSupabase } from './supabase-local.mjs';
+
+const runLocalSupabase = (args, options) => runProjectSupabase(args, {
+  inspect: () => 'unix:///tmp/test.sock',
+  ...options,
+});
 
 test('test reset targets only the test workdir and does not inherit a cloud target', () => {
   const calls = [];
@@ -64,4 +69,26 @@ test('a failed CLI command stays failed without leaking its output', () => {
     assert.equal(error.message.includes('secret-marker'), false);
     return true;
   });
+});
+
+test("a remote Docker endpoint cannot receive the local test reset", () => {
+  for (const [env, endpoint] of [
+    [{ DOCKER_HOST: "tcp://remote.invalid:2375" }, ""],
+    [{ DOCKER_CONTEXT: "remote-context" }, "ssh://example.invalid"],
+    [{}, "tcp://remote.invalid:2375"],
+  ]) {
+    let invoked = false;
+    assert.throws(() => runLocalSupabase(["test", "reset"], {
+      env, inspect: () => endpoint, run: () => { invoked = true; },
+    }), /local Docker/i);
+    assert.equal(invoked, false);
+  }
+  let env;
+  runLocalSupabase(["test", "reset"], {
+    env: { DOCKER_CONTEXT: "desktop-linux" },
+    inspect: () => "unix:///tmp/local-docker.sock\n",
+    run: (_command, _args, options) => { env = options.env; },
+  });
+  assert.equal(env.DOCKER_CONTEXT, undefined);
+  assert.equal(env.DOCKER_HOST, "unix:///tmp/local-docker.sock");
 });
