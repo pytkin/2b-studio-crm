@@ -1,6 +1,11 @@
+import { dirname, join } from 'node:path';
 import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
+  ...(process.env.CRM_E2E_ACCOUNTS && {
+    outputDir: join(dirname(process.env.CRM_E2E_ACCOUNTS), 'raw-results'),
+    reporter: './scripts/e2e-reporter.mjs',
+  }),
   testDir: './e2e',
   workers: 1,
   retries: 0,

@@ -284,6 +284,18 @@ test('API-02/03: RLS, exact counts, no direct writes or impersonation, revocatio
     await db.query('update public.profiles set active=false where id=$1', [m2.id]);
     assert.deepEqual(await objects(m2.client), []);
     await denied(m2.client.rpc('delete_object', { p_id: a, p_expected_version: 1 }), 'FORBIDDEN');
+    const transition = { p_id: t3, p_expected_version: 1, p_to_status: 'in_progress' };
+    const readHistory = () =>
+      value(m1.client.from('tasks').select('status,version,task_status_history(id,comment)').eq('id', t3).single());
+    const before = await readHistory();
+    await denied(e2.client.rpc('transition_task', { ...transition, p_comment: 'a'.repeat(131072) }), 'INVALID_INPUT');
+    assert.deepEqual(await readHistory(), before);
+    const atLimit = '🟢'.repeat(4000);
+    await value(e2.client.rpc('transition_task', { ...transition, p_comment: atLimit }));
+    const after = await readHistory();
+    assert.equal(after.version, 2);
+    assert.equal(after.task_status_history.length, 2);
+    assert.ok(after.task_status_history.some((event) => event.comment === atLimit));
   } finally {
     await db.query(
       'delete from public.task_status_history where task_id in(select id from public.tasks where object_id=any($1))',

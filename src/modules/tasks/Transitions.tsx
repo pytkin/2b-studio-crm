@@ -7,6 +7,7 @@ import { getSupabase } from '../../shared/supabase';
 import { Modal } from '../../shared/ui/Modal';
 import { statusLabels } from '../../shared/ui/StatusBadge';
 import { useSession } from '../auth';
+import { commentError, commentHint, fitsComment } from './comment';
 import type { Task } from './data';
 import { domainMessage, useTaskReadback } from './useTaskReadback';
 
@@ -43,6 +44,7 @@ export function Transitions({ task }: { task: Task }) {
       feedback.current?.focus();
   }, [busy, message]);
   const allowed = actions(task, profile.id, profile.role);
+  const commentValid = fitsComment(comment);
   async function reconcile() {
     setUncertain(true);
     setBusy(true);
@@ -127,12 +129,17 @@ export function Transitions({ task }: { task: Task }) {
           <textarea
             id="status-comment"
             value={comment}
+            aria-invalid={!commentValid}
+            aria-describedby="status-comment-hint"
             disabled={busy || uncertain}
             onChange={(e) => {
               if (initialVersion === undefined) setInitialVersion(task.version);
               setComment(e.target.value);
             }}
           />
+          <small id="status-comment-hint" className={commentValid ? undefined : 'form-error'}>
+            {commentValid ? commentHint : commentError}
+          </small>
         </div>
       )}
       {(busy || message) && (
@@ -151,7 +158,7 @@ export function Transitions({ task }: { task: Task }) {
               type="button"
               key={action.target}
               className="button primary"
-              disabled={busy}
+              disabled={busy || !commentValid}
               onClick={(event) => {
                 initiator.current = event.currentTarget;
                 if (action.target === 'rework') {
@@ -180,7 +187,12 @@ export function Transitions({ task }: { task: Task }) {
   );
 }
 
-const reasonSchema = z.object({ reason: z.string().trim().min(1, 'Укажите причину возврата') });
+const reasonSchema = z.object({
+  reason: z
+    .string()
+    .refine(fitsComment, commentError)
+    .pipe(z.string().trim().min(1, 'Укажите причину возврата')),
+});
 function ReturnDialog({
   initial,
   onClose,
@@ -208,8 +220,9 @@ function ReturnDialog({
             id="return-reason"
             {...form.register('reason')}
             aria-invalid={!!error}
-            aria-describedby={error ? 'return-error' : undefined}
+            aria-describedby={error ? 'return-error' : 'return-hint'}
           />
+          <small id="return-hint">{commentHint}</small>
           {error && (
             <p id="return-error" className="form-error">
               {error.message}

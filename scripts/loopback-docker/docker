@@ -1,0 +1,46 @@
+#!/bin/bash
+# Only on the pinned Supabase CLI's PATH during start/reset. Docker Desktop
+# ignores a bridge's default host IP, so put the IP in each publish request.
+set -eu
+export PATH="${CRM_DOCKER_PATH:?}"
+deny() { echo 'Unsupported Docker invocation for loopback-only Supabase.' >&2; exit 1; }
+
+case "${1:-}" in
+  --crm-loopback-preflight) exec docker version --format '{{.Server.Version}}' ;;
+  start|restart)
+    (( $# == 2 )) && [[ "$2" != -* ]] || deny
+    # The CLI may reuse a stopped container by name. Validate the immutable
+    # saved publish specification at the last boundary before it can listen.
+    template='{{.HostConfig.NetworkMode}}:{{.HostConfig.PublishAllPorts}}{{range .HostConfig.PortBindings}}{{range .}}{{if and (ne .HostIp "127.0.0.1") (ne .HostIp "::1")}}:unsafe{{end}}{{end}}{{end}}'
+    [[ $(docker inspect --format "$template" "$2") == "${CRM_DOCKER_NETWORK:?}:false" ]] || deny
+    exec docker "$@" ;;
+  create|run) args=("$1"); shift ;;
+  info|version|ps|inspect|pull|logs|exec|cp|rm|stop|kill|wait) exec docker "$@" ;;
+  container|network|volume|image|context)
+    case "$1 ${2:-}" in
+      'container inspect'|'container ls'|'container rm'|'network inspect'|'network create'|'network ls'|'network rm'|'volume inspect'|'volume create'|'volume ls'|'volume rm'|'image inspect'|'image pull'|'image tag'|'context inspect') exec docker "$@" ;;
+      *) deny ;;
+    esac ;;
+  *) deny ;;
+esac
+
+# Parse only the CLI's container options. The image and its command (including
+# any -p intended for a program inside the container) pass through untouched.
+while (( $# )); do
+  case "$1" in
+    -p|--publish)
+      [[ ${2:-} =~ ^[0-9]+:[0-9]+(/(tcp|udp))?$ ]] || deny
+      args+=("-p" "127.0.0.1:$2"); shift 2 ;;
+    --network)
+      [[ ${2:-} == "${CRM_DOCKER_NETWORK:?}" ]] || deny
+      args+=("$1" "$2"); shift 2 ;;
+    --rm|-i|-t|--interactive|--tty|--detach|-d)
+      args+=("$1"); shift ;;
+    --name|--hostname|-e|--env|-v|--volume|--volumes-from|--tmpfs|--expose|--health-cmd|--health-interval|--health-timeout|--health-retries|--health-start-period|--restart|--security-opt|--add-host|--network-alias|--label|--entrypoint|-u|--user|-w|--workdir)
+      (( $# >= 2 )) || deny
+      args+=("$1" "$2"); shift 2 ;;
+    -*) deny ;;
+    *) exec docker "${args[@]}" "$@" ;;
+  esac
+done
+deny

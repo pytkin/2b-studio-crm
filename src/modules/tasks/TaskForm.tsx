@@ -9,6 +9,7 @@ import { collectPages } from '../../shared/pagination';
 import { getSupabase } from '../../shared/supabase';
 import { Modal } from '../../shared/ui/Modal';
 import { useSession } from '../auth';
+import { commentError, commentHint, fitsComment } from './comment';
 import type { Task } from './data';
 import { domainMessage, useTaskReadback } from './useTaskReadback';
 
@@ -17,7 +18,7 @@ const schema = z.object({
   object_id: z.string().min(1, 'Выберите объект'),
   assignee_id: z.string().min(1, 'Выберите исполнителя'),
   description: z.string(),
-  comment: z.string(),
+  comment: z.string().refine(fitsComment, commentError),
 });
 type Values = z.infer<typeof schema>;
 function Field({
@@ -308,8 +309,16 @@ export function TaskForm({
             </select>
           </Field>
           {!task && (
-            <Field name="task-comment" label="Комментарий к созданию">
-              <textarea {...attrs('comment')} />
+            <Field
+              name="task-comment"
+              label="Комментарий к созданию"
+              error={errors.comment?.message}
+            >
+              <textarea
+                {...attrs('comment')}
+                aria-describedby={errors.comment ? 'task-comment-error' : 'task-comment-hint'}
+              />
+              <small id="task-comment-hint">{commentHint}</small>
             </Field>
           )}
         </fieldset>

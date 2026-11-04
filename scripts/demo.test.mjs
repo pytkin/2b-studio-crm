@@ -17,6 +17,64 @@ import { openAccounts } from './demo-accounts.mjs';
 import { runDemo } from './demo.mjs';
 import { localConfig } from './supabase-local.mjs';
 
+test('a failed start releases a newly opened stack, but preserves a running project', async () => {
+  for (const alreadyRunning of [false, true]) {
+    for (const failedStep of ['start', 'serve']) {
+      const calls = [];
+      let running = alreadyRunning;
+      const ops = Object.fromEntries(
+        ['install', 'start', 'migrate', 'activate', 'provision', 'build', 'serve', 'stop'].map(
+          (name) => [
+            name,
+            () => {
+              calls.push(name);
+              if (name === 'start') running = true;
+              if (name === 'stop') running = false;
+              if (name === failedStep) throw Error('injected failure');
+            },
+          ],
+        ),
+      );
+      ops.isRunning = () => running;
+      await assert.rejects(runDemo('start', ops));
+      assert.equal(calls.includes('stop'), !alreadyRunning, failedStep);
+    }
+  }
+});
+
+test('explicit stop attempts both resources even when preview shutdown fails', async () => {
+  const calls = [];
+  await assert.rejects(
+    runDemo('stop', {
+      shutdown() {
+        calls.push('preview');
+        throw Error('injected');
+      },
+      stop() {
+        calls.push('db');
+      },
+    }),
+  );
+  assert.deepEqual(calls, ['preview', 'db']);
+});
+
+test('refusing a start before creating containers does not stop a project again', async () => {
+  let stopped = false;
+  await assert.rejects(
+    runDemo('start', {
+      install() {},
+      isRunning: () => false,
+      start() {
+        throw Error('preflight refused');
+      },
+      stop() {
+        stopped = true;
+      },
+    }),
+  );
+  assert.equal(stopped, false);
+});
+
 test('demo starts from a clean checkout and applies pending migrations without resetting', async () => {
   const calls = [];
   const operations = Object.fromEntries(
@@ -38,6 +96,7 @@ test('demo starts from a clean checkout and applies pending migrations without r
     ]),
   );
   const activation = Promise.withResolvers();
+  operations.isRunning = () => true;
   operations.activate = () => {
     calls.push('activate');
     return activation.promise;
@@ -149,8 +208,12 @@ test('standalone entry point completes shutdown through the real preview module'
     copyFileSync(new URL(name, import.meta.url), join(dir, 'scripts', name));
   }
   writeFileSync(
+    join(dir, 'scripts', 'stack-lock.mjs'),
+    'export const withStackLock = (target, run) => run();',
+  );
+  writeFileSync(
     join(dir, 'scripts', 'supabase-local.mjs'),
-    'export const cliEnv={},root=process.cwd(); export function localConfig() {} export function migrateLocal() {} export function runLocalSupabase() {}',
+    'export const cliEnv={},root=process.cwd(); export function openLocalStack() { return {run(){}}; }',
   );
   const result = spawnSync(process.execPath, ['scripts/demo.mjs', 'stop'], {
     cwd: dir,
@@ -170,7 +233,8 @@ test('demo cannot provision accounts or publish a URL before the REST read guard
       },
     ]),
   );
-  await assert.rejects(runDemo('start', ops), /Guard/);
+  ops.isRunning = () => true;
+  await assert.rejects(runDemo('start', ops), /activate/);
   assert.deepEqual(events, ['install', 'start', 'migrate', 'activate']);
 });
 

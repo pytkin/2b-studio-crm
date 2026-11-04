@@ -23,6 +23,30 @@ const start = 'Взять в работу';
 const submit = 'Отправить на проверку';
 const reviewActions = ['Принять', 'Вернуть на доработку'];
 
+it('keeps an oversized transition comment editable and accepts 4000 Unicode code points', async () => {
+  const write = vi.fn(() => HttpResponse.json({}));
+  server.use(
+    http.get(`${api}/tasks`, () =>
+      HttpResponse.json([
+        { ...taskRow, status: 'new', objects: objectRow, task_status_history: [] },
+      ]),
+    ),
+    http.post(`${api}/rpc/transition_task`, write),
+  );
+  await signIn('executor');
+  const { user } = openPage(`/tasks/${ids.task}`);
+  const field = await screen.findByRole('textbox', { name: 'Комментарий' });
+  const allowed = '🟢'.repeat(4000);
+  fireEvent.change(field, { target: { value: allowed + 'я' } });
+  await user.click(screen.getByRole('button', { name: start }));
+  expect(write).not.toHaveBeenCalled();
+  expect(field).toHaveValue(allowed + 'я');
+  expect(field).toHaveAttribute('aria-invalid', 'true');
+  fireEvent.change(field, { target: { value: allowed } });
+  await user.click(screen.getByRole('button', { name: start }));
+  await waitFor(() => expect(write).toHaveBeenCalledTimes(1));
+});
+
 it.each([
   ['executor', 'new', [start]],
   ['executor', 'in_progress', [submit]],

@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import { execFileSync, spawnSync } from 'node:child_process';
-import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -138,4 +138,72 @@ test('artifact command fails closed without exposing malformed private credentia
     );
     assert.match(malformed.stderr, /Не удалось прочитать файл демо-доступов/);
   }
+});
+
+test('checks staged blob bytes even when a partially staged file was cleaned or removed', (t) => {
+  const { cwd, env, write, scan } = scannerFixture(t);
+  const git = (...args) => execFileSync('git', args, { cwd, env, stdio: 'pipe' });
+  const binaryName = 'staged file\twith-newline\n.bin';
+  // Invalid UTF-8, NUL and a fake batch header must not disrupt the next object.
+  write('a.bin', Buffer.from([255, 0, 10, 128]));
+  write(
+    binaryName,
+    Buffer.concat([Buffer.from([0, 255]), Buffer.from(password + '\nabc blob 4\n')]),
+  );
+  write(localAccounts, JSON.stringify([{ password }]));
+  git('add', '--', 'a.bin', binaryName);
+  write(binaryName, 'clean working copy');
+  for (const remove of [false, true]) {
+    if (remove) rmSync(join(cwd, binaryName));
+    const result = scan();
+    assert.equal(result.status, 1);
+    assert.ok(result.stderr.includes('staged file'));
+    assert.equal((result.stderr + result.stdout).includes(password), false);
+  }
+  git('rm', '--cached', '--', binaryName);
+  assert.equal(scan().status, 0);
+});
+
+test('never follows indexed symlinks, gitlinks, or symlinked working-tree directories', (t) => {
+  const { cwd, env, write, scan } = scannerFixture(t);
+  const git = (...args) => execFileSync('git', args, { cwd, env, encoding: 'utf8' });
+  write(localAccounts, JSON.stringify([{ password }]));
+  write('elsewhere/secret', password);
+  symlinkSync('elsewhere/secret', join(cwd, 'link'));
+  symlinkSync(password, join(cwd, 'dangling-link'));
+  write('old/secret', 'public');
+  git('add', '--', 'link', 'dangling-link', 'old/secret');
+  const tree = git('write-tree').trim();
+  const commit = git(
+    '-c',
+    'user.name=Test',
+    '-c',
+    'user.email=test@example.test',
+    'commit-tree',
+    tree,
+    '-m',
+    'fixture',
+  ).trim();
+  git('update-index', '--add', '--cacheinfo', `160000,${commit},embedded`);
+  write('embedded/private', password);
+  rmSync(join(cwd, 'old'), { recursive: true });
+  symlinkSync('elsewhere', join(cwd, 'old'));
+  const clean = scan();
+  assert.equal(clean.status, 0, clean.stderr);
+});
+
+test('staged blob scan reads the stored object even with a local Git replacement', (t) => {
+  const { cwd, env, write, scan } = scannerFixture(t);
+  const git = (...args) => execFileSync('git', args, { cwd, env, encoding: 'utf8' }).trim();
+  write(localAccounts, JSON.stringify([{ password }]));
+  write('partial.txt', password);
+  git('add', '--', 'partial.txt');
+  const staged = git('rev-parse', ':partial.txt');
+  write('partial.txt', 'clean');
+  const clean = git('hash-object', '-w', 'partial.txt');
+  git('replace', staged, clean);
+  const result = scan();
+  assert.equal(result.status, 1);
+  assert.ok(result.stderr.includes('partial.txt'));
+  assert.equal((result.stdout + result.stderr).includes(password), false);
 });

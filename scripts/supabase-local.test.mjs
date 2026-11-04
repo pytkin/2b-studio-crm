@@ -1,8 +1,30 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { localConfig, runLocalSupabase as runProjectSupabase } from './supabase-local.mjs';
+import { spawnSync } from 'node:child_process';
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { localConfig, openLocalStack, prepareLocalStack, runLocalSupabase as runProjectSupabase } from './supabase-local.mjs';
+
+const safeContainers = (target) => ['kong', 'db'].map((service, i) => {
+  const binding = { HostIp: '127.0.0.1', HostPort: String((target === 'test' ? 56421 : 56321) + i) };
+  const ports = { [(i ? '5432' : '8000') + '/tcp']: [binding] };
+  return { name: '/supabase_' + service + '_2b-studio-crm-' + target, running: true,
+    mode: 'supabase_network_2b-studio-crm-' + target, publishAll: false, requested: ports, actual: ports };
+});
+
+function dockerFixture(rows, version = '29.9.2') {
+  return (args) => {
+    if (args[0] === '--crm-loopback-preflight') return version;
+    if (args[0] === 'ps') return rows.map((_, i) => 'id' + i).join('\n');
+    if (args[0] === 'inspect') return rows.map((row) => JSON.stringify(row)).join('\n');
+    throw Error('unexpected Docker invocation');
+  };
+}
 
 const runLocalSupabase = (args, options) => runProjectSupabase(args, {
+  docker: dockerFixture(safeContainers(args[0])),
   inspect: () => 'unix:///tmp/test.sock',
   ...options,
 });
@@ -129,6 +151,140 @@ test('local config accepts only credentials for the requested local API and data
       assert.throws(() => localConfig(target, read(overrides)), {
         message: 'Не удалось прочитать параметры локального Supabase (' + target + ').',
       }, label);
+    }
+  }
+});
+
+test('start pins the Docker publish adapter before invoking the local CLI', () => {
+  let cliEnv;
+  runLocalSupabase(['test', 'start'], {
+    env: { PATH: '/bin' },
+    run: (_cli, _args, options) => { cliEnv = options.env; },
+  });
+  assert.match(cliEnv.PATH, /scripts\/loopback-docker:/);
+});
+
+test('start refuses old engines and unsafe saved or active bindings before the CLI', () => {
+  for (const problem of ['old engine', 'saved wildcard', 'actual IPv6 wildcard', 'empty saved IP', 'host networking']) {
+    const rows = safeContainers('test');
+    rows[0] = structuredClone(rows[0]);
+    if (problem === 'saved wildcard' || problem === 'empty saved IP') {
+      rows[0].running = false;
+      rows[0].requested = { '8000/tcp': [{ HostIp: problem === 'saved wildcard' ? '0.0.0.0' : '', HostPort: '56421' }] };
+    }
+    if (problem === 'actual IPv6 wildcard')
+      rows[0].actual = { '8000/tcp': [...rows[0].actual['8000/tcp'], { HostIp: '::', HostPort: '56421' }] };
+    if (problem === 'host networking') rows[0].mode = 'host';
+    let called = false;
+    assert.throws(() => runLocalSupabase(['test', 'start'], {
+      docker: dockerFixture(rows, problem === 'old engine' ? '27.5.1' : '29.9.2'),
+      run: () => { called = true; },
+    }), /loopback/i, problem);
+    assert.equal(called, false, problem);
+  }
+});
+
+test('successful CLI start still fails without both loopback endpoints in Docker readback', () => {
+  for (const problem of ['missing SQL', 'extra IPv6 wildcard']) {
+    let rows = [];
+    assert.throws(() => runLocalSupabase(['test', 'start'], {
+      docker: (args) => dockerFixture(rows)(args),
+      run: () => {
+        rows = safeContainers('test');
+        if (problem === 'missing SQL') rows.pop();
+        else rows[1].actual['5432/tcp'].push({ HostIp: '::', HostPort: '56422' });
+      },
+    }), /loopback/i, problem);
+  }
+});
+
+test('Docker receives explicit loopback publishes and cannot start an unsafe saved container', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'crm-isolation-'));
+  try {
+    const received = join(dir, 'called');
+    writeFileSync(join(dir, 'docker'), '#!/bin/sh\nif [ "$1" = inspect ]; then printf "%s" "$SAVED"; else printf "%s\\n" "$@" > "$LOG"; fi\n', {mode: 0o700});
+    const exec = (args, saved = '') => spawnSync(fileURLToPath(new URL('./loopback-docker/docker', import.meta.url)), args, {
+      env: { CRM_DOCKER_PATH: dir, CRM_DOCKER_NETWORK: 'crm', LOG: received, SAVED: saved }, encoding: 'utf8',
+    });
+    const result = exec(['create', '--network', 'crm', '-p', '56422:5432', 'postgres', '-p', '5432']);
+    assert.equal(result.status, 0);
+    assert.match(readFileSync(received, 'utf8'), /-p\n127\.0\.0\.1:56422:5432\npostgres\n-p\n5432/);
+    for (const args of [['run', '-P', 'postgres'], ['create', '-p', '0.0.0.0:123:123', 'image'], ['run', '--network', 'host', 'image'],
+      ['container', 'run', '-P', 'image'], ['compose', 'up'], ['--context', 'remote', 'run', '-P', 'image']])
+      assert.notEqual(exec(args).status, 0);
+    assert.notEqual(exec(['start', 'saved'], 'unsafe').status, 0);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('postflight failure stops the new stack but preserves a stack that was already running', async () => {
+  for (const alreadyRunning of [false, true]) {
+    let rows = alreadyRunning ? safeContainers('test') : [];
+    const actions = [];
+    const stack = openLocalStack('test', {
+      env: { DOCKER_HOST: 'unix:///tmp/test.sock' },
+      docker: (args) => dockerFixture(rows)(args),
+      run: (_cli, args) => {
+        actions.push(args[0]);
+        if (args[0] === 'start') {
+          rows = safeContainers('test');
+          rows[0].actual['8000/tcp'].push({ HostIp: '::', HostPort: '56421' });
+        } else if (args[0] === 'stop') rows = [];
+      },
+    });
+    await assert.rejects(() => prepareLocalStack('test', 'start', stack), /loopback/i);
+    assert.deepEqual(actions, alreadyRunning ? ['start'] : ['start', 'stop']);
+  }
+});
+
+test('changing Docker context cannot redirect later migration, status, or rollback within a lifecycle', async () => {
+  const hosts = [];
+  let selected = 'unix:///tmp/first.sock';
+  let reads = 0;
+  const safe = dockerFixture(safeContainers('test'));
+  const stack = openLocalStack('test', {
+    env: { DOCKER_CONTEXT: 'selected', PATH: '/bin' },
+    inspect: () => { reads++; return selected; },
+    docker: (args, env) => { hosts.push(env.DOCKER_HOST); return safe(args); },
+    run: (_file, args, options) => {
+      hosts.push(options.env.DOCKER_HOST);
+      if (args[0] === 'status') return [
+        'API_URL="http://127.0.0.1:56421"', 'DB_URL="postgres://postgres@127.0.0.1:56422/postgres"',
+        'PUBLISHABLE_KEY="synthetic"', 'SECRET_KEY="synthetic"'].join('\n');
+    },
+  });
+  assert.equal(stack.isRunning(), true);
+  stack.run('start');
+  selected = 'unix:///tmp/other.sock';
+  stack.migrate();
+  assert.equal(stack.config().url, 'http://127.0.0.1:56421');
+  stack.run('stop');
+  assert.equal(reads, 1);
+  assert.deepEqual([...new Set(hosts)], ['unix:///tmp/first.sock']);
+});
+
+test('direct preparation cleans up once on CLI, migration or activation failure according to prior ownership', async () => {
+  for (const action of ['start', 'reset']) {
+    for (const failure of ['cli', ...(action === 'start' ? ['migrate'] : []), 'activate']) {
+      for (const existing of [false, true]) {
+        let running = existing;
+        const actions = [];
+        const fail = (at) => { if (at === failure) throw Error('Injected failure'); };
+        const stack = {
+          isRunning: () => running,
+          run: (command) => {
+            actions.push(command);
+            running = command !== 'stop';
+            if (running) fail('cli');
+          },
+          migrate: () => fail('migrate'),
+          config: () => ({}),
+        };
+        await assert.rejects(() => prepareLocalStack('test', action, stack, () => fail('activate')), /Injected failure/);
+        assert.equal(running, existing);
+        assert.deepEqual(actions, existing ? [action] : [action, 'stop']);
+      }
     }
   }
 });

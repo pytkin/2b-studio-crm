@@ -52,7 +52,7 @@ export async function snapshot(page: Page, info: TestInfo, name: string) {
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(
     true,
   );
-  await info.attach(name, {
+  await info.attach(`crm-snapshot-${name}`, {
     body: await page.screenshot({ path: info.outputPath(`${name}.png`) }),
     contentType: 'image/png',
   });
