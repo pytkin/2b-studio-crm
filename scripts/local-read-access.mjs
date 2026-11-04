@@ -27,28 +27,37 @@ export async function enableVerifiedReads(ops) {
   }
 }
 
+export async function guardVerifiedAtGateway(config) {
+  try {
+    const endpoint = config.url + '/rest/v1/tasks?select=id&limit=0';
+    const request = (headers) =>
+      fetch(endpoint, {
+        headers: { apikey: config.key, ...headers },
+        redirect: 'error',
+        signal: AbortSignal.timeout(1500),
+      });
+    const denied = await request({ Prefer: 'count=planned' });
+    const error = await denied.json();
+    if (
+      denied.status !== 400 ||
+      error.code !== 'PT400' ||
+      error.message !== 'UNSUPPORTED_READ_PREFERENCE'
+    )
+      return false;
+    // Even without Prefer, enabling the dedicated plan media type would leak estimates.
+    const plan = await request({ Accept: 'application/vnd.pgrst.plan+json' });
+    return plan.status === 406 && (await plan.json()).code === 'PGRST107';
+  } catch {
+    return false;
+  }
+}
+
 export async function activateLocalReads(config) {
   const db = new pg.Client({ connectionString: config.db, connectionTimeoutMillis: 3000 });
   await db.connect();
   try {
     await enableVerifiedReads({
-      probe: async () => {
-        try {
-          const response = await fetch(config.url + '/rest/v1/tasks?select=id&limit=0', {
-            headers: { apikey: config.key, Prefer: 'count=planned' },
-            redirect: 'error',
-            signal: AbortSignal.timeout(1500),
-          });
-          const body = await response.json();
-          return (
-            response.status === 400 &&
-            body.code === 'PT400' &&
-            body.message === 'UNSUPPORTED_READ_PREFERENCE'
-          );
-        } catch {
-          return false;
-        }
-      },
+      probe: () => guardVerifiedAtGateway(config),
       restrict: async () => {
         // An explicit transaction in an activation script may have failed.
         await db.query('rollback');
