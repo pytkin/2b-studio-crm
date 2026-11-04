@@ -166,7 +166,7 @@ h3 {
   display: grid;
   gap: 6px;
 }
-.sidebar nav a {
+.sidebar :where(nav) a {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -174,13 +174,13 @@ h3 {
   border-radius: 6px;
   color: #d5e4d8;
 }
-.sidebar nav a[aria-current="page"],
-.sidebar nav a.active,
-.sidebar nav a[data-status="active"] {
+.sidebar :where(nav) a[aria-current="page"],
+.sidebar :where(nav) a.active,
+.sidebar :where(nav) a[data-status="active"] {
   background: #2e584a;
   color: white;
 }
-.sidebar nav a:hover {
+.sidebar :where(nav) a:hover {
   background: #274e42;
 }
 .workspace {
@@ -300,6 +300,8 @@ h3 {
   margin: 0;
 }
 .task-row {
+  color: var(--ink);
+  text-decoration: none;
   padding: 15px 20px;
   display: flex;
   gap: 12px;
@@ -431,7 +433,7 @@ textarea {
     display: flex;
     gap: 2px;
   }
-  .sidebar nav a {
+  .sidebar :where(nav) a {
     padding: 8px;
   }
   .main-content {
@@ -471,27 +473,185 @@ textarea {
     display: none;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-    transition: none !important;
-  }
-}
 
 .login-visual h2 {
   font-size: clamp(2.5rem, 5.5vw, 5.3rem);
   line-height: 1.02;
   max-width: 10ch;
   font-weight: 530;
-  letter-spacing: -.065em;
+  letter-spacing: -0.065em;
 }
-.login-visual .brand {font-size:1.55rem}
-.login-visual .brand svg {width:32px;height:32px}
-.login-form .button {min-height:48px;justify-content:space-between;margin-top:5px}
-.record-meta,.record-address {display:flex;align-items:center;gap:8px;color:var(--muted);font-size:.93rem}
-.record-meta svg,.record-address svg {flex:none}
-.record-card::after {content:"";position:absolute;inset:auto 20px 0;height:2px;background:var(--pine);transform:scaleX(0);transform-origin:left;transition:transform .18s ease}
-.record-card:focus-within::after,.record-card:hover::after {transform:scaleX(1)}
-@media(max-width:800px){.login-visual h2{font-size:2.15rem;max-width:none}.login-visual>.brand{font-size:1.1rem}.login-visual>.brand svg{width:24px;height:24px}}
+.login-visual .brand {
+  font-size: 1.55rem;
+}
+:where(.login-visual) .brand svg {
+  width: 32px;
+  height: 32px;
+}
+.login-form .button {
+  min-height: 48px;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+.record-meta,
+.record-address {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.93rem;
+}
+.record-meta svg,
+.record-address svg {
+  flex: none;
+}
+.record-card::after {
+  content: "";
+  position: absolute;
+  inset: auto 20px 0;
+  height: 2px;
+  background: var(--pine);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.18s ease;
+}
+.record-card:focus-within::after,
+.record-card:hover::after {
+  transform: scaleX(1);
+}
+@media (max-width: 800px) {
+  .login-visual h2 {
+    font-size: 2.15rem;
+    max-width: none;
+  }
+  .login-visual > .brand {
+    font-size: 1.1rem;
+  }
+  :where(.login-visual) > .brand svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (min-width: 801px) {
+  .login-visual::before {
+    inset: 118px 3% 260px;
+  }
+}
+
+.main-content > a:first-child {
+  display: inline-flex;
+  margin: 0 0 16px;
+  text-decoration: none;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+.panel > .badge {
+  float: right;
+  margin-left: 12px;
+}
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 18px 22px;
+  margin: 22px 0;
+  padding: 20px 0;
+  border-block: 1px solid var(--edge);
+}
+.detail-grid dt {
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+}
+.detail-grid dd {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.panel :where(h3) + p {
+  margin-top: 7px;
+  white-space: pre-wrap;
+}
+.panel > .history {
+  background: none;
+  border: 0;
+  padding: 0;
+}
+.history li {
+  position: relative;
+  padding: 3px 0 18px 23px;
+  border: 0;
+}
+.history li:before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 9px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid #648374;
+}
+.history li:not(:last-child):after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 19px;
+  bottom: 0;
+  border-left: 1px solid #b7c8b8;
+}
+.history li:last-child:before {
+  background: var(--pine);
+  border-color: var(--pine);
+}
+.history :where(li) p {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+}
+.task-row > div:first-child {
+  min-width: 0;
+  flex: 1;
+  overflow-wrap: anywhere;
+}
+.task-row p {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.task-row:hover {
+  background: #f2f5ed;
+}
+.task-row a {
+  overflow-wrap: anywhere;
+}
+.record-meta {
+  margin-top: auto;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid #e4e8df;
+}
+.topbar > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 500px) {
+  .detail-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .panel > .badge {
+    float: none;
+    margin: 0 0 12px;
+  }
+  .history {
+    padding: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .record-card::after {
+    transition: none;
+  }
+}

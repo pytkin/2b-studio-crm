@@ -15,7 +15,7 @@
     "dev": "vite --host 127.0.0.1",
     "build": "tsc --noEmit && vite build",
     "typecheck": "tsc --noEmit",
-    "lint": "biome lint . --diagnostic-level=warn",
+    "lint": "biome lint src scripts tests e2e --diagnostic-level=warn",
     "format:check": "biome format src",
     "test": "pnpm test:infra && vitest run",
     "verify": "pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm check:artifacts",

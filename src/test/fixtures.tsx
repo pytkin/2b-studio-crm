@@ -90,8 +90,19 @@ export const server = setupServer(
   http.get(`${api}/profiles`, ({ request }) =>
     HttpResponse.json([profile(new URL(request.url).searchParams.has('role') ? 'executor' : role)]),
   ),
-  http.get(`${api}/objects`, () => HttpResponse.json([{ ...objectRow, tasks: [{ count: 1 }] }])),
-  http.get(`${api}/tasks`, () => HttpResponse.json([{ ...taskRow, objects: objectRow }])),
+  http.get(`${api}/objects`, ({ request }) =>
+    HttpResponse.json([
+      {
+        ...objectRow,
+        tasks: new URL(request.url).searchParams.has('id') ? [taskRow] : [{ count: 1 }],
+      },
+    ]),
+  ),
+  http.get(`${api}/tasks`, () =>
+    HttpResponse.json([
+      { ...taskRow, objects: objectRow, task_status_history: [firstEvent, lastEvent] },
+    ]),
+  ),
   http.get(`${api}/task_status_history`, () => HttpResponse.json([firstEvent, lastEvent])),
 );
 export function registerServer() {

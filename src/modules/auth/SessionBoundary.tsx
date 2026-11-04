@@ -2,7 +2,16 @@ import type { Session } from '@supabase/supabase-js';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Link, Navigate, useLocation, useRouter } from '@tanstack/react-router';
 import { Building2, DraftingCompass, ListChecks, LogOut } from 'lucide-react';
-import { createContext, type ReactNode, useContext, useEffect, useRef, useState } from 'react';
+import {
+  createContext,
+  type ReactNode,
+  useContext,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
+import { observeReadAccess } from '../../app/query';
 import type { Tables } from '../../shared/database.types';
 import { getSupabase } from '../../shared/supabase';
 import { Login } from './Login';
@@ -30,27 +39,70 @@ export function SessionBoundary({ children }: { children: ReactNode }) {
   const exiting = useRef(false);
   const userId = session?.user.id;
   const cache = useQueryClient();
+  useEffect(() => observeReadAccess(cache), [cache]);
   const identity = useRef<string | undefined>(undefined);
+  const sessionEpoch = useRef(0);
+  const applySession = useCallback(
+    (value: Session | null) => {
+      sessionEpoch.current += 1;
+      const next = value?.expires_at && value.expires_at * 1000 <= Date.now() ? null : value;
+      if (identity.current && identity.current !== next?.user.id) {
+        void cache.cancelQueries();
+        cache.clear();
+      }
+      identity.current = next?.user.id;
+      setSession(next);
+    },
+    [cache],
+  );
   useEffect(() => {
     try {
       const {
         data: { subscription },
-      } = getSupabase().auth.onAuthStateChange((_event, next) => {
-        if (identity.current !== next?.user.id) {
-          if (identity.current) {
-            void cache.cancelQueries();
-            cache.clear();
-          }
-          identity.current = next?.user.id;
-        }
-        setSession(next);
-      });
-      return () => subscription.unsubscribe();
+      } = getSupabase().auth.onAuthStateChange((_event, next) => applySession(next));
+      return () => {
+        sessionEpoch.current += 1;
+        subscription.unsubscribe();
+      };
     } catch {
       setFault(true);
-      setSession(null);
+      applySession(null);
     }
-  }, [cache]);
+  }, [applySession]);
+  useEffect(() => {
+    if (!session?.expires_at) return;
+    const epoch = sessionEpoch.current;
+    const deadline = session.expires_at * 1000;
+    function checkExpiry() {
+      if (epoch !== sessionEpoch.current || Date.now() < deadline) return;
+      // GoTrue can retain a rejected refresh in its cache past the JWT lifetime.
+      // Hide the former identity immediately. Only a newer valid session may reopen it.
+      applySession(null);
+      const lockedEpoch = sessionEpoch.current;
+      void getSupabase()
+        .auth.getSession()
+        .then(({ data, error }) => {
+          if (
+            sessionEpoch.current === lockedEpoch &&
+            !error &&
+            data.session?.expires_at &&
+            data.session.expires_at * 1000 > Date.now()
+          )
+            applySession(data.session);
+        })
+        .catch(() => {
+          /* The session remains locked while refresh is unavailable. */
+        });
+    }
+    const timer = window.setTimeout(checkExpiry, Math.max(0, Math.ceil(deadline - Date.now())) + 1);
+    window.addEventListener('focus', checkExpiry);
+    document.addEventListener('visibilitychange', checkExpiry);
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener('focus', checkExpiry);
+      document.removeEventListener('visibilitychange', checkExpiry);
+    };
+  }, [session, applySession]);
   const profile = useQuery({
     queryKey: ['user', userId, 'profile'],
     enabled: !!userId,

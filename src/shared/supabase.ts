@@ -9,6 +9,6 @@ export function getSupabase() {
   const key = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY?.trim();
   if (!url || !key) throw new Error('Задайте публичные параметры Supabase.');
   if (!isPublicKey(key)) throw new Error('Требуется публичный ключ Supabase.');
-  client = createClient<Database>(url, key);
+  client = createClient<Database>(url, key, { db: { timeout: 10_000 } });
   return client;
 }

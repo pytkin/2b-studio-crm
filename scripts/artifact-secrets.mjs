@@ -36,6 +36,8 @@ if (import.meta.main) {
   const paths = new Set([
     ...tracked.filter((path) => existsSync(path) && lstatSync(path).isFile()),
     ...filesIn('dist'),
+    ...filesIn('.local/demo-dist'),
+    ...filesIn('.local/e2e-dist'),
     ...filesIn('test-results'),
     ...filesIn('playwright-report'),
   ]);

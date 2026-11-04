@@ -5,8 +5,9 @@ import {
   Outlet,
   type RouterHistory,
 } from '@tanstack/react-router';
-import { ObjectsPage, ObjectPage } from '../modules/objects';
 import { SessionBoundary } from '../modules/auth';
+import { ObjectPage, ObjectsPage } from '../modules/objects';
+import { MyTasksPage, TaskPage } from '../modules/tasks';
 import { PageHeading } from '../shared/ui/PageHeading';
 
 const root = createRootRoute({
@@ -35,17 +36,17 @@ const objects = createRoute({
 const object = createRoute({
   getParentRoute: () => root,
   path: '/objects/$objectId',
-  component: () => <ObjectPage objectId={object.useParams().objectId}/>,
+  component: () => <ObjectPage objectId={object.useParams().objectId} />,
 });
 const mine = createRoute({
   getParentRoute: () => root,
   path: '/my-tasks',
-  component: () => <PageHeading>Мои задачи</PageHeading>,
+  component: MyTasksPage,
 });
 const task = createRoute({
   getParentRoute: () => root,
   path: '/tasks/$taskId',
-  component: () => <PageHeading>Задача</PageHeading>,
+  component: () => <TaskPage key={task.useParams().taskId} taskId={task.useParams().taskId} />,
 });
 const tree = root.addChildren([home, login, objects, object, mine, task]);
 export const makeRouter = (history?: RouterHistory) => createRouter({ routeTree: tree, history });
