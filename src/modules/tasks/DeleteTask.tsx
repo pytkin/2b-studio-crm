@@ -45,6 +45,11 @@ export function DeleteTask({ task, onClose }: { task: Task; onClose: () => void 
         setNote('Не удалось подтвердить сессию.');
         return;
       }
+      if (error.message === 'FORBIDDEN') {
+        setNote('Это действие недоступно для вашей роли.');
+        await verify.recheckAccess();
+        return;
+      }
       const domain = domainMessage(error.message);
       if (domain) {
         setNote(domain);

@@ -5,8 +5,8 @@ import { Building2, DraftingCompass, ListChecks, LogOut } from 'lucide-react';
 import {
   createContext,
   type ReactNode,
-  useContext,
   useCallback,
+  useContext,
   useEffect,
   useRef,
   useState,
@@ -20,6 +20,7 @@ type Access = {
   profile: Tables<'profiles'>;
   signOut: () => Promise<void>;
   checkSession: () => Promise<void>;
+  recheckAccess: () => Promise<void>;
 };
 const Context = createContext<Access | null>(null);
 export function useSession() {
@@ -118,17 +119,31 @@ export function SessionBoundary({ children }: { children: ReactNode }) {
         .maybeSingle();
       if (status === 401 && identity.current === userId) await checkSession();
       if (error) throw Error('Не удалось проверить профиль.');
+      const previous = cache.getQueryData<Tables<'profiles'>>(['user', userId, 'profile']);
+      if (previous && (!data || data.role !== previous.role)) {
+        cache.removeQueries({
+          predicate: (q) =>
+            q.queryKey[0] === 'user' && q.queryKey[1] === userId && q.queryKey[2] !== 'profile',
+        });
+      }
       return data;
     },
   });
-  useEffect(() => {
-    if (userId && profile.data === null) {
-      cache.removeQueries({
-        predicate: (q) =>
-          q.queryKey[0] === 'user' && q.queryKey[1] === userId && q.queryKey[2] !== 'profile',
-      });
-    }
-  }, [userId, profile.data, cache]);
+  async function recheckAccess() {
+    const result = await profile.refetch();
+    if (
+      identity.current !== userId ||
+      !result.isSuccess ||
+      !result.data ||
+      result.data.role !== profile.data?.role
+    )
+      return;
+    await cache.refetchQueries({
+      type: 'active',
+      predicate: (q) =>
+        q.queryKey[0] === 'user' && q.queryKey[1] === userId && q.queryKey[2] !== 'profile',
+    });
+  }
   async function signOut() {
     setMessage('');
     exiting.current = true;
@@ -196,7 +211,10 @@ export function SessionBoundary({ children }: { children: ReactNode }) {
     return <Navigate to="/objects" replace />;
   const active = profile.data;
   return (
-    <Context.Provider key={active.id} value={{ profile: active, signOut, checkSession }}>
+    <Context.Provider
+      key={`${active.id}-${active.role}`}
+      value={{ profile: active, signOut, checkSession, recheckAccess }}
+    >
       <div className="app-shell">
         <aside className="sidebar">
           <span className="brand">

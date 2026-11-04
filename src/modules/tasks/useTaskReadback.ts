@@ -6,7 +6,7 @@ import { ReadFailure, readTask, refreshLists, taskKey } from './data';
 
 export function useTaskReadback(id: string) {
   const cache = useQueryClient();
-  const { profile, checkSession } = useSession();
+  const { profile, checkSession, recheckAccess } = useSession();
   const alive = useRef(true);
   useEffect(() => {
     alive.current = true;
@@ -51,6 +51,7 @@ export function useTaskReadback(id: string) {
     revoke,
     refresh: () => refreshLists(cache, profile.id),
     checkSession,
+    recheckAccess,
   };
 }
 

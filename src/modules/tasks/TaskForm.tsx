@@ -229,6 +229,11 @@ export function TaskForm({
           form.setValue('assignee_id', '');
         return;
       }
+      if (error.message === 'FORBIDDEN') {
+        setNote('Это действие недоступно для вашей роли.');
+        await verify.recheckAccess();
+        return;
+      }
       const domain = domainMessage(error.message);
       if (domain) {
         setNote(domain);

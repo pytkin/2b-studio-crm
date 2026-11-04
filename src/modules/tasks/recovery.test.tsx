@@ -314,3 +314,59 @@ it('unknown delete followed by an empty read reports only unavailability', async
   expect(screen.queryByText(/успешно удалена/i)).not.toBeInTheDocument();
   expect(remove).toHaveBeenCalledTimes(1);
 });
+
+it.each(['inactive', 'executor'])(
+  "FORBIDDEN on task create rechecks the same employee's %s profile and removes manager draft and directory",
+  async (next) => {
+    await signIn('manager');
+    const { user, cache } = openPage(`/objects/${ids.object}`);
+    await user.click(await screen.findByRole('button', { name: 'Создать задачу' }));
+    const dialog = within(screen.getByRole('dialog'));
+    await user.type(dialog.getByLabelText('Название'), 'Секретный черновик');
+    await user.selectOptions(dialog.getByLabelText('Исполнитель'), ids.executor);
+    const denied = vi.fn(() =>
+      HttpResponse.json({ message: 'FORBIDDEN', code: 'P0001' }, { status: 400 }),
+    );
+    server.use(
+      http.post(`${api}/rpc/create_task`, denied),
+      http.get(`${api}/profiles`, () =>
+        HttpResponse.json(
+          next === 'inactive'
+            ? []
+            : [{ id: ids.manager, role: 'executor', active: true, display_name: 'Ирина' }],
+        ),
+      ),
+    );
+    await user.click(dialog.getByRole('button', { name: 'Сохранить' }));
+    await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+    expect(denied).toHaveBeenCalledTimes(1);
+    expect(screen.queryByDisplayValue('Секретный черновик')).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Создать задачу' })).not.toBeInTheDocument();
+    expect(cache.getQueryData(['user', ids.manager, 'task-choices'])).toBeUndefined();
+    if (next === 'inactive')
+      expect(screen.getByRole('heading', { name: 'Профиль недоступен' })).toBeVisible();
+    else expect(await screen.findByText(/Ирина · Исполнитель/)).toBeVisible();
+  },
+);
+it('forbidden single transition refreshes authorization and retains a still-authorized task', async () => {
+  server.use(http.get(`${api}/tasks`, () => HttpResponse.json([newTask])));
+  await signIn('executor');
+  const { user } = openPage(`/tasks/${ids.task}`);
+  await user.type(await screen.findByLabelText('Комментарий'), 'Проверить позже');
+  const check = vi.fn(() =>
+    HttpResponse.json([
+      { id: ids.executor, role: 'executor', active: true, display_name: 'Евгений' },
+    ]),
+  );
+  server.use(
+    http.get(`${api}/profiles`, check),
+    http.post(`${api}/rpc/transition_task`, () =>
+      HttpResponse.json({ message: 'FORBIDDEN', code: 'P0001' }, { status: 400 }),
+    ),
+  );
+  await user.click(screen.getByRole('button', { name: 'Взять в работу' }));
+  await waitFor(() => expect(check).toHaveBeenCalled());
+  expect(await screen.findByText('Это действие недоступно для вашей роли.')).toBeVisible();
+  expect(screen.getByRole('heading', { name: newTask.title })).toBeVisible();
+  expect(screen.getByLabelText('Комментарий')).toHaveValue('Проверить позже');
+});

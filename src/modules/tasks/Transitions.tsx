@@ -83,6 +83,11 @@ export function Transitions({ task }: { task: Task }) {
           setMessage('Не удалось подтвердить сессию.');
           return;
         }
+        if (error.message === 'FORBIDDEN') {
+          setMessage('Это действие недоступно для вашей роли.');
+          await verify.recheckAccess();
+          return;
+        }
         await reconcile();
         const domain = domainMessage(error.message);
         if (domain) setMessage(domain);
