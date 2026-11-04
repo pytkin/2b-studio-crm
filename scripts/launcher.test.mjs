@@ -17,3 +17,16 @@ test('Kit delegates each application operation and propagates its exit code', (t
     assert.equal(res.stdout.trim(), op);
   }
 });
+
+test('Kit rejects extra arguments before invoking the application command', (t) => {
+  const dir = mkdtempSync(join(tmpdir(), 'crm-command-'));
+  t.after(() => rmSync(dir, { recursive: true, force: true }));
+  writeFileSync(join(dir, 'pnpm'), '#!/bin/sh\necho unexpected-invocation\n', { mode: 0o700 });
+  const result = spawnSync('./bin/project', ['build', '--extra'], {
+    encoding: 'utf8',
+    env: { ...process.env, PATH: dir + ':' + process.env.PATH },
+  });
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /Ожидается одна операция/);
+  assert.equal(result.stdout, '');
+});

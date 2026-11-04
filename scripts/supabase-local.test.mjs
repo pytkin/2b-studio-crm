@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { runLocalSupabase as runProjectSupabase } from './supabase-local.mjs';
+import { localConfig, runLocalSupabase as runProjectSupabase } from './supabase-local.mjs';
 
 const runLocalSupabase = (args, options) => runProjectSupabase(args, {
   inspect: () => 'unix:///tmp/test.sock',
@@ -24,7 +24,12 @@ test('test reset targets only the test workdir and does not inherit a cloud targ
 });
 
 test('development data cannot be reset through the project command', () => {
-  assert.throws(() => runLocalSupabase(['dev', 'reset']), /Reset is only allowed for test/);
+  let invoked = false;
+  assert.throws(() => runLocalSupabase(['dev', 'reset'], {
+    env: {},
+    run: () => { invoked = true; },
+  }), /Reset is only allowed for test/);
+  assert.equal(invoked, false);
 });
 
 test('start uses the standard local Docker CLI without named stacks or remote flags', () => {
@@ -91,4 +96,39 @@ test("a remote Docker endpoint cannot receive the local test reset", () => {
   });
   assert.equal(env.DOCKER_CONTEXT, undefined);
   assert.equal(env.DOCKER_HOST, "unix:///tmp/local-docker.sock");
+});
+
+test('local config accepts only credentials for the requested local API and database', () => {
+  for (const [target, port] of [['dev', 56321], ['test', 56421]]) {
+    const url = 'http://127.0.0.1:' + port;
+    const db = 'postgresql://postgres:private-marker@127.0.0.1:' + (port + 1) + '/postgres';
+    const values = {
+      API_URL: url,
+      DB_URL: db,
+      PUBLISHABLE_KEY: 'public-marker',
+      SECRET_KEY: 'admin-marker',
+    };
+    const read = (overrides) => () =>
+      Object.entries({ ...values, ...overrides })
+        .map(([key, value]) => key + '="' + value + '"')
+        .join('\n');
+    assert.deepEqual(localConfig(target, read({})), {
+      url, db, key: values.PUBLISHABLE_KEY, adminKey: values.SECRET_KEY,
+    });
+    for (const [label, overrides] of [
+      ['foreign API', { API_URL: 'https://example.invalid' }],
+      ['database protocol', { DB_URL: db.replace('postgresql:', 'https:') }],
+      ['database host', { DB_URL: db.replace('127.0.0.1', 'example.invalid') }],
+      ['other local stack', { DB_URL: db.replace(String(port + 1), '5432') }],
+      ['other database', { DB_URL: db + '_other' }],
+      ['connection overrides', { DB_URL: db + '?host=example.invalid' }],
+      ['database fragment', { DB_URL: db + '#unexpected' }],
+      ['empty public key', { PUBLISHABLE_KEY: '' }],
+      ['empty administrator key', { SECRET_KEY: '' }],
+    ]) {
+      assert.throws(() => localConfig(target, read(overrides)), {
+        message: 'Не удалось прочитать параметры локального Supabase (' + target + ').',
+      }, label);
+    }
+  }
 });

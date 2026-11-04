@@ -39,6 +39,7 @@ pnpm demo:stop
 | `pnpm verify` | Lint, TypeScript, инфраструктурные и компонентные тесты, сборка, проверка файлов на закрытые ключи Supabase, JWT сессий и известные демо-пароли |
 | `pnpm db:test start`, `pnpm db:test reset` | Старт и **полное пересоздание тестовой БД**. Reset требуется для прогона миграций с нуля |
 | `pnpm test:db`, `pnpm test:api` | pgTAP и прямые запросы из пользовательских сессий, включая конкуренцию и потерянный ответ |
+| `pnpm test:mutation` | Stryker временно меняет распознавание публичного ключа и HTTP-проверку защиты чтения. Тесты должны обнаружить каждую мутацию выбранного набора. Docker и учётные данные не нужны. |
 | `pnpm test:e2e` | Playwright на desktop и mobile с настоящими Auth/БД. При первой установке выполнить `pnpm exec playwright install chromium` |
 | `pnpm db:test stop` | Остановка тестовых сервисов с сохранением тома |
 
@@ -59,6 +60,7 @@ pnpm demo:stop
 - [Требования](docs/business-requirements.md) и [пользовательские сценарии](docs/scenarios.md)
 - [Техническая спецификация](docs/technical-specification.md) и [решения](docs/decisions.md)
 - [Повторное ревью и проверка всех сценариев](docs/evidence/review.md) · [эвристический UI/UX-анализ](docs/evidence/ux-audit/README.md)
+- [Негативные проверки: что уже защищено и какие ошибки обнаруживают мутационные тесты](docs/evidence/negative-mutation.md)
 - [Результаты локальной приёмки и снимки desktop/mobile](docs/evidence/README.md)
 - [Матрица приёмки](docs/acceptance-plan.md) и [карточки с результатами](docs/implementation-plan.md)
 - [Исходное задание](docs/source/README.md)

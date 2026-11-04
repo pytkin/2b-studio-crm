@@ -12,5 +12,6 @@ select is((select count(*)::int from public.task_status_history where task_id in
 reset role;
 alter table public.task_status_history add constraint test_reject_event check (task_id <> pg_temp.uid(28));
 set local role authenticated;
-select isnt(pg_temp.failure($q$select public.create_task(pg_temp.uid(28),'Roll back',pg_temp.uid(11),pg_temp.uid(3),'')$q$),'OK','injected event failure');
+select throws_ok($q$select public.create_task(pg_temp.uid(28),'Roll back',pg_temp.uid(11),pg_temp.uid(3),'')$q$,
+ 'PT500','REQUEST_FAILED','initial history failure returns a safe technical error');
 select is((select count(*)::int from public.tasks where id=pg_temp.uid(28)),0,'failed initial history rolls back task');

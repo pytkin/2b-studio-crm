@@ -17,6 +17,40 @@ import {
 
 vi.mock('../../shared/supabase', () => ({ getSupabase: () => client }));
 registerServer();
+
+const editActions = ['Редактировать', 'Удалить задачу'];
+const start = 'Взять в работу';
+const submit = 'Отправить на проверку';
+const reviewActions = ['Принять', 'Вернуть на доработку'];
+
+it.each([
+  ['executor', 'new', [start]],
+  ['executor', 'in_progress', [submit]],
+  ['executor', 'in_review', []],
+  ['executor', 'rework', [start]],
+  ['executor', 'accepted', []],
+  ['manager', 'new', editActions],
+  ['manager', 'in_progress', editActions],
+  ['manager', 'in_review', [...editActions, ...reviewActions]],
+  ['manager', 'rework', editActions],
+  ['manager', 'accepted', editActions],
+] as const)('shows only permitted task actions to %s in %s', async (role, status, allowed) => {
+  server.use(
+    http.get(`${api}/tasks`, () =>
+      HttpResponse.json([{ ...taskRow, status, objects: objectRow, task_status_history: [] }]),
+    ),
+  );
+  await signIn(role);
+  openPage(`/tasks/${ids.task}`);
+  expect(await screen.findByRole('heading', { name: taskRow.title })).toBeVisible();
+  const permitted = new Set<string>(allowed);
+  for (const name of [...editActions, start, submit, ...reviewActions]) {
+    const button = screen.queryByRole('button', { name });
+    if (permitted.has(name)) expect(button).toBeEnabled();
+    else expect(button).not.toBeInTheDocument();
+  }
+});
+
 it('S5-01 includes accepted work and opens its chronological history', async () => {
   await signIn('executor');
   const { user } = openPage('/my-tasks');

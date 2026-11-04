@@ -146,6 +146,11 @@ test('API-02/03: RLS, exact counts, no direct writes or impersonation, revocatio
       m1.client.from('profiles').select('id').in('id', [m1.id, m2.id, e1.id, e2.id, inactive.id]),
     );
     assert.deepEqual(profileIds.map((p) => p.id).sort(), [m1.id, e1.id, e2.id].sort());
+    const escalation = await e1.client.from('profiles').update({ role: 'manager' }).eq('id', e1.id);
+    assert.equal(escalation.error?.code, '42501');
+    assert.deepEqual(await value(e1.client.from('profiles').select('role').eq('id', e1.id)), [
+      { role: 'executor' },
+    ]);
 
     // Supply even valid rows: lack of privilege must deny every operation.
     for (const name of ['profiles', 'objects', 'tasks', 'task_status_history']) {
@@ -252,6 +257,11 @@ test('API-02/03: RLS, exact counts, no direct writes or impersonation, revocatio
       p_title: 'Moved',
       p_description: '',
     };
+    const taskWithHistory = () =>
+      value(m2.client.from('tasks').select('*,task_status_history(*)').eq('id', t1).single());
+    const original = await taskWithHistory();
+    await denied(m2.client.rpc('update_task', { ...edit, p_expected_version: null }), 'INVALID_INPUT');
+    assert.deepEqual(await taskWithHistory(), original);
     await value(m2.client.rpc('update_task', edit));
     assert.deepEqual(await objects(e1.client), []);
     assert.deepEqual(

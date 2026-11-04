@@ -6,6 +6,7 @@
 node_modules/
 dist/
 coverage/
+.stryker-tmp/
 playwright-report/
 test-results/
 .cache/

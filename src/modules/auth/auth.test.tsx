@@ -6,11 +6,13 @@ import {
   base,
   client,
   ids,
+  objectRow,
   openPage,
   registerServer,
   server,
   signIn,
   submitLogin,
+  taskRow,
 } from '../../test/fixtures';
 
 vi.mock('../../shared/supabase', () => ({ getSupabase: () => client }));
@@ -18,12 +20,28 @@ registerServer();
 
 it('S3-01 guest on a protected link sees only login and returns to the authorized destination', async () => {
   const path = `/tasks/${ids.task}`;
+  const authorizedReads: boolean[] = [];
+  server.use(
+    http.get(`${api}/tasks`, async ({ request }) => {
+      const { data } = await client.auth.getSession();
+      const authorized =
+        data.session?.user.id === ids.executor &&
+        request.headers.get('authorization') === `Bearer ${data.session.access_token}`;
+      authorizedReads.push(authorized);
+      return authorized
+        ? HttpResponse.json([{ ...taskRow, objects: objectRow, task_status_history: [] }])
+        : HttpResponse.json([], { status: 401 });
+    }),
+  );
   const { router, user } = openPage(path);
   expect(await screen.findByRole('heading', { name: 'Вход' })).toBeVisible();
-  expect(screen.queryByRole('heading', { name: 'Задача' })).not.toBeInTheDocument();
+  expect(screen.queryByRole('heading', { name: taskRow.title })).not.toBeInTheDocument();
+  expect(authorizedReads).toEqual([]);
   await submitLogin(user, 'executor');
-  await waitFor(() => expect(router.state.location.pathname).toBe(path));
-  expect(await screen.findByRole('button', { name: 'Выйти' })).toBeVisible();
+  expect(await screen.findByRole('heading', { name: taskRow.title })).toBeVisible();
+  expect(router.state.location.pathname).toBe(path);
+  expect(authorizedReads).toContain(true);
+  expect(authorizedReads).not.toContain(false);
 });
 it('S3-02 old account cache and its late response are removed before a new login', async () => {
   await signIn('executor');

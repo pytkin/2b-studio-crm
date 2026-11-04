@@ -131,6 +131,52 @@ it('a concurrent edit retains the draft and requires fresh explicit confirmation
   await waitFor(() => expect(update).toHaveBeenCalledTimes(1));
 });
 
+it('a stale transition draft requires a second click with the refreshed version', async () => {
+  let current = { ...newTask };
+  const event = {
+    ...firstEvent,
+    id: 2,
+    actor_id: ids.executor,
+    actor_name: 'Евгений',
+    from_status: 'new',
+    to_status: 'in_progress',
+    comment: 'Уточню размеры',
+  };
+  const writes: unknown[] = [];
+  server.use(
+    http.get(`${api}/tasks`, () =>
+      HttpResponse.json([
+        {
+          ...current,
+          task_status_history: current.status === 'new' ? [firstEvent] : [firstEvent, event],
+        },
+      ]),
+    ),
+    http.post(`${api}/rpc/transition_task`, async ({ request }) => {
+      writes.push(await request.json());
+      current = { ...current, status: 'in_progress', version: current.version + 1 };
+      return HttpResponse.json({ task: current, event });
+    }),
+  );
+  await signIn('executor');
+  const { user } = openPage(`/tasks/${ids.task}`);
+  const comment = await screen.findByRole('textbox', { name: 'Комментарий' });
+  await user.type(comment, event.comment);
+  current = { ...current, description: 'Размеры изменились', version: 4 };
+  const start = screen.getByRole('button', { name: 'Взять в работу' });
+  await user.click(start);
+  expect(await screen.findByText(/Сверьте статус и подтвердите действие/)).toBeVisible();
+  expect(screen.getByText(current.description)).toBeVisible();
+  expect(comment).toHaveValue(event.comment);
+  expect(writes).toEqual([]);
+  await user.click(start);
+  const submit = await screen.findByRole('button', { name: 'Отправить на проверку' });
+  await waitFor(() => expect(submit).toBeEnabled());
+  expect(writes).toEqual([
+    { p_id: ids.task, p_to_status: 'in_progress', p_expected_version: 4, p_comment: event.comment },
+  ]);
+});
+
 it.each(['transition', 'delete'])(
   'definitive %s RPC UNAVAILABLE purges task, draft and history without waiting for GET',
   async (operation) => {

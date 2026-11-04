@@ -40,7 +40,9 @@ select is((select count(*)::int from matrix m join public.tasks t on t.id=pg_tem
 select ok(not has_table_privilege('anon',format('public.%I',name),'SELECT')
  and has_table_privilege('authenticated',format('public.%I',name),'SELECT'),format('%s restricted SELECT',name))
 from unnest(array['profiles','objects','tasks','task_status_history']) name;
-select ok(not has_table_privilege(role,format('public.%I',name),op),format('%s %s denied on %s',role,op,name))
+select ok(not case when op in ('INSERT','UPDATE','REFERENCES')
+ then has_any_column_privilege(role,format('public.%I',name),op)
+ else has_table_privilege(role,format('public.%I',name),op) end,format('%s %s denied on %s',role,op,name))
 from unnest(array['anon','authenticated']) role,
  unnest(array['profiles','objects','tasks','task_status_history']) name,
  unnest(array['INSERT','UPDATE','DELETE','TRUNCATE','REFERENCES','TRIGGER','MAINTAIN']) op;

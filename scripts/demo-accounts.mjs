@@ -1,5 +1,7 @@
 import { isDeepStrictEqual } from 'node:util';
 import { randomBytes, randomUUID } from 'node:crypto';
+import { homedir } from 'node:os';
+import { join } from 'node:path';
 import {
   closeSync,
   constants,
@@ -10,6 +12,14 @@ import {
   rmSync,
   writeFileSync,
 } from 'node:fs';
+
+export function sharedAccountsPath() {
+  return join(
+    process.env.XDG_STATE_HOME || join(homedir(), '.local/state'),
+    '2b-studio-crm-dev',
+    'demo-accounts.json',
+  );
+}
 
 export function newAccounts(prefix = 'demo') {
   return [

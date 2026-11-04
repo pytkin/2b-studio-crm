@@ -1,0 +1,21 @@
+{
+  "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "mutate": ["src/shared/public-config.ts", "scripts/local-read-access.mjs:30-53"],
+  "ignorePatterns": [
+    "**",
+    "!/package.json",
+    "!/src/shared/public-config.ts",
+    "!/scripts/public-key.test.mjs",
+    "!/scripts/local-read-access.mjs",
+    "!/scripts/read-guard.test.mjs"
+  ],
+  "testRunner": "command",
+  "commandRunner": {
+    "command": "node --test scripts/public-key.test.mjs scripts/read-guard.test.mjs"
+  },
+  "coverageAnalysis": "off",
+  "concurrency": 2,
+  "thresholds": { "high": 100, "low": 90, "break": 100 },
+  "reporters": ["clear-text", "json"],
+  "jsonReporter": { "fileName": "coverage/mutation/report.json" }
+}

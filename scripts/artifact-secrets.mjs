@@ -1,6 +1,7 @@
 import { execFileSync } from 'node:child_process';
 import { lstatSync, readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { sharedAccountsPath } from './demo-accounts.mjs';
 function privileged(text) {
   if (/\bsb_secret_[\w-]{24,}/.test(text)) return true;
   for (const match of text.matchAll(/\beyJ[\w-]+\.([\w-]+)\.[\w-]+/g)) {
@@ -45,15 +46,27 @@ if (import.meta.main) {
     ...filesIn('test-results'),
     ...filesIn('playwright-report'),
   ]);
-  const sensitive = new Set();
-  const accounts = '.local/demo-accounts.json';
-  if (existsSync(accounts))
-    for (const item of JSON.parse(readFileSync(accounts, 'utf8')))
-      if (item.password) sensitive.add(item.password);
+  const sensitive = [];
+  for (const path of ['.local/demo-accounts.json', sharedAccountsPath()]) {
+    try {
+      const accounts = JSON.parse(readFileSync(path, 'utf8'));
+      if (!Array.isArray(accounts) || !accounts.length) throw Error();
+      for (const item of accounts) {
+        if (typeof item?.password !== 'string' || !item.password) throw Error();
+        sensitive.push(item.password);
+      }
+    } catch (error) {
+      if (error.code !== 'ENOENT') {
+        // Parser diagnostics can quote the contents of this private file.
+        console.error('Не удалось прочитать файл демо-доступов. Проверка остановлена.');
+        process.exit(1);
+      }
+    }
+  }
   const entries = function* () {
     for (const path of paths) yield [path, readFileSync(path)];
   };
-  const findings = inspectArtifacts(entries(), [...sensitive]);
+  const findings = inspectArtifacts(entries(), sensitive);
   if (findings.length) {
     console.error('Обнаружены конфиденциальные значения в файлах:', ...findings);
     process.exitCode = 1;

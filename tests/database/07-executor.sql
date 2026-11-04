@@ -11,6 +11,12 @@ select is(pg_temp.failure($q$select public.transition_task(pg_temp.uid(21),2,'ac
 reset role;
 alter table public.task_status_history add constraint test_reject_review check (to_status <> 'in_review');
 set local role authenticated;
-select isnt(pg_temp.failure($q$select public.transition_task(pg_temp.uid(21),2,'in_review')$q$),'OK','injected history failure');
+select throws_ok($q$select public.transition_task(pg_temp.uid(21),2,'in_review')$q$,
+ 'PT500','REQUEST_FAILED','transition history failure returns a safe technical error');
 select is((select row(status,version)::text from public.tasks where id=pg_temp.uid(21)),'(in_progress,2)','history failure rolls back task');
 select is((select count(*)::int from public.task_status_history where task_id=pg_temp.uid(21)),2,'exact history count');
+select pg_temp.claim(4);
+select is(pg_temp.failure($q$select public.transition_task(pg_temp.uid(22),null,'in_progress')$q$),
+ 'INVALID_INPUT','an assigned executor must supply the version even for an allowed edge');
+select is((select row(t.status,t.version,(select count(*) from public.task_status_history h where h.task_id=t.id))::text
+ from public.tasks t where t.id=pg_temp.uid(22)), '(new,1,1)','missing version leaves status, version and initial history intact');

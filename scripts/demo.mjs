@@ -1,8 +1,7 @@
 import { execFileSync } from 'node:child_process';
 import { mkdirSync } from 'node:fs';
-import { homedir } from 'node:os';
-import { join } from 'node:path';
-import { openAccounts } from './demo-accounts.mjs';
+import { dirname, join } from 'node:path';
+import { openAccounts, sharedAccountsPath } from './demo-accounts.mjs';
 import { cliEnv, root, localConfig, migrateLocal, runLocalSupabase } from './supabase-local.mjs';
 
 export async function runDemo(action, ops) {
@@ -34,14 +33,11 @@ if (import.meta.main) {
       mkdirSync(dir, { recursive: true, mode: 0o700 });
       config = localConfig('dev');
       const { provision } = await import('./fixtures-local.mjs');
-      const projectState = join(
-        process.env.XDG_STATE_HOME || join(homedir(), '.local/state'),
-        '2b-studio-crm-dev',
-      );
-      mkdirSync(projectState, { recursive: true, mode: 0o700 });
+      const shared = sharedAccountsPath();
+      mkdirSync(dirname(shared), { recursive: true, mode: 0o700 });
       await provision(
         config,
-        openAccounts(join(dir, 'demo-accounts.json'), join(projectState, 'demo-accounts.json')),
+        openAccounts(join(dir, 'demo-accounts.json'), shared),
         true,
       );
     },

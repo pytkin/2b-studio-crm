@@ -39,6 +39,8 @@ it('S4-01 renders the visible objects, their RLS counts, and only permitted task
   expect(screen.queryByRole('button', { name: 'Создать объект' })).not.toBeInTheDocument();
   await user.click(objectLink);
   expect(await screen.findByRole('heading', { name: objectRow.name })).toHaveFocus();
+  for (const name of ['Редактировать', 'Удалить объект', 'Создать задачу'])
+    expect(screen.queryByRole('button', { name })).not.toBeInTheDocument();
   expect(await screen.findByRole('link', { name: new RegExp(taskRow.title) })).toBeVisible();
   expect(screen.queryByText('Чужая задача')).not.toBeInTheDocument();
   expect(screen.getByText('Принята')).toBeVisible();

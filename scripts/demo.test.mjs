@@ -1,6 +1,15 @@
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { copyFileSync, mkdirSync, mkdtempSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import {
+  chmodSync,
+  copyFileSync,
+  mkdirSync,
+  mkdtempSync,
+  rmSync,
+  statSync,
+  symlinkSync,
+  writeFileSync,
+} from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { test } from 'node:test';
@@ -28,7 +37,17 @@ test('demo starts from a clean checkout and applies pending migrations without r
       },
     ]),
   );
-  await runDemo('start', operations);
+  const activation = Promise.withResolvers();
+  operations.activate = () => {
+    calls.push('activate');
+    return activation.promise;
+  };
+  const started = runDemo('start', operations);
+  await new Promise((resolve) => setImmediate(resolve));
+  const beforeConfirmation = [...calls];
+  activation.resolve();
+  await started;
+  assert.deepEqual(beforeConfirmation, ['install', 'start', 'migrate', 'activate']);
   assert.deepEqual(calls, [
     'install',
     'start',
@@ -57,6 +76,23 @@ test('credentials exist privately before provisioning and survive restarts', (t)
   assert.ok(accounts.every((a) => a.password.length >= 24));
   assert.equal(statSync(path).mode & 0o777, 0o600);
   assert.deepEqual(openAccounts(path), accounts);
+});
+
+test('refuses existing credentials with public permissions, symlinks or inconsistent roles', (t) => {
+  const dir = mkdtempSync(join(tmpdir(), 'crm-credentials-'));
+  t.after(() => rmSync(dir, { recursive: true, force: true }));
+  const file = join(dir, 'accounts.json');
+  const accounts = openAccounts(file);
+  chmodSync(file, 0o644);
+  assert.throws(() => openAccounts(file), /chmod 600/);
+  chmodSync(file, 0o600);
+  const link = join(dir, 'linked.json');
+  symlinkSync(file, link);
+  assert.throws(() => openAccounts(link), { code: 'ELOOP' });
+  assert.deepEqual(openAccounts(file), accounts);
+  accounts[1].role = 'manager';
+  writeFileSync(file, JSON.stringify(accounts));
+  assert.throws(() => openAccounts(file), /Неверный формат/);
 });
 
 test('two worktrees share credentials for the same local project and refuse conflicting private files', async (t) => {
@@ -140,13 +176,23 @@ test('demo cannot provision accounts or publish a URL before the REST read guard
 
 test('an unverified REST service cannot reopen CRM tables, including after a reload failure', async () => {
   const { enableVerifiedReads } = await import('./local-read-access.mjs');
-  for (const fault of ['wrong-response', 'configure-failed', 'reloaded-without-hook', 'ready']) {
+  for (const fault of [
+    'wrong-response',
+    'configure-failed',
+    'reloaded-without-hook',
+    'delayed-reload',
+    'ready',
+  ]) {
     const changes = [];
     let probes = 0;
     const ops = {
       probe: async () => {
         probes++;
-        return fault === 'ready' || (fault === 'reloaded-without-hook' && probes === 1);
+        return (
+          fault === 'ready' ||
+          (fault === 'reloaded-without-hook' && probes === 1) ||
+          (fault === 'delayed-reload' && probes >= 3)
+        );
       },
       wait: async () => {},
       restrict: async () => {
@@ -163,8 +209,13 @@ test('an unverified REST service cannot reopen CRM tables, including after a rel
     if (fault === 'ready') {
       await enableVerifiedReads(ops);
       assert.deepEqual(changes, ['configure', 'opened']);
+    } else if (fault === 'delayed-reload') {
+      await enableVerifiedReads(ops);
+      assert.deepEqual(changes, ['closed', 'configure', 'opened']);
     } else {
       await assert.rejects(enableVerifiedReads(ops), /Чтение CRM закрыто/);
+      if (fault !== 'reloaded-without-hook')
+        assert.deepEqual(changes.slice(0, 2), ['closed', 'configure']);
       assert.ok(!changes.includes('opened'));
       assert.equal(changes.at(-1), 'closed');
     }
