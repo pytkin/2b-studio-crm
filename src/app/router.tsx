@@ -2,20 +2,25 @@ import {
   createRootRoute,
   createRoute,
   createRouter,
-  Navigate,
   Outlet,
   type RouterHistory,
 } from '@tanstack/react-router';
+import { ObjectsPage, ObjectPage } from '../modules/objects';
+import { SessionBoundary } from '../modules/auth';
 import { PageHeading } from '../shared/ui/PageHeading';
 
 const root = createRootRoute({
-  component: Outlet,
+  component: () => (
+    <SessionBoundary>
+      <Outlet />
+    </SessionBoundary>
+  ),
   notFoundComponent: () => <PageHeading>Страница не найдена</PageHeading>,
 });
 const home = createRoute({
   getParentRoute: () => root,
   path: '/',
-  component: () => <Navigate to="/login" replace />,
+  component: () => null,
 });
 const login = createRoute({
   getParentRoute: () => root,
@@ -25,12 +30,12 @@ const login = createRoute({
 const objects = createRoute({
   getParentRoute: () => root,
   path: '/objects',
-  component: () => <PageHeading>Объекты</PageHeading>,
+  component: ObjectsPage,
 });
 const object = createRoute({
   getParentRoute: () => root,
   path: '/objects/$objectId',
-  component: () => <PageHeading>Объект</PageHeading>,
+  component: () => <ObjectPage objectId={object.useParams().objectId}/>,
 });
 const mine = createRoute({
   getParentRoute: () => root,

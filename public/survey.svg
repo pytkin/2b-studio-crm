@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="430" viewBox="0 0 640 430" fill="none">
+<defs>
+ <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0V28" stroke="#b8e1cc" opacity=".13"/></pattern>
+ <pattern id="hatch" width="9" height="9" patternUnits="userSpaceOnUse"><path d="M-2 2l4-4m-2 11 9-9m-2 11 4-4" stroke="#c4e2cd" stroke-width=".65" opacity=".5"/></pattern>
+ <g id="floor"><path d="m0 0 189-88 146 69-188 90Z" fill="#1d544a" stroke="#cee9d7"/><path d="m0 0 147 71v8L0 8Zm147 71 188-90v8L147 79Z" fill="url(#hatch)" stroke="#cee9d7"/><g stroke="#b4dbc8" opacity=".73"><path d="m35-16 146 69m-85-98 146 69m-194-3 189-88m-127 119 188-89"/><path d="m64-30 33 16 48-23 18 8m21-46-1 35-35 18m38 18 52-25 25 11"/></g></g>
+</defs>
+<path fill="url(#grid)" d="M0 0h640v430H0z"/>
+<g stroke="#d1eadb" opacity=".38" stroke-dasharray="4 7"><path d="M52 324 381 166m-209 213 349-171M111 138l304 146m-253-159 305 147M155 82v259m146-197v263m41-335v239m146-168v174"/></g>
+<g transform="translate(155 290)"><use href="#floor"/><g stroke="#accfb9" stroke-width="1.5"><path d="M0-59V0m147 11v60m188-151v61m-146-129v60m-92-14v59m172-74v59"/></g><use href="#floor" y="-62"/><g stroke="#b0d2bd" stroke-width="1.5"><path d="M0-115v53m147-44v53m188-143v54m-146-123v55m-92-10v53m172-73v53"/></g><use href="#floor" y="-120"/></g>
+<g stroke="#e0b66b" stroke-width="1"><path d="m102 325 147 71m-152-67 10-9m137 80 10-9m257-200v94m-5-94h10m-10 94h10"/><circle cx="155" cy="170" r="4"/><circle cx="490" cy="151" r="4"/></g>
+</svg>
