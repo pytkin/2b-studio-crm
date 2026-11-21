@@ -42,9 +42,15 @@
 
 ## Pin и история
 
-Kit подключён как Git submodule `.agent-platform`; канонический pin — gitlink
-репозитория, без автоматического обновления ветки. Закреплён SHA
-`fe7e6a6ff14d1a49738f595abb771af942375a43`. Соседние checkout не требуются.
+Kit подключён как Git submodule `.agent-platform`. Текущую ревизию
+определяет gitlink коммита проекта. Его значение можно прочитать из корня:
+
+```sh
+git rev-parse HEAD:.agent-platform
+```
+
+При первичном подключении S0 gitlink указывал на
+`fe7e6a6ff14d1a49738f595abb771af942375a43`.
 При изменении pin применяется маршрут Kit после его получения:
 `.agent-platform/docs/agent-platform-kit.md`.
 
